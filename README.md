@@ -1,1 +1,1 @@
-# Syncron-Automa-o
+# Syncron-Automação
