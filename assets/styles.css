@@ -1,0 +1,162 @@
+/* RESET */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body{
+    height: 100%;
+}
+
+
+/* BODY */
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #dcdcdc;
+}
+
+
+/* HEADER */
+
+header{
+    background-color: #35649B;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+}
+
+
+/* LOGO HEADER */
+
+.logo img{
+    height: 58px;
+}
+
+
+/* MENU */
+
+nav{
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    transition: 0.3s;
+}
+
+nav a:hover{
+    opacity: 0.8;
+}
+
+nav i{
+    font-size: 38px;
+}
+
+
+/* MAIN */
+
+main{
+    flex: 1;
+}
+
+
+/* FOOTER */
+
+footer{
+    background-color: #35649B;
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 35px 50px;
+
+    min-height: 200px;
+}
+
+
+/* ESQUERDA */
+
+.footer-esquerda{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    width: 420px;
+}
+
+.footer-esquerda img{
+    width: 110px;
+}
+
+.footer-esquerda p{
+    font-size: 17px;
+    line-height: 1.5;
+}
+
+
+/* LINKS */
+
+.footer-links{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-links h2{
+    margin-bottom: 8px;
+}
+
+.footer-links a{
+    color: white;
+    font-size: 16px;
+}
+
+
+/* CONTATOS */
+
+.footer-contato{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    width: 350px;
+}
+
+.footer-contato h2{
+    margin-bottom: 8px;
+}
+
+.footer-contato p{
+    display: flex;
+    gap: 12px;
+
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.footer-contato i{
+    font-size: 20px;
+    margin-top: 2px;
+}
