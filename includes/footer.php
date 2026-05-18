@@ -1,30 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<footer>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="footer-esquerda">
 
-    <title>Syncron Automação</title>
+        <img src="img/logo-footer.png" alt="">
 
-    <link rel="stylesheet" href="css/style.css">
+        <p>
+            A Syncron Automação fornece soluções
+            em automação e controle industrial.
+        </p>
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-
-<body>
-
-<header>
-
-    <div class="logo">
-        <img src="img/logo-header.png" alt="">
     </div>
 
-    <nav>
-        <a href="index.php">Home</a>
-        <a href="produtos.php">Produtos</a>
-        <a href="login.php">Login</a>
-    </nav>
+</footer>
 
-</header>
+</body>
+</html>
