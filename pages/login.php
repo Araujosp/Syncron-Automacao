@@ -1,6 +1,8 @@
 <?php 
 
 require_once "../includes/crud.php";
+require_once "../includes/session.php";
+
 
 $mensagem_erro = "";
 
@@ -20,11 +22,17 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
         $condicao = "usuario = '$usuario_digitado'";
         $usuario_encontrado = read($pdo, 'usuarios_sistema', $condicao);
+                            # SELECT * FROM usuarios_sistema WHERE usuario = '$usuario_digitado'
+
 
         // Verifica se o usuário existe
         if($usuario_encontrado){
             // Verifica senha
-            if($senha_digitada == $usuario_encontrado['senha']){
+
+            if(password_verify($senha_digitada, $usuario_encontrado['senha'])){
+                $_SESSION['id_usuario'] =$usuario_encontrado['id_usuario'];
+                $_SESSION['usuario'] = $usuario_encontrado['usuario']; 
+
                 header("Location: ../admin/estoque.php");
                 exit;
             }
