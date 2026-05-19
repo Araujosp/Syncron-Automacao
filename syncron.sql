@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/05/2026 às 15:25
+-- Tempo de geração: 19/05/2026 às 14:31
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,10 +139,22 @@ INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoq
 CREATE TABLE `usuarios_sistema` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
+  `usuario` varchar(30) NOT NULL,
+  `senha` varchar(100) NOT NULL,
   `cpf` varchar(14) NOT NULL,
   `cargo` varchar(50) NOT NULL,
   `data_cadastro` date NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios_sistema`
+--
+
+INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`, `cargo`, `data_cadastro`) VALUES
+(1, 'Rafael Yu', 'rafael', '$2y$10$..Z/qALUB1M6QsoLqoJO6ekS2.RbfVwwAWzumJZ.bGBQ5PpPHqQa.', '11785567891', 'Funcionario', '2026-05-19'),
+(2, 'Derick Condolo', 'derick', '$2y$10$EkBf4X0L74/itLlwLz2/QuHhjnFIIrX8.eyzHK59rygEPT214pXfO', '21025479768', 'Funcionario', '2026-05-19'),
+(3, 'Nicole Hanai', 'nicole', '$2y$10$sk55POn/USu0/h2GCN7Z3e3PCWU.vZrTFhZKBFrpbSytplgIsrJlm', '33895657789', 'Funcionario', '2026-05-19'),
+(4, 'Gabriel Araujo', 'gabriel', '$2y$10$JuRbd8bOqql7BZ4KVZKsCOEP6FHi6GkWtOhXA9ie6C//i9LTKQnCC', '445449874589', 'Administrador', '2026-05-19');
 
 --
 -- Índices para tabelas despejadas
@@ -217,7 +229,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `usuarios_sistema`
 --
 ALTER TABLE `usuarios_sistema`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para tabelas despejadas

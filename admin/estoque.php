@@ -1,9 +1,14 @@
 <?php
-session_start();
 
+require_once "../includes/session.php";
 require_once "../includes/crud.php";
 
 $produtos = readAll($pdo, 'produtos');
+
+if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
+    header("Location:../pages/login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +24,7 @@ $produtos = readAll($pdo, 'produtos');
     <div class="sidebar">
         <div class="user-profile">
             <div class="user-icon">👤</div>
-            <div class="user-email"> <?php  echo  $_SESSION['usuario'];   ?> </div>
+            <div class="user-email"> <?php  echo  ucfirst($_SESSION['usuario']);   ?> </div>
         </div>
 
         <div class="nav-links">
@@ -29,7 +34,7 @@ $produtos = readAll($pdo, 'produtos');
             <a href="#">Dashboard</a>
         </div>
 
-        <a href="logout.php" class="logout-btn">Log out</a>
+        <a href="../includes/logout.php" class="logout-btn">Log out</a>
     </div>
 
     <div class="main-content">
