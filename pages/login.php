@@ -31,7 +31,8 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
             if(password_verify($senha_digitada, $usuario_encontrado['senha'])){
                 $_SESSION['id_usuario'] =$usuario_encontrado['id_usuario'];
-                $_SESSION['usuario'] = $usuario_encontrado['usuario']; 
+                $_SESSION['usuario'] = $usuario_encontrado['usuario'];
+                $_SESSION['foto_perfil'] = $usuario_encontrado['foto_perfil'];
 
                 header("Location: ../admin/estoque.php");
                 exit;

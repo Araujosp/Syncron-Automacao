@@ -9,6 +9,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
 
     <div class="sidebar">
         <div class="user-profile">
-            <div class="user-icon">👤</div>
+            <div class="user-icon">  <img src="../uploads/usuarios/<?= $_SESSION['foto_perfil'] ?>"> </div>
             <div class="user-email"> <?php  echo  ucfirst($_SESSION['usuario']);   ?> </div>
         </div>
 
