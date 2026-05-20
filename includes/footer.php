@@ -1,6 +1,6 @@
 <footer>
         <div class="footer-esquerda">
-            <img src="img/logo-footer.png" alt="Logo">
+            <img src="../img/logo-footer.png" alt="Logo">
             <p>
                 A Syncron Automação fornece soluções
                 em automação e controle industrial.

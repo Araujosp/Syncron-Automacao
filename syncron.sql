@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/05/2026 às 15:22
+-- Tempo de geração: 20/05/2026 às 15:55
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -91,44 +91,23 @@ CREATE TABLE `produtos` (
   `quantidade_estoque` int(11) NOT NULL,
   `preco_unitario` decimal(10,2) NOT NULL,
   `descricao` varchar(1000) NOT NULL,
-  `categoria` varchar(40) NOT NULL
+  `categoria` varchar(40) NOT NULL,
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `produtos`
 --
 
-INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`) VALUES
-(1, 'Notebook Dell ', '2026-05-14', 15, 3499.90, 'Notebook com processador Intel i5, 8GB RAM e SSD 512GB.', 'Informática'),
-(2, 'Mouse Gamer Redragon', '2026-05-14', 40, 129.90, 'Mouse gamer RGB com 7200 DPI e 7 botões programáveis.', 'Periféricos'),
-(3, 'Teclado Mecânico HyperX', '2026-05-14', 20, 289.90, 'Teclado mecânico RGB com switches red.', 'Periféricos'),
-(4, 'Monitor LG 24 Polegadas', '2026-05-14', 10, 899.90, 'Monitor Full HD IPS de 24 polegadas.', 'Monitores'),
-(5, 'Cadeira Gamer XT Racer', '2026-05-14', 8, 1199.90, 'Cadeira ergonômica gamer com ajuste de altura.', 'Móveis'),
-(6, 'SSD Kingston 1TB', '2026-05-14', 30, 459.90, 'SSD SATA 1TB para alta velocidade de leitura e gravação.', 'Armazenamento'),
-(7, 'Headset Logitech G435', '2026-05-14', 18, 399.90, 'Headset gamer sem fio com microfone integrado.', 'Áudio'),
-(8, 'Smartphone Samsung Galaxy A55', '2026-05-14', 12, 2199.90, 'Smartphone com 256GB de armazenamento e câmera tripla.', 'Celulares'),
-(9, 'Impressora Epson EcoTank', '2026-05-14', 6, 1499.90, 'Impressora multifuncional com tanque de tinta.', 'Impressoras'),
-(10, 'Webcam Logitech C920', '2026-05-14', 25, 349.90, 'Webcam Full HD ideal para reuniões e streaming.', 'Acessórios'),
-(11, 'Processador Ryzen 7 5700X', '2026-05-14', 14, 1299.90, 'Processador AMD Ryzen 7 com 8 núcleos e 16 threads.', 'Hardware'),
-(12, 'Placa de Vídeo RTX 4060', '2026-05-14', 7, 2599.90, 'Placa de vídeo NVIDIA RTX 4060 com 8GB GDDR6.', 'Hardware'),
-(13, 'Memória RAM Corsair 16GB', '2026-05-14', 35, 319.90, 'Memória DDR4 3200MHz para alto desempenho.', 'Hardware'),
-(14, 'Gabinete Gamer Rise Mode', '2026-05-14', 11, 279.90, 'Gabinete gamer com lateral em vidro temperado.', 'Hardware'),
-(15, 'Fonte Corsair 650W', '2026-05-14', 16, 499.90, 'Fonte 80 Plus Bronze com proteção contra surtos.', 'Hardware'),
-(16, 'Roteador TP-Link Archer C6', '2026-05-14', 22, 249.90, 'Roteador dual band com velocidade de até 1200Mbps.', 'Redes'),
-(17, 'Switch 8 Portas Intelbras', '2026-05-14', 18, 139.90, 'Switch ethernet de 8 portas gigabit.', 'Redes'),
-(18, 'HD Externo Seagate 2TB', '2026-05-14', 13, 579.90, 'HD externo portátil USB 3.0 com 2TB.', 'Armazenamento'),
-(19, 'Caixa de Som JBL Go 3', '2026-05-14', 28, 229.90, 'Caixa de som bluetooth portátil resistente à água.', 'Áudio'),
-(20, 'Microfone Fifine K669B', '2026-05-14', 19, 249.90, 'Microfone condensador USB para streaming e gravações.', 'Áudio'),
-(21, 'Mesa Digitalizadora Wacom One', '2026-05-14', 5, 799.90, 'Mesa digitalizadora para design gráfico e ilustração.', 'Periféricos'),
-(22, 'Controle Xbox Series', '2026-05-14', 17, 399.90, 'Controle sem fio compatível com PC e Xbox.', 'Games'),
-(23, 'PlayStation 5 Slim', '2026-05-14', 4, 3899.90, 'Console Sony PlayStation 5 versão Slim.', 'Games'),
-(24, 'Nintendo Switch OLED', '2026-05-14', 6, 2399.90, 'Console híbrido com tela OLED de 7 polegadas.', 'Games'),
-(25, 'Smart TV Samsung 50\"', '2026-05-14', 9, 2899.90, 'Smart TV 4K UHD com sistema Tizen.', 'Televisores'),
-(26, 'Ventilador Arno Turbo', '2026-05-14', 20, 189.90, 'Ventilador silencioso com 6 pás.', 'Eletrodomésticos'),
-(27, 'Air Fryer Mondial 5L', '2026-05-14', 14, 429.90, 'Fritadeira elétrica sem óleo com capacidade de 5 litros.', 'Eletrodomésticos'),
-(28, 'Cafeteira Nespresso Essenza', '2026-05-14', 8, 599.90, 'Cafeteira expresso compacta para cápsulas.', 'Eletrodomésticos'),
-(29, 'Smartwatch Xiaomi Redmi Watch', '2026-05-14', 24, 349.90, 'Relógio inteligente com monitor cardíaco.', 'Wearables'),
-(30, 'Tablet Samsung Galaxy Tab S9', '2026-05-14', 7, 3299.90, 'Tablet Android com tela AMOLED e caneta S Pen.', 'Tablets');
+INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`, `foto`) VALUES
+(1, 'Notebook Dell ', '2026-05-14', 15, 3499.90, 'Notebook com processador Intel i5, 8GB RAM e SSD 512GB.', 'Informática', NULL),
+(2, 'Mouse Gamer Redragon', '2026-05-14', 40, 129.90, 'Mouse gamer RGB com 7200 DPI e 7 botões programáveis.', 'Periféricos', NULL),
+(3, 'Teclado Mecânico HyperX', '2026-05-14', 20, 289.90, 'Teclado mecânico RGB com switches red.', 'Periféricos', NULL),
+(7, 'Headset Logitech G435', '2026-05-14', 18, 399.90, 'Headset gamer sem fio com microfone integrado.', 'Áudio', NULL),
+(8, 'Smartphone Samsung Galaxy A55', '2026-05-14', 12, 2199.90, 'Smartphone com 256GB de armazenamento e câmera tripla.', 'Celulares', NULL),
+(31, 'teste', '2026-05-20', 252, 250.00, '', 'Sensores', 'uploads/31/Produto_6a0db2c2d38da.jpeg'),
+(32, 'IHM', '2026-05-20', 67, 124.00, '', 'Sensores', 'uploads/32/Produto_6a0db336959e7.webp'),
+(33, 'teste', '2026-05-20', 50, 250.00, 'Controladores programáveis com IHM incorporada Família XL - CLPs & IHMs - Controle e Indicação de Processos - CIP - Produtos - NOVUS Automation ', 'IHMs', 'uploads/33/Produto_6a0dbc2770da6.webp');
 
 -- --------------------------------------------------------
 
@@ -224,7 +203,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios_sistema`
