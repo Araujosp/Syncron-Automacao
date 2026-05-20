@@ -18,7 +18,9 @@
 <header>
 
     <div class="logo">
-        <img src="img/logo-header.png" alt="">
+        <a href="index.php">
+            <img src="../img/logo-header.png">
+        </a>
     </div>
 
     <nav>

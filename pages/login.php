@@ -54,10 +54,14 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles.css">
     <link rel="stylesheet" href="../assets/login.css">
     <title>Login | Syncron</title>
+    <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
 </head>
 <body>
+
+    <?php include '../includes/header.php'; ?>
 
     <div class="container">
         <div class="left-side">
@@ -97,7 +101,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                         </div>
                         
                         <button type="submit" class="btn-submit">
-                            acessar
+                            Acessar
                         </button>
 
                     </form>
