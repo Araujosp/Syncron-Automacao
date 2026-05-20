@@ -1,7 +1,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        body { display: flex; height: 100vh; background-color: #f8f9fa; }
+        body { display: flex; height: 100vh; background-color: #f1f1f1; }
 
         /* --- MENU LATERAL (SIDEBAR) --- */
         .sidebar {
@@ -56,7 +56,7 @@
 
         /* --- ÁREA PRINCIPAL (MAIN CONTENT) --- */
         .main-content {
-            flex: 1; padding: 30px; overflow-y: auto; background-color: #ffffff;
+            flex: 1; padding: 30px; overflow-y: auto; background-color: #f1f1f1;
         }
 
         /* Filtros e Pesquisa */
@@ -90,6 +90,7 @@
         .badge-verde { background-color: #2ecc71; }
         .badge-amarelo { background-color: #f1c40f; color: #000; }
         .badge-vermelho { background-color: #e74c3c; }
+        .badhe-cinza { background-color: #808080; color: #000; }
 
         /* Ações (Editar / Excluir) */
         .acoes a {
@@ -97,3 +98,17 @@
         }
         .btn-editar { background-color: #3498db; }
         .btn-excluir { background-color: #e74c3c; }
+
+        /* --- DASHBOARD --- */
+        .line{
+            display: grid;
+            grid-template-columns: repeat (3,1);
+            gap: 50px;
+        }
+
+        .box{
+            height: 400px;
+            width: 500px;
+            background-color: #ffffff;
+            color: #000000;
+        }
