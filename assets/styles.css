@@ -1,10 +1,13 @@
+/* IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 /* RESET */
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 html, body{
@@ -34,13 +37,14 @@ header{
     position: fixed;
     width: 100%;
     padding: 0 40px;
+    z-index: 999;
 }
 
 
 /* LOGO HEADER */
 
 .logo img{
-    height: 58px;
+    height: 60px;
 }
 
 
