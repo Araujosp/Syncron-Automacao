@@ -1,0 +1,111 @@
+main {
+    padding-top: 82px;
+    display: flex;
+}
+
+.filtro-sidebar {
+    padding-top: 50px;
+    background-color: #fafafa;
+    width: 20%;
+    box-shadow: 0px 0px 10px rgb(114, 114, 114);
+    position: relative;
+}
+
+.filtro-sidebar form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: sticky;
+    top: 150px;
+}
+
+.filtro-sidebar h2 {
+    font-size: 2rem;
+}
+
+.checkboxes-container div {
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkboxes-container input {
+    transform: scale(1.5);
+}
+
+.checkboxes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.botoes-container {
+    display: flex;
+    gap: 20px;
+}
+
+.botoes-container button {
+    background-color: #35649b;
+    color: #fafafa;
+    font-size: 1.25rem;
+    padding: 8px;
+    cursor: pointer;
+    border: 0;
+    transition: .5s ease-in-out;
+}
+
+.botoes-container button:hover {
+    background-color: #242424;
+}
+
+.produtos-container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 50px;
+    gap: 20px;
+    height: auto;
+}
+
+.cor{
+    border-radius: 5px;
+    width: 250px;
+    height: 325px;
+    background-color: #fafafa;
+    border: 1px solid rgb(114, 114, 114);
+    box-shadow: 0px 0px 10px rgb(114, 114, 114);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.info{
+    margin: 5px 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.botao{
+    width: 80%;
+    background-color: #48a5cb;
+    color: #fafafa;
+    border-radius: 3px;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 700;
+    border-radius: 15px;
+}
+
+.cor img{
+    width: 150px;
+    height: 150px; 
+}
