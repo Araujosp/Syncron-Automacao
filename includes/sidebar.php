@@ -5,10 +5,10 @@
     </div>
 
     <div class="nav-links">
-        <a href="#" class="active">Estoque</a>
-        <a href="#">Cadastro</a>
-        <a href="#">Financeiro</a>
-        <a href="#">Dashboard</a>
+        <a href="../admin/estoque.php" class="active">Estoque</a>
+        <a href="../admin/cadastrar-produto.php">Cadastro</a>
+        <a href="../admin/financeiro.php">Financeiro</a>
+        <a href="../admin/dashboard.php">Dashboard</a>
     </div>
 
     <a href="../includes/logout.php" class="logout-btn">Log out</a>
