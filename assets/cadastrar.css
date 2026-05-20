@@ -1,0 +1,47 @@
+
+body{
+    font-family: Arial;
+    background: #f4f4f4;
+}
+
+form{
+
+    width: 400px;
+    max-height:550px ;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    border:  1px blue solid
+}
+
+input, select{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    background: #35649B;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+textarea{
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    resize: none;
+}
+
+.container{
+    height:100vh ;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

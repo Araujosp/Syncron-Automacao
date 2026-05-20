@@ -90,7 +90,7 @@
         .badge-verde { background-color: #2ecc71; }
         .badge-amarelo { background-color: #f1c40f; color: #000; }
         .badge-vermelho { background-color: #e74c3c; }
-        .badhe-cinza { background-color: #808080; color: #000; }
+        .badge-cinza { background-color: #808080; color: #000; }
 
         /* Ações (Editar / Excluir) */
         .acoes a {
@@ -99,16 +99,5 @@
         .btn-editar { background-color: #3498db; }
         .btn-excluir { background-color: #e74c3c; }
 
-        /* --- DASHBOARD --- */
-        .line{
-            display: grid;
-            grid-template-columns: repeat (3,1);
-            gap: 50px;
-        }
 
-        .box{
-            height: 400px;
-            width: 500px;
-            background-color: #ffffff;
-            color: #000000;
-        }
+        
