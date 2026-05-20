@@ -9,7 +9,6 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -22,22 +21,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="user-profile">
-            <div class="user-icon">  <img src="../uploads/usuarios/<?= $_SESSION['foto_perfil'] ?>"> </div>
-            <div class="user-email"> <?php  echo  ucfirst($_SESSION['usuario']);   ?> </div>
-        </div>
-
-        <div class="nav-links">
-            <a href="#" class="active">Estoque</a>
-            <a href="#">Cadastro</a>
-            <a href="#">Financeiro</a>
-            <a href="#">Dashboard</a>
-        </div>
-
-        <a href="../includes/logout.php" class="logout-btn">Log out</a>
-
-    </div>
+    <?php require_once "../includes/sidebar.php"; ?>
 
     <div class="main-content">
         
@@ -98,8 +82,8 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
                     <td><?php echo $produto['quantidade_estoque']; ?></td>
                     <td>R$ <?php echo number_format($produto['preco_unitario'], 2, ',', '.'); ?></td>
                     <td class="acoes">
-                        <a href="editar_produto.php?id=<?php echo $produto['id']; ?>" class="btn-editar">Editar</a>
-                        <a href="excluir_produto.php?id=<?php echo $produto['id']; ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                        <a href="atualizar-produto.php?id=<?php echo $produto['id_produto']; ?>" class="btn-editar">Editar</a>
+                        <a href="excluir-produto.php?id=<?php echo $produto['id_produto']; ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                     </td>
                 </tr>
                 <?php 
