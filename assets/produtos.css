@@ -85,6 +85,8 @@ main {
 
     font-size: 16px;
     border-radius: 20px;
+
+    cursor: pointer;
 }
 
 .info{

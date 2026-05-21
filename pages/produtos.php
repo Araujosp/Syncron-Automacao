@@ -59,7 +59,7 @@ $produtos = readAll($pdo, 'produtos');
                 if($produtos){
                     foreach($produtos as $produto){
             ?>
-            <div class="cor">
+            <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $produto['id_produto']; ?>'">
                 <div>
                     <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="placeholder-img">
@@ -73,6 +73,7 @@ $produtos = readAll($pdo, 'produtos');
                 </div>
                 <a href="#" class="botao">Adicionar ao carrinho</a>
             </div>
+            
             <?php
                 }
             }
