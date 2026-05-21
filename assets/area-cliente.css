@@ -1,6 +1,12 @@
         /* --- ÁREA PRINCIPAL (MAIN CONTENT) --- */
         .main-content {
-            padding: 30px; background-color: #f1f1f1;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            flex-direction: column;
+            padding-block: 120px;
+            padding-left: 100px;
         }
 
         .top-bar {
@@ -8,4 +14,174 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 20px;
+            color:black;
         }
+
+        /* --- EXIBIÇÃO DO PERFIL --- */
+        .profile-box{
+            width: 500px;
+            height: 150px;
+        }
+
+        .profile-photo{
+            width: 125px;
+            height: 125px;
+            align-items: left;
+            justify-content: left;
+        }
+
+        .profile-line{
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .profile-info{
+            align-items: left;
+            justify-content: left;
+            margin-left: -100px;
+        }
+
+        .profile-info h2{
+            font-size: 50px;
+        }
+
+        .profile-info p{
+            font-size: 25px;
+            margin-left: 4px;
+        }
+
+        /*Botão de Editar Infoemações */
+
+        .profile-edit{
+            width: 1700px;
+            height: 100px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+            margin-top: 50px;
+            list-style: none;
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .edit-line{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 10px;
+        }
+
+        .edit-desc{
+            margin-left: 50px;
+        }
+
+        .edit-desc h2{
+            font-size: 35px;
+        }
+
+        .edit-desc p{
+            margin-left: 2px;
+        }
+
+        .arrow{
+            width: 50px;
+            height: 50px;
+            margin-right: 25px;
+        }
+
+        /* Lista de Pedidos */
+
+        .order-list{
+            width: 1700px;
+            height: 300px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+            margin-top: 50px;
+        }
+
+        .order-list h2{
+            margin-top: 15px;
+            margin-left: 50px;
+        }
+
+        .order-line{
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin-top: 25px;
+        }
+
+        .order-box{
+            width: 250px;
+            height: 200px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+        }
+
+        .more-order{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            list-style: none;
+            text-decoration: none;
+            color: #000000;
+            margin-bottom: 100px;
+        }
+
+        .order-arrow{
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+            margin-bottom: -13.5px;
+        }
+
+        /* --- EDITAR INFORMAÇÕES --- */
+
+        .edit-info{
+            width: 1700px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+            margin-top: 50px;
+        }
+
+        .edit-info h2{
+            margin-top: 15px;
+            margin-left: 50px;
+        }
+        
+        .edit-box{
+            position: relative;
+        }
+
+        .edit-label{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .edit-input{
+            background: none;
+            border:none;
+            border-bottom: 1px solid #000000;
+            outline: none;
+            color: #000000;
+            font-size: 15px;
+            font-weight: 1000;
+            width: 100%;
+            letter-spacing: 2px;
+        }
+
+        .edit-input:focus ~ .edit-label,
+        .edit-input:valid ~ .edit-label{
+            top: 90%;
+            font-size: 12px;
+            color: #000000;
+        }
+
