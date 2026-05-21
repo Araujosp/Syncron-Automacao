@@ -1,3 +1,11 @@
+<?php
+
+require_once "../includes/crud.php";
+
+$produtos = readAll($pdo, 'produtos');
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -47,166 +55,28 @@
             </form>
         </aside>
         <div class="produtos-container">
+            <?php
+                if($produtos){
+                    foreach($produtos as $produto){
+            ?>
             <div class="cor">
-                <img src="../img/Clps.jpg">
+                <div>
+                    <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="placeholder-img">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <span>Sem imagem</span>
+                    </div>
+                </div>
                 <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
+                    <p><?php echo $produto['nome']; ?></p>
+                    <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
                 </div>
                 <a href="#" class="botao">Adicionar ao carrinho</a>
             </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
-                </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
-            </div>
+            <?php
+                }
+            }
+            ?>
         </div>
     </main>
     <?php include '../includes/footer.php'; ?>

@@ -28,7 +28,7 @@ header{
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     position: fixed;
     width: 100%;
     padding: 0 40px;
@@ -40,6 +40,15 @@ header{
 
 .logo img{
     height: 60px;
+}
+
+.search-bar { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; position: relative; margin-right: 100px; }
+.search-bar input {
+    padding: 10px 10px; border: 1px solid #000; border-radius: 15px; width: 300px; caret-color: #000;
+}
+.search-bar i {
+    position: absolute;
+    right: 10px;
 }
 
 
@@ -70,7 +79,7 @@ nav a:hover{
 }
 
 nav i{
-    font-size: 38px;
+    font-size: 30px;
 }
 
 
@@ -81,6 +90,28 @@ main{
     min-height: 100vh;
 }
 
+.placeholder-img{
+    width: 150px;
+    height: 150px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #777;
+    background: #f8f9fa;
+}
+
+.placeholder-img i{
+    font-size: 42px;
+    color: #999;
+}
+
+.placeholder-img span{
+    font-size: 14px;
+    font-weight: 500;
+}
+
 
 /* FOOTER */
 
@@ -89,7 +120,7 @@ footer{
     color: white;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 
     padding: 35px 50px;
     position: sticky;
