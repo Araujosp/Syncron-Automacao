@@ -39,7 +39,7 @@ body{
     border-radius: 5px;
     width: 350px;
     height: 425px;
-    background-color: #fafafa;
+    background-color: #ffffff;
     border: 1px solid rgb(114, 114, 114);
     box-shadow: 0px 0px 10px rgb(114, 114, 114);
 
@@ -73,4 +73,123 @@ body{
      width: 250px;
     height: 250px; 
     
+}
+
+
+.Quem_somos{
+    width: 1500px;
+    height: 600px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    /* border: 1px solid rgb(114, 114, 114); */
+    box-shadow: 0px 0px 10px rgb(114, 114, 114);
+    padding: 30px;
+    position: relative;
+    margin:auto;
+    z-index: 2;
+
+}
+
+.Quem_somos h1{
+    text-align: center;
+}
+.Quem_somos p {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+
+.login-card-wrapper {
+     margin-top: 100px;
+    position: relative;
+    padding: 10px; /* Espessura da borda animada */
+    border-radius: 20px;
+    background: #e0e0e0;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+        /* O gradiente que gira (O "raio azul") */
+.login-card-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 400%;
+    background: conic-gradient(
+                transparent, 
+                transparent, 
+                transparent, 
+                #00d2ff, 
+                #3a7bd5
+            );
+    animation: rotate-border 5s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rotate-border {
+     0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+
+.carrosel h1 {
+    margin: 100px 0px 50px;
+    text-align: center;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px auto;
+    width: 90%;
+    margin: auto;
+    border: 5px solid red;
+    overflow-x: auto;
+    gap: 50px;
+    height: 300px;
+}
+
+.container::-webkit-scrollbar{
+    display: none;
+}
+
+@keyframes slide {
+    from{
+        transform: translate(0);
+    }
+    to {
+        transform: translate(-100%);
+    }
+    
+}
+
+.logo{
+    height: 200px;
+    
+}
+
+
+.logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    animation: 8s infinite slide linear;
+}
+
+.logos img{
+    opacity: 70%;
+    object-fit: contain;
+    height: 200px;
+
+}
+
+.logos img:hover{
+    opacity:100%;
+    filter: brightness(100px);
 }

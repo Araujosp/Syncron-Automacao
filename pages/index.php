@@ -29,8 +29,77 @@
             <div class="cor"></div>
             <div class="cor"></div>
         </div>
-    
+        <div class="login-card-wrapper">
+            <section class="Quem_somos">
+                <h1>Quem somos</h1>
+                <p>A Syncron Automação é uma empresa especializada em soluções para automação industrial, 
+                oferecendo produtos e equipamentos voltados para controle, eficiência e produtividade industrial.
+                Atuamos no fornecimento de componentes e tecnologias para diferentes segmentos da indústria, garantindo 
+                qualidade, confiabilidade e suporte técnico especializado.</p>
+                <p>Trabalhamos com uma ampla linha de produtos voltados para automação e controle industrial, atendendo 
+                desde pequenas aplicações até projetos industriais de maior porte. Nosso compromisso é oferecer soluções 
+                tecnológicas eficientes, seguras e confiáveis, auxiliando empresas na modernização de processos industriais 
+                e no aumento da produtividade. Contamos com equipamentos de alta qualidade e suporte especializado para 
+                atender às necessidades de diferentes segmentos da indústria, sempre buscando inovação, desempenho e excelência 
+                no atendimento aos nossos clientes.</p>
+                <p>Além da comercialização de equipamentos industriais, buscamos oferecer um atendimento personalizado, entendendo as 
+                necessidades de cada cliente para indicar as melhores soluções em automação. Nossa atuação é focada em eficiência operacional, 
+                organização de processos e evolução tecnológica, contribuindo para que empresas tenham maior controle, segurança e desempenho em 
+                suas operações industriais.</p>
+                <p>Com experiência no segmento e compromisso com a qualidade, a Syncron Automação se destaca pela seriedade, confiança e dedicação em 
+                entregar soluções que atendam às exigências do mercado industrial moderno.</p>
+            </section>
+        </div>
+            <section class="carrosel">
+                <h1>Empresas parceira</h1>
+                <div class="container">
+                    <div class="logos">
+                            <div class="logo">
+                                <img src="../img/amazon.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/android.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/claude.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/linkedin.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/microsoft.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/openai.png" alt="logo" width="250x250">
+                            </div>
+                    </div>
+                    <div aria-hidden class="logos">
+                            <div class="logo">
+                                <img src="../img/amazon.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/android.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/claude.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/linkedin.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/microsoft.png" alt="logo" width="250x250">
+                            </div>
+                            <div class="logo">
+                                <img src="../img/openai.png" alt="logo" width="250x250">
+                            </div>
+                    </div>
+                    
+                </div>
+
+            </section>
+        
     </main>
+
     
     <?php include '../includes/footer.php'; ?>
     
