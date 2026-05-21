@@ -1,47 +1,106 @@
-
+/* FUNDO */
 body{
-    font-family: Arial;
-    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
 }
 
-form{
-
-    width: 400px;
-    max-height:550px ;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    border:  1px blue solid
-}
-
-input, select{
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-button{
-    width: 100%;
-    padding: 12px;
-    background: #35649B;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-textarea{
-    width: 100%;
-    height: 120px;
-    padding: 10px;
-    resize: none;
-}
-
+/* CONTAINER */
 .container{
-    height:100vh ;
-    width:100%;
+    height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 30px;
+}
+
+/* FORMULÁRIO */
+.form{
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
+}
+
+/* TITULO */
+.h2{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1e293b;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* LABEL */
+.form label{
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    color: #334155;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* INPUTS */
+.form input,
+.form select,
+.form textarea{
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    font-size: 15px;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+/* FOCO */
+.form input:focus,
+.form select:focus,
+.form textarea:focus{
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* TEXTAREA */
+.form textarea{
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* BOTÃO */
+.form button{
+    width: 100%;
+    margin-top: 28px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+/* HOVER BOTÃO */
+.form button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+}
+
+/* MENSAGEM */
+.form p{
+    margin-top: 18px;
+    text-align: center;
+    color: #16a34a;
+    font-weight: bold;
 }

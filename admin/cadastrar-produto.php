@@ -86,10 +86,11 @@ if(isset($_POST['nome'])){
 
     <form method="POST" enctype="multipart/form-data" class = "form">
         
-        <h2>Cadastro de Produto</h2>
-        
+        <h2 class = "h2">Cadastro de Produto</h2>
+        <label>Nome do Produto</label>
         <input type="text" name="nome" placeholder="Nome do produto" required>
         
+        <label>Categoria</label>
         <select name="categoria" required>
             <option value="">Selecione</option>
             <option>Sensores</option>
@@ -100,12 +101,16 @@ if(isset($_POST['nome'])){
             <option>Inversores de Frequência</option>
         </select>
         
+        <label>Preço Unitario</label>
         <input type="number" step="0.01" name="preco_unitario" placeholder="Preço">
         
+        <label>Quantidade em Estoque</label>
         <input type="number" name="quantidade_estoque" placeholder="Quantidade">
         
+        <label>Descrição do Produto</label>
         <textarea name="descricao" placeholder="Descrição do produto"></textarea>
         
+        <label>Selecione a imagem do Produto</label>
         <input type="file" name="foto" required>
         
         
