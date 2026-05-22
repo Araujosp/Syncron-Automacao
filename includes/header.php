@@ -9,8 +9,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -23,10 +22,16 @@
         </a>
     </div>
 
+    <div class="search-bar">
+        <input type="text" placeholder="Pesquisar...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
     <nav>
-        <a href="index.php">Home</a>
-        <a href="produtos.php">Produtos</a>
-        <a href="login.php">Login</a>
+        <a href="index.php"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="produtos.php"><i class="fa-solid fa-boxes-stacked"></i>Produtos</a>
+        <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i>Meu Carrinho</a>
+        <a href="login.php"><i class="fa-regular fa-circle-user"></i>Login</a>
     </nav>
 
 </header>
