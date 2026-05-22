@@ -35,7 +35,7 @@ if ($qtd >= 50) {
 
     <main class="main">
         <div class="imagem-produto">
-            <img src="../img/banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <img src="../<?php echo $produto["foto"]; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
             <div class="placeholder-img">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <span>Sem imagem</span>

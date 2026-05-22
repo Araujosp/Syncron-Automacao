@@ -46,7 +46,7 @@ main {
     gap: 20px;
 }
 
-.botoes-container button {
+.botoes-container button, .botoes-container a {
     background-color: #35649b;
     color: #fafafa;
     font-size: 1.25rem;
@@ -54,9 +54,10 @@ main {
     cursor: pointer;
     border: 0;
     transition: .5s ease-in-out;
+    text-decoration: none;
 }
 
-.botoes-container button:hover {
+.botoes-container button:hover, .botoes-container a:hover {
     background-color: #242424;
 }
 

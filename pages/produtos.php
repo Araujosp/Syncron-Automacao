@@ -4,6 +4,7 @@ require_once "../includes/crud.php";
 
 $produtos = readAll($pdo, 'produtos');
 
+$categoriasFiltradas = $_GET["categorias"] ?? []; 
 ?>
 
 <!DOCTYPE html>
@@ -19,37 +20,37 @@ $produtos = readAll($pdo, 'produtos');
     <?php include '../includes/header.php'; ?>
     <main class="main">
         <aside class="filtro-sidebar">
-            <form action="">
+            <form action="produtos.php" method="GET">
                 <h2>Filtro por</h2>
                 <div class="checkboxes-container">
                     <div>
-                        <input type="checkbox" name="clps" id="clps">
+                        <input type="checkbox" name="categorias[]" id="clps" value="CLPs" <?php echo (in_array("CLPs", $categoriasFiltradas) ? 'checked' : '') ?>>
                         <label for="clps">CLPs</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="sensores" id="sensores">
+                        <input type="checkbox" name="categorias[]" id="sensores" value="Sensores" <?php echo (in_array("Sensores", $categoriasFiltradas) ? 'checked' : '') ?>>
                         <label for="sensores">Sensores</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="ihms" id="ihms">
+                        <input type="checkbox" name="categorias[]" id="ihms" value="IHMs" <?php echo (in_array("IHMs", $categoriasFiltradas) ? 'checked' : '') ?>>
                         <label for="ihms">IHMs</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="fontes" id="fontes">
-                        <label for="fontes">Fontes industriais</label>
+                        <input type="checkbox" name="categorias[]" id="fontes" value="Fontes Industriais" <?php echo (in_array("Fontes Industriais", $categoriasFiltradas) ? 'checked' : '') ?>>
+                        <label for="fontes">Fontes Industriais</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="reles" id="reles">
+                        <input type="checkbox" name="categorias[]" id="reles" value="Relés" <?php echo (in_array("Relés", $categoriasFiltradas) ? 'checked' : '') ?>>
                         <label for="reles">Relés</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="inversores" id="inversores">
-                        <label for="inversores">Inversores de frequência</label>
+                        <input type="checkbox" name="categorias[]" id="inversores" value="Inversores de Frequência" <?php echo (in_array("Inversores de Frequência", $categoriasFiltradas) ? 'checked' : '') ?>>
+                        <label for="inversores">Inversores de Frequência</label>
                     </div>
                 </div>
                 <div class="botoes-container">
-                    <button>Limpar</button>
-                    <button>Filtrar</button>
+                    <a href="produtos.php">Limpar</a>
+                    <button type="submit">Filtrar</button>
                 </div>
             </form>
         </aside>
@@ -57,6 +58,7 @@ $produtos = readAll($pdo, 'produtos');
             <?php
                 if($produtos){
                     foreach($produtos as $produto){
+                        if(empty($categoriasFiltradas) || in_array($produto["categoria"], $categoriasFiltradas)){
             ?>
             <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $produto['id_produto']; ?>'">
                 <div>
@@ -72,8 +74,8 @@ $produtos = readAll($pdo, 'produtos');
                 </div>
                 <a href="#" class="botao">Adicionar ao carrinho</a>
             </div>
-            
             <?php
+                    }
                 }
             }
             ?>
