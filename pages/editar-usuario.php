@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/styles.css">
+        <?php require_once "../includes/meta-links.php"; ?>
         <link rel="stylesheet" href="../assets/area-cliente.css">
         <title>[nome do usuário] | Syncron</title>
     </head>
