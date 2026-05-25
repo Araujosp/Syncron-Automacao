@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../assets/styles.css">
         <link rel="stylesheet" href="../assets/area-cliente.css">
         <title>[nome do usuário] | Syncron</title>
+        <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
         <?php include '../includes/header.php'; ?>

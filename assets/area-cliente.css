@@ -85,9 +85,10 @@
         }
 
         .arrow{
-            width: 50px;
-            height: 50px;
-            margin-right: 25px;
+            width: 35px;
+            height: 35px;
+            margin-right: 35px;
+            margin-bottom: 7.5px;
         }
 
         /* Lista de Pedidos */
@@ -132,17 +133,17 @@
         }
 
         .order-arrow{
-            width: 50px;
-            height: 50px;
+            width: 35px;
+            height: 35px;
             margin-left: 10px;
-            margin-bottom: -13.5px;
+            margin-bottom: -6px;
         }
 
         /* --- EDITAR INFORMAÇÕES --- */
 
         .edit-info{
             width: 1700px;
-            height: 500px;
+            height: 660px;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
@@ -155,6 +156,34 @@
         }
         
         .edit-box{
+            position: absolute;
+            margin-top: 330px;
+            margin-left: 500px;
+            transform: translate(-50%,-50%);
+            padding: 20px;
+            border-radius: 1rem;
+            width: 1000px;
+            height: 660px;
+            color: rgb(0, 0, 0);
+            font-weight: lighter;
+        }
+
+        fieldset{
+            border: 1px solid rgba(53, 100, 155, 1);
+            border-radius: 1rem;
+        }
+
+        legend{
+            border: 1px solid rgba(53, 100, 155, 1);
+            padding: 10px;
+            text-align: center;
+            background-color: rgba(53, 100, 155, 1);
+            border-radius: 10px;
+            color: white;
+            font-size: 15px;
+            font-weight: bolder;        
+        }
+        .input-box{
             position: relative;
         }
 
@@ -164,17 +193,19 @@
             left: 0px;
             pointer-events: none;
             transition: .5s;
+            margin-left: 5%;
         }
 
         .edit-input{
             background: none;
-            border:none;
-            border-bottom: 1px solid #000000;
+            border: none;
+            border-bottom: 1px solid rgb(0, 0, 0);
             outline: none;
-            color: #000000;
+            color: rgb(0, 0, 0);
             font-size: 15px;
-            font-weight: 1000;
-            width: 100%;
+            font-weight: 500;
+            width: 90%;
+            margin-left: 5%;
             letter-spacing: 2px;
         }
 
