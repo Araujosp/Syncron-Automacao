@@ -11,7 +11,6 @@
         #submit{
             background-color: rgba(53, 100, 155, 1);;
             width: 25%;
-            margin-left: 70%;
             margin-bottom: 10px;
             border: none;
             padding: 15px;
@@ -21,7 +20,7 @@
             border-radius: 10px;
         }
         #submit:hover{
-            background-color: rgba(53, 100, 155, 1);;
+            background-color: #7096c2;;
             transform: translateY(-10%);
             transition: .5s;   
        }
@@ -93,10 +92,16 @@
                                 <label for="documento" class="edit-label">Documento</label>
                             </div>
                             <br><br>
-                            <button type="submit" name="submit" id="submit">
-                                <b>Salvar alterações<b>
-                                <img src="../img/arrow2.png" class="submit-arrow">
-                            </button>
+                            <div class="button-line">
+                                <a href="./area-cliente.php" class="return">
+                                    <img src="../img/arrow3.png" class="return-arrow">
+                                    <b>Voltar</b>
+                                </a>
+                                <button type="submit" name="submit" id="submit">
+                                    <b>Salvar alterações<b>
+                                    <img src="../img/arrow2.png" class="submit-arrow">
+                                </button>
+                            </div>
                             <br><br>
                         </fieldset>
                     </form>
