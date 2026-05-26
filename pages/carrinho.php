@@ -20,9 +20,9 @@
                         <div class="caixa_titulo">
                             <p>CLPs eletricos</p>
                             <div class="caixa_adicionar">
-                               <button><i class="fa-solid fa-minus"></i></button>
-                                <p>1</p>
-                                <button><i class="fa-solid fa-plus"></i></button>
+                               <button id="menos"><i class="fa-solid fa-minus"></i></button>
+                                <p id="contador">1</p>
+                                <button id="mais"><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
                         <div class="caixa_reais">
@@ -46,7 +46,25 @@
             </section>
         </div>
     </main>
-    
+    <script defer>
+        const btnMais = document.querySelector('#mais');
+        const btnMenos = document.querySelector('#menos');
+        const contador = document.querySelector('#contador');
+
+        let valor = 1;
+
+        btnMais.addEventListener('click', ()=> {
+            valor++;
+            contador.textContent = valor;
+        });
+
+         btnMenos.addEventListener('click', () => {
+        if (valor > 0) {
+            valor--;
+            contador.textContent = valor;
+            }
+        });
+    </script>
     
 </body>
 </html>
