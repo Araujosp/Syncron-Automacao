@@ -52,7 +52,7 @@ if(isset($_POST['nome'])){
 
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $file)) {
 
-        $fotoUrl = "uploads/$idNovoProduto/$novoNome";
+        $fotoUrl = "uploads/produtos/$idNovoProduto/$novoNome";
 
         update(
             $pdo,
@@ -93,8 +93,8 @@ if(isset($_POST['nome'])){
         <label>Categoria</label>
         <select name="categoria" required>
             <option value="">Selecione</option>
+            <option>CLPs</option>
             <option>Sensores</option>
-            <option>Clps</option>
             <option>IHMs</option>
             <option>Fontes Industriais</option>
             <option>Relés</option>

@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/styles.css">
+    <?php require_once "../includes/meta-links.php"; ?>
     <link rel="stylesheet" href="../assets/index.css">
     <title>Home | Syncron</title>
-    <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
 </head>
 <body>
     <?php include '../includes/header.php'; ?>
     <main class="main">
-     
-    
         <img src="../img/banner.png" class="banner">
         <h1 class="produto">Produtos em destaque</h1>
         <div class="centraliza">
@@ -52,55 +49,26 @@
         </div>
             <section class="carrosel">
                 <h1>Empresas parceira</h1>
-                <div class="container">
-                    <div class="logos">
-                            <div class="logo">
-                                <img src="../img/amazon.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/android.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/claude.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/linkedin.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/microsoft.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/openai.png" alt="logo" width="250x250">
-                            </div>
+                <div class="carousel">
+                    <div class="group">
+                        <div class="card"><img src="../img/microsoft.png" class="logo"></div>
+                        <div class="card"><img src="../img/openai.png" class="logo"></div>
+                        <div class="card"><img src="../img/amazon.png" class="logo"></div>
+                        <div class="card"><img src="../img/android.png" class="logo"></div>
+                        <div class="card"><img src="../img/claude.png" class="logo"></div>
+                        <div class="card"><img src="../img/linkedin.png" class="logo"></div>
                     </div>
-                    <div aria-hidden class="logos">
-                            <div class="logo">
-                                <img src="../img/amazon.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/android.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/claude.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/linkedin.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/microsoft.png" alt="logo" width="250x250">
-                            </div>
-                            <div class="logo">
-                                <img src="../img/openai.png" alt="logo" width="250x250">
-                            </div>
+                    <div aria-hidden="true" class="group">
+                        <div class="card"><img src="../img/microsoft.png" class="logo"></div>
+                        <div class="card"><img src="../img/openai.png" class="logo"></div>
+                        <div class="card"><img src="../img/amazon.png" class="logo"></div>
+                        <div class="card"><img src="../img/android.png" class="logo"></div>
+                        <div class="card"><img src="../img/claude.png" class="logo"></div>
+                        <div class="card"><img src="../img/linkedin.png" class="logo"></div>
                     </div>
-                    
                 </div>
-
             </section>
-        
     </main>
-
-    
     <?php include '../includes/footer.php'; ?>
     
 </body>

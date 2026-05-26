@@ -26,17 +26,16 @@ if ($qtd >= 50) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/styles.css">
+    <?php require_once "../includes/meta-links.php"; ?>wwww
     <link rel="stylesheet" href="../assets/informacoes-produto.css">
-    <title></title>
-    <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
+    <title><?php echo $produto["nome"]; ?> | Syncron</title>
 </head>
 <body>
     <?php include '../includes/header.php'; ?>
 
     <main class="main">
         <div class="imagem-produto">
-            <img src="../img/banner" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <img src="../<?php echo $produto["foto"]; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
             <div class="placeholder-img">
                 <i class="fa-solid fa-boxes-stacked"></i>
                 <span>Sem imagem</span>
