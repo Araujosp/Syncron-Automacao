@@ -2,8 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../assets/styles.css">
+    <?php require_once "../includes/meta-links.php"?>
     <link rel="stylesheet" href="../assets/carrinho.css">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>carrinho</title>
 </head>
@@ -19,20 +20,29 @@
                         <div class="caixa_titulo">
                             <p>CLPs eletricos</p>
                             <div class="caixa_adicionar">
-                                <i class="fa-solid fa-minus"></i>
+                               <button><i class="fa-solid fa-minus"></i></button>
                                 <p>1</p>
-                                <i class="fa-solid fa-plus"></i>
+                                <button><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
                         <div class="caixa_reais">
                             <h1>R$ 25,00</h1>
-                            <i class="fa-solid fa-trash"></i>
+                            <button><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="pagamento">
                 <a href="#" class="botao">continuar</a>
+                    <div class="caixa_cupom">
+                        <p>Valor original: <strong>R$25,00</strong></p>
+                        <p>Adicionar cupom:</p>
+                        <p class="cupom">DESCONTO10</p>
+                        <p>Desconto: <strong>10%</strong></p>
+                    </div>
+                    <div>
+                        <h1 class="total">R$ 13,50</h1s>
+                    </div>
             </section>
         </div>
     </main>
