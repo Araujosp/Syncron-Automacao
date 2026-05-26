@@ -2,9 +2,16 @@
 
 require_once "../includes/crud.php";
 
-$produtos = readAll($pdo, 'produtos');
+$categoriasFiltradas = $_GET["categorias"] ?? [];
 
-$categoriasFiltradas = $_GET["categorias"] ?? []; 
+$pesquisa = $_GET["pesquisa"] ?? null;
+
+if($pesquisa != null){
+    $produtos = readAll($pdo, "produtos", "nome LIKE '%$pesquisa%'");
+} else {
+    $produtos = readAll($pdo, 'produtos');
+}
+
 ?>
 
 <!DOCTYPE html>
