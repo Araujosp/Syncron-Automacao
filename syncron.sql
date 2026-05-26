@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20/05/2026 às 15:55
+-- Tempo de geração: 26/05/2026 às 14:42
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -100,8 +100,8 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`, `foto`) VALUES
-(1, 'Notebook Dell ', '2026-05-14', 15, 3499.90, 'Notebook com processador Intel i5, 8GB RAM e SSD 512GB.', 'Informática', NULL),
-(2, 'Mouse Gamer Redragon', '2026-05-14', 40, 129.90, 'Mouse gamer RGB com 7200 DPI e 7 botões programáveis.', 'Periféricos', NULL),
+(1, 'Notebook Dell ', '2026-05-14', 15, 3499.90, 'Notebook com processador Intel i5, 8GB RAM e SSD 512GB.', 'Sensores', NULL),
+(2, 'Mouse Gamer Redragon', '2026-05-14', 40, 129.90, 'Mouse gamer RGB com 7200 DPI e 7 botões programáveis.', 'Fontes Industriais', NULL),
 (3, 'Teclado Mecânico HyperX', '2026-05-14', 20, 289.90, 'Teclado mecânico RGB com switches red.', 'Periféricos', NULL),
 (7, 'Headset Logitech G435', '2026-05-14', 18, 399.90, 'Headset gamer sem fio com microfone integrado.', 'Áudio', NULL),
 (8, 'Smartphone Samsung Galaxy A55', '2026-05-14', 12, 2199.90, 'Smartphone com 256GB de armazenamento e câmera tripla.', 'Celulares', NULL),
@@ -123,18 +123,19 @@ CREATE TABLE `usuarios_sistema` (
   `cpf` varchar(14) NOT NULL,
   `cargo` varchar(50) NOT NULL,
   `data_cadastro` date NOT NULL DEFAULT curdate(),
-  `foto_perfil` varchar(255) DEFAULT NULL
+  `foto_perfil` varchar(255) DEFAULT NULL,
+  `tipo_usuario` enum('sistema') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuarios_sistema`
 --
 
-INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`, `cargo`, `data_cadastro`, `foto_perfil`) VALUES
-(1, 'Rafael Yu', 'rafael', '$2y$10$..Z/qALUB1M6QsoLqoJO6ekS2.RbfVwwAWzumJZ.bGBQ5PpPHqQa.', '11785567891', 'Funcionario', '2026-05-19', 'rafael.jpeg'),
-(2, 'Derick Condolo', 'derick', '$2y$10$EkBf4X0L74/itLlwLz2/QuHhjnFIIrX8.eyzHK59rygEPT214pXfO', '21025479768', 'Funcionario', '2026-05-19', 'derick.jpeg'),
-(3, 'Nicole Hanai', 'nicole', '$2y$10$sk55POn/USu0/h2GCN7Z3e3PCWU.vZrTFhZKBFrpbSytplgIsrJlm', '33895657789', 'Funcionario', '2026-05-19', 'nicole.jpeg'),
-(4, 'Gabriel Araujo', 'gabriel', '$2y$10$JuRbd8bOqql7BZ4KVZKsCOEP6FHi6GkWtOhXA9ie6C//i9LTKQnCC', '445449874589', 'Administrador', '2026-05-19', 'gabriel.jpeg');
+INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`, `cargo`, `data_cadastro`, `foto_perfil`, `tipo_usuario`) VALUES
+(1, 'Rafael Yu', 'rafael', '$2y$10$..Z/qALUB1M6QsoLqoJO6ekS2.RbfVwwAWzumJZ.bGBQ5PpPHqQa.', '11785567891', 'Funcionario', '2026-05-19', 'rafael.jpeg', 'sistema'),
+(2, 'Derick Condolo', 'derick', '$2y$10$EkBf4X0L74/itLlwLz2/QuHhjnFIIrX8.eyzHK59rygEPT214pXfO', '21025479768', 'Funcionario', '2026-05-19', 'derick.jpeg', 'sistema'),
+(3, 'Nicole Hanai', 'nicole', '$2y$10$sk55POn/USu0/h2GCN7Z3e3PCWU.vZrTFhZKBFrpbSytplgIsrJlm', '33895657789', 'Funcionario', '2026-05-19', 'nicole.jpeg', 'sistema'),
+(4, 'Gabriel Araujo', 'gabriel', '$2y$10$JuRbd8bOqql7BZ4KVZKsCOEP6FHi6GkWtOhXA9ie6C//i9LTKQnCC', '445449874589', 'Administrador', '2026-05-19', 'gabriel.jpeg', 'sistema');
 
 --
 -- Índices para tabelas despejadas

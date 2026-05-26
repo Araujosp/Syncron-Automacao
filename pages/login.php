@@ -3,7 +3,6 @@
 require_once "../includes/crud.php";
 require_once "../includes/session.php";
 
-
 $mensagem_erro = "";
 
 if(isset($_POST['usuario']) && isset($_POST['senha'])){
@@ -13,40 +12,79 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
     // Verifica campos vazios
     if(strlen($usuario_digitado) == 0){
+
         $mensagem_erro = "Usuário não pode estar vazio.";
+
     }
     else if(strlen($senha_digitada) == 0){
+
         $mensagem_erro = "Senha não pode estar vazia.";
+
     }
     else{
+   
+        // LOGIN SISTEMA
+      
 
         $condicao = "usuario = '$usuario_digitado'";
-        $usuario_encontrado = read($pdo, 'usuarios_sistema', $condicao);
-                            # SELECT * FROM usuarios_sistema WHERE usuario = '$usuario_digitado'
 
+        $usuario_encontrado = read( $pdo,'usuarios_sistema', $condicao);
 
-        // Verifica se o usuário existe
         if($usuario_encontrado){
-            // Verifica senha
 
-            if(password_verify($senha_digitada, $usuario_encontrado['senha'])){
-                $_SESSION['id_usuario'] =$usuario_encontrado['id_usuario'];
-                $_SESSION['usuario'] = $usuario_encontrado['usuario'];
-                $_SESSION['foto_perfil'] = $usuario_encontrado['foto_perfil'];
+            if(password_verify($senha_digitada,$usuario_encontrado['senha'])){
+
+                $_SESSION['id_usuario'] =
+                    $usuario_encontrado['id_usuario'];
+
+                $_SESSION['usuario'] =
+                    $usuario_encontrado['usuario'];
+
+                $_SESSION['foto_perfil'] =
+                    $usuario_encontrado['foto_perfil'];
+
+                $_SESSION['tipo'] = "sistema";
 
                 header("Location: ../admin/estoque.php");
                 exit;
             }
             else{
+
                 $mensagem_erro = "Senha incorreta.";
             }
         }
         else{
-            $mensagem_erro = "Usuário não encontrado.";
+
+            // LOGIN CLIENTE
+
+            $cliente_encontrado = read($pdo,'clientes', $condicao);
+
+            if($cliente_encontrado){
+
+                if(password_verify( $senha_digitada, $cliente_encontrado['senha'])){
+
+                    $_SESSION['id_cliente'] =
+                        $cliente_encontrado['id_cliente'];
+
+                    $_SESSION['usuario'] =
+                        $cliente_encontrado['usuario'];
+
+                    $_SESSION['tipo_cliente'] =
+                        $cliente_encontrado['tipo_cliente'];
+
+                    header("Location:area-cliente.php");
+                    exit;
+                }
+                else{
+                    $mensagem_erro = "Senha incorreta.";
+                }
+            }
+            else{
+                $mensagem_erro = "Usuário não encontrado.";
+            }
         }
     }
 }
-
 ?>
 
 <!DOCTYPE html>
