@@ -3,7 +3,11 @@
 require_once "../includes/crud.php";
 require_once "../includes/session.php";
 
-$mensagem_erro = "";
+if(isset($_GET['usuario_cadastrado'])) {
+    $mensagem_erro = "Usuário cadastrado com sucesso!";
+} else {
+    $mensagem_erro = "";
+}
 
 if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
@@ -137,10 +141,12 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                             >
                         </div>
                         
-                        <button type="submit" class="btn-submit">
-                            Acessar
-                        </button>
-
+                        <div class="botoes">
+                            <button type="submit" class="btn-submit">
+                                Acessar
+                            </button>
+                            <p>Não tem uma conta? <a href="cadastro.php">Cadastre-se</a></p>
+                        </div>
                     </form>
                 </div>
             </div>
