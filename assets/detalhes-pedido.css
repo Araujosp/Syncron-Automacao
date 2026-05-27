@@ -1,0 +1,72 @@
+        /* --- ÁREA PRINCIPAL (MAIN CONTENT) --- */
+        .main-content {
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: left;
+            justify-content: left;
+            flex-direction: column;
+            padding-block: 120px;
+            padding-left: 100px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            color:black;
+        }
+
+        /* --- ORGANIZAÇÃO DA PÁGINA (line e caixas de fundo) --- */
+        .line{
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin-left: -170px;
+        }
+
+        .order-box{
+            width: 1200px;
+            height: 650px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+        }
+
+        .situation-box{
+            width: 300px;
+            height: 400px;
+            background-color: #ffffff;
+            margin-bottom: 250px;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+            margin-left: -200px;
+        }
+
+        /* Área dos Detalhes do Pedido*/
+        .order-table{
+            margin-top: 50px;
+            width: 1100px;
+        }
+
+        .head{
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .order-img{
+            width: 75px;
+            height: 75px;
+        }
+
+        .body{
+            text-align: center;
+        }
+
+        .product-table{
+            margin-top: 10px;
+        }
+
+        /* Área da Situação do Pedido */
+

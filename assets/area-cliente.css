@@ -132,6 +132,10 @@
             margin-bottom: 100px;
         }
 
+        .margin-order{
+            margin-left: 10px;
+        }
+
         .order-arrow{
             width: 35px;
             height: 35px;
@@ -139,6 +143,25 @@
             margin-bottom: -6px;
         }
 
+        .order-img{
+            width: 30px;
+            height: 30px;
+        }
+
+        .order-subprice{
+            margin-left: 20px;
+        }
+
+        .inbox-line{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 50px;
+        }
+
+        .order-price{
+            font-size: 25px;
+        }
         /* --- EDITAR INFORMAÇÕES --- */
 
         .edit-info{
@@ -250,3 +273,40 @@
             margin-right: 10px;
             margin-bottom: -5px;
         }
+
+        /* VER PEDIDOS (deus me ajude) */
+        .order-back{
+            width: 95%;
+            height: 650px;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            border-radius: 1rem;
+        }
+
+        .order-return{
+            width: 25%;
+            margin-left: 50px;
+            margin-bottom: 0px;
+            border: none;
+            padding: 15px;
+            text-align: center;
+            background-color: #999999;
+            color: rgb(0, 0, 0);
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .order-return:hover{
+            background-color: #afafaf;;
+            transform: translateY(-10%);
+            transition: .5s;   
+       }
+
+       .details-arrow{
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+       }

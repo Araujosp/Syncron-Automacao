@@ -43,12 +43,104 @@
                 <h2>Meus pedidos:</h2>
                 <div class="order-line">
                     <div class="order-box">
+                        <div class="margin-order">
+                            <h3>PEDIDO 1:</h3>
+                            <table>
+                                <tbody class="inbox-list">
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>1x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 7,00<p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>3x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 60,00<p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="inbox-line">
+                                <h4 class="order-price">R$ 67,00</h4>
+                                <a href="./detalhes-pedido.php">
+                                    <img src="../img/arrow.png" class="details-arrow">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="order-box">
+                        <div class="margin-order">
+                            <h3>PEDIDO 1:</h3>
+                            <table>
+                                <tbody class="inbox-list">
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>1x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 7,00<p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>3x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 60,00<p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="inbox-line">
+                                <h4 class="order-price">R$ 67,00</h4>
+                                <a href="./detalhes-pedido.php">
+                                    <img src="../img/arrow.png" class="details-arrow">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="order-box">
+                        <div class="margin-order">
+                            <h3>PEDIDO 1:</h3>
+                            <table>
+                                <tbody class="inbox-list">
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>1x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 7,00<p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>3x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 60,00<p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="inbox-line">
+                                <h4 class="order-price">R$ 67,00</h4>
+                                <a href="./detalhes-pedido.php">
+                                    <img src="../img/arrow.png" class="details-arrow">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="order-box">
+                        <div class="margin-order">
+                            <h3>PEDIDO 1:</h3>
+                            <table>
+                                <tbody class="inbox-list">
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>1x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 7,00<p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                        <td>3x. <b>PRODUTO<b></td>
+                                        <td><p class="order-subprice">R$ 60,00<p></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="inbox-line">
+                                <h4 class="order-price">R$ 67,00</h4>
+                                <a href="./detalhes-pedido.php">
+                                    <img src="../img/arrow.png" class="details-arrow">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <a href="./ver-pedidos.php" class="more-order">
                         <h3>Ver mais</h3>
