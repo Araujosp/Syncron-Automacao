@@ -39,7 +39,54 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
         $cliente_criado = create( $pdo,'clientes', $novo_cliente);
 
-        header("Location: login.php?usuario_cadastrado=true");
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+            $tipos_permitidos = [
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+                'image/avif'
+            ];
+
+            if (!in_array($_FILES['foto']['type'], $tipos_permitidos)) {
+                die("Tipo de arquivo não permitido.");
+            }
+
+            $tamanho_maximo = 1 * 1024 * 1024;
+
+            if ($_FILES['foto']['size'] > $tamanho_maximo) {
+                die("Arquivo muito grande.");
+            }
+
+            $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+
+            $novoNome = "Usuario_" . uniqid() . "." . $extensao;
+
+            $dir = "../uploads/usuarios/";
+
+            $caminho = $dir . "$cliente_criado/";
+
+            $file = $caminho . $novoNome;
+
+            if (!is_dir($caminho)) {
+                mkdir($caminho, 0775, true);
+            }
+
+            if (move_uploaded_file($_FILES['foto']['tmp_name'], $file)) {
+                $fotoUrl = "uploads/usuarios/$cliente_criado/$novoNome";
+                update(
+                    $pdo,
+                    'clientes',
+                    ['foto_perfil' => $fotoUrl],
+                    "id_cliente = $cliente_criado"
+                );
+
+                header("Location: login.php?usuario_cadastrado=true");
+            } else {
+                $mensagem = "Erro ao enviar imagem.";
+            }
+        } else {
+            header("Location: login.php?usuario_cadastrado=true");
+        }   
     }
 }
 ?>
@@ -68,7 +115,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                         </div>
                     <?php endif; ?>
                     
-                    <form action="" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
 
                         <div class="input-group">
                             <label for="nome">Nome</label>
@@ -144,6 +191,11 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                                 placeholder="Digite sua senha"
                                 required
                             >
+                        </div>
+
+                        <div class="input-group">
+                            <label>Selecione uma foto de perfil (Opcional)</label>
+                            <input type="file" name="foto">
                         </div>
                         
                         <div class="botoes">

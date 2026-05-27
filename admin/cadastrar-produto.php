@@ -77,6 +77,7 @@ if(isset($_POST['nome'])){
 <title>Cadastro Produto</title>
 <link rel="stylesheet" href="../assets/cadastrar.css">
 <link rel="stylesheet" href="../assets/estoque.css">
+<link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
 </head>
 <body>
 

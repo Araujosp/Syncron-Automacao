@@ -76,6 +76,12 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                     $_SESSION['tipo_cliente'] =
                         $cliente_encontrado['tipo_cliente'];
 
+                    $_SESSION['nome'] =
+                        $cliente_encontrado['nome'];
+
+                    $_SESSION['email'] =
+                        $cliente_encontrado['email'];
+
                     header("Location:area-cliente.php");
                     exit;
                 }

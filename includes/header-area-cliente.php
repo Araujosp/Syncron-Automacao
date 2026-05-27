@@ -15,5 +15,6 @@
         <a href="index.php"><i class="fa-solid fa-house"></i>Home</a>
         <a href="produtos.php"><i class="fa-solid fa-boxes-stacked"></i>Produtos</a>
         <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i>Meu Carrinho</a>
+        <a href="../includes/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
     </nav>
 </header>

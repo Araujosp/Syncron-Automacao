@@ -5,7 +5,6 @@
         /* --- MENU LATERAL (SIDEBAR) --- */
         .sidebar {
             width: 250px;
-            height: 1000px;
             background-color: #3b6b9a;
             color: white;
             display: flex;
@@ -49,7 +48,7 @@
 
         .logout-btn {
             margin-top: auto;
-            margin-bottom: 81px;
+            margin-bottom: 80px;
             background-color: #222; color: white;
             border: none; padding: 12px 30px; border-radius: 8px;
             font-weight: bold; cursor: pointer; text-decoration: none;
