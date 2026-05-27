@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/05/2026 às 14:42
+-- Tempo de geração: 27/05/2026 às 14:26
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -34,21 +34,23 @@ CREATE TABLE `clientes` (
   `email` varchar(100) NOT NULL,
   `tipo_cliente` enum('PF','PJ') NOT NULL,
   `data_cadastro` date NOT NULL DEFAULT curdate(),
-  `documento` varchar(18) DEFAULT NULL
+  `documento` varchar(18) DEFAULT NULL,
+  `usuario` varchar(50) DEFAULT NULL,
+  `senha` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `clientes`
 --
 
-INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente`, `data_cadastro`, `documento`) VALUES
-(1, 'João Silva', '(11) 98765-4321', 'joao.silva@email.com', 'PF', '2026-05-14', '123.456.789-00'),
-(2, 'Maria Oliveira', '(11) 99876-5432', 'maria.oliveira@email.com', 'PF', '2026-05-14', '987.654.321-00'),
-(3, 'Carlos Souza', '(11) 97654-3210', 'carlos.souza@email.com', 'PF', '2026-05-14', '456.789.123-00'),
-(4, 'Tech Solutions LTDA', '(11) 4002-8922', 'contato@techsolutions.com.br', 'PJ', '2026-05-14', '12.345.678/0001-90'),
-(5, 'Mercado Central LTDA', '(11) 4333-2211', 'financeiro@mercadocentral.com.br', 'PJ', '2026-05-14', '98.765.432/0001-10'),
-(6, 'Ana Pereira', '(11) 91234-5678', 'ana.pereira@email.com', 'PF', '2026-05-14', '321.654.987-00'),
-(7, 'Construtora Alpha SA', '(11) 4555-6677', 'contato@alpha.com.br', 'PJ', '2026-05-14', '55.444.333/0001-22');
+INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente`, `data_cadastro`, `documento`, `usuario`, `senha`) VALUES
+(1, 'João Silva', '(11) 98765-4321', 'joao.silva@email.com', 'PF', '2026-05-14', '123.456.789-00', 'joao1', '$2y$10$.Qfvcbc1VjrPI0PzbkJrWOtFCNuVzug1wYNBPOKheCkTDSOtL2252'),
+(2, 'Maria Oliveira', '(11) 99876-5432', 'maria.oliveira@email.com', 'PF', '2026-05-14', '987.654.321-00', 'maria2', '$2y$10$UpVYlkxTitBa7zLzkhfbiutESGEiqHRPk8B9B7ltBQvCDfqOjn6Ni'),
+(3, 'Carlos Souza', '(11) 97654-3210', 'carlos.souza@email.com', 'PF', '2026-05-14', '456.789.123-00', 'carlos3', '$2y$10$v5tkXXGFEZ5ddXSLMIxt7OgsEU/.Y933z.1GFRY2BdZEntcSZ4i9W'),
+(4, 'Tech Solutions LTDA', '(11) 4002-8922', 'contato@techsolutions.com.br', 'PJ', '2026-05-14', '12.345.678/0001-90', 'tech4', '$2y$10$57M2ikhdOmv4kMDBp36uIepcr6OWOFNuE6csoe3OTuTXYZyNyXZhq'),
+(5, 'Mercado Central LTDA', '(11) 4333-2211', 'financeiro@mercadocentral.com.br', 'PJ', '2026-05-14', '98.765.432/0001-10', 'mercado5', '$2y$10$eFMKz.RzxE0NZeAb3lGLQuxiF3XNjoqEPlyX3VMSSMlK.n79ZJ8Yi'),
+(6, 'Ana Pereira', '(11) 91234-5678', 'ana.pereira@email.com', 'PF', '2026-05-14', '321.654.987-00', 'ana6', '$2y$10$ejQswD.bG6e2gWPvNCghKufLReCMUhM3L1ly1jZb3wNkbgxlAkj5u'),
+(7, 'Construtora Alpha SA', '(11) 4555-6677', 'contato@alpha.com.br', 'PJ', '2026-05-14', '55.444.333/0001-22', 'construtora7', '$2y$10$0FtsHU4yTlY.8lOV2TmayuSSvV5h1sTA3qM6xJIUFo50rJrJSNCba');
 
 -- --------------------------------------------------------
 
