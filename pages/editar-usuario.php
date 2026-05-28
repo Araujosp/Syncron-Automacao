@@ -18,11 +18,11 @@
             font-size: 15px;
             cursor: pointer;
             border-radius: 10px;
+            transition: .5s ease-in-out;   
         }
         #submit:hover{
             background-color: #7096c2;;
             transform: translateY(-10%);
-            transition: .5s;   
        }
         .submit-arrow{
             width: 20px;

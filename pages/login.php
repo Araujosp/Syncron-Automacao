@@ -3,7 +3,11 @@
 require_once "../includes/crud.php";
 require_once "../includes/session.php";
 
-$mensagem_erro = "";
+if(isset($_GET['usuario_cadastrado'])) {
+    $mensagem_erro = "Usuário cadastrado com sucesso!";
+} else {
+    $mensagem_erro = "";
+}
 
 if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
@@ -72,6 +76,12 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                     $_SESSION['tipo_cliente'] =
                         $cliente_encontrado['tipo_cliente'];
 
+                    $_SESSION['nome'] =
+                        $cliente_encontrado['nome'];
+
+                    $_SESSION['email'] =
+                        $cliente_encontrado['email'];
+
                     header("Location:area-cliente.php");
                     exit;
                 }
@@ -137,10 +147,12 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                             >
                         </div>
                         
-                        <button type="submit" class="btn-submit">
-                            Acessar
-                        </button>
-
+                        <div class="botoes">
+                            <button type="submit" class="btn-submit">
+                                Acessar
+                            </button>
+                            <p>Não tem uma conta? <a href="cadastro.php">Cadastre-se</a></p>
+                        </div>
                     </form>
                 </div>
             </div>

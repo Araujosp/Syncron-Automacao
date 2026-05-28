@@ -48,7 +48,7 @@
             </section>
         </div>
             <section class="carrosel">
-                <h1>Empresas parceira</h1>
+                <h1>Empresas Parceiras</h1>
                 <div class="carousel">
                     <div class="group">
                         <div class="card"><img src="../img/microsoft.png" class="logo"></div>

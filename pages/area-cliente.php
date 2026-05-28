@@ -1,3 +1,14 @@
+<?php
+
+require_once "../includes/session.php";
+require_once "../includes/crud.php";
+
+if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
+    header("Location:../pages/login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -5,7 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php require_once "../includes/meta-links.php"; ?>
         <link rel="stylesheet" href="../assets/area-cliente.css">
-        <title>[nome do usuário] | Syncron</title>
+        <title><?php echo $_SESSION['usuario']; ?> | Syncron</title>
         <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
@@ -21,8 +32,8 @@
                         <img src="../uploads/usuarios/joinha-placeholder.png">
                     </div>
                     <div class="profile-info">
-                        <h2>Usuário</h2>
-                        <p>usuario@email.com</p>
+                        <h2><?php echo $_SESSION['nome']; ?></h2>
+                        <p><?php echo $_SESSION['email']; ?></p>
                     </div>
                 </div>
             </article>

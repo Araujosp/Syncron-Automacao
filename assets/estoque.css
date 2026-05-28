@@ -1,7 +1,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        body { display: flex; height: 100vh; background-color: #f1f1f1; }
+        body { display: flex; height: 100vh; background-color: #f1f1f1; justify-content: space-between; }
 
         /* --- MENU LATERAL (SIDEBAR) --- */
         .sidebar {
@@ -49,6 +49,7 @@
 
         .logout-btn {
             margin-top: auto;
+            margin-bottom: 80px;
             background-color: #222; color: white;
             border: none; padding: 12px 30px; border-radius: 8px;
             font-weight: bold; cursor: pointer; text-decoration: none;
