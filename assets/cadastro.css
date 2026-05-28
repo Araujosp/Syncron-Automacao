@@ -11,6 +11,7 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
+    padding-top: 100px;
 }
 
 /* Lado esquerdo (Onde fica o formulário) */
@@ -40,7 +41,7 @@ body {
 /* --- INÍCIO DO EFEITO DA BORDA ANIMADA --- */
 .login-card-wrapper {
     position: relative;
-    width: 400px;
+    width: 600px;
     padding: 4px; /* Espessura da borda animada */
     border-radius: 16px;
     background: #e0e0e0;
@@ -82,6 +83,7 @@ body {
     z-index: 2; /* Fica acima do raio animado */
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .login-card h2 {
@@ -99,14 +101,26 @@ body {
     flex-direction: column;
 }
 
-.input-group label {
+.input-group-half {
+    margin-bottom: 25px;
+    display: flex;
+    width: 100%;
+    gap: 30px;
+}
+
+.input-group-half div {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label, .input-group-half label {
     font-size: 14px;
     color: #333;
     margin-bottom: 8px;
     font-weight: 500;
 }
 
-.input-group input {
+.input-group input, .input-group-half input, .input-group-half select {
     padding: 12px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -114,6 +128,14 @@ body {
     outline: none;
     transition: all 0.3s ease;
     background-color: #fafafa;
+}
+
+.input-group-half input, .input-group-half select {
+    width: 100%;
+}
+
+.input-group-half select {
+    width: 204px;
 }
 
 /* Efeito ao clicar no input */
@@ -125,7 +147,7 @@ body {
 
 .botoes {
     display: flex;
-    gap: 60px;
+    justify-content: space-between;
     align-items: center;
 }
 

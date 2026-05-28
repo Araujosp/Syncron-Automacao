@@ -6,10 +6,10 @@
         </a>
     </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Pesquisar...">
+    <form class="search-bar" action="produtos.php" method="GET">
+        <input type="text" name="pesquisa" placeholder="Pesquisar...">
         <i class="fa-solid fa-magnifying-glass"></i>
-    </div>
+    </form>
 
     <nav>
         <a href="index.php"><i class="fa-solid fa-house"></i>Home</a>

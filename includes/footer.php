@@ -8,8 +8,8 @@
         </div>
         <div class="footer-links">
             <h2>Links</h2>
-            <a href="#">Home</a>
-            <a href="#">Produtos</a>
+            <a href="index.php">Home</a>
+            <a href="produtos.php">Produtos</a>
             <a href="#">Sobre nós</a>
         </div>
         <div class="footer-contato">
