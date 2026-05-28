@@ -3,11 +3,32 @@
 require_once "../includes/session.php";
 require_once "../includes/crud.php";
 
-$produtos = readAll($pdo, 'produtos');
+$pedidos = readAll($pdo, 'pedidos');
 
 if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
 }
+
+$sql = " SELECT pedidos.id_pedido, clientes.nome AS nome_cliente, produtos.nome AS nome_produto,
+    itens_pedidos.quantidade_item, itens_pedidos.preco_unitario, pedidos.status_geral, pedidos.status_pagamento,
+    pedidos.data_pedido
+FROM pedidos
+
+INNER JOIN clientes
+ON clientes.id_cliente = pedidos.id_cliente
+
+INNER JOIN itens_pedidos
+ON itens_pedidos.id_pedido = pedidos.id_pedido
+
+INNER JOIN produtos
+ON produtos.id_produto = itens_pedidos.id_produto
+";
+
+$stmt = $pdo->prepare($sql);
+
+$stmt->execute();
+
+$dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -54,7 +75,23 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
                 </tr>
             </thead>
             <tbody>
-                <?php ?>
+                <?php
+                foreach ($dados as $row){
+                    echo "<tr>";
+                    echo "<td>" . $row['id_pedido'] . "</td>";
+                    echo "<td>"  . $row['nome_produto'] . "</td>";
+                    echo "<td>"  . $row['nome_cliente'] . "</td>";
+                    echo "<td>"  . $row['status_geral'] . "</td>";
+                    echo "<td>"  . $row['status_pagamento'] . "</td>";
+                    echo "<td>"  . $row['data_pedido'] . "</td>";
+                    echo "<td>"  . "R$" . $row['quantidade_item'] * $row['preco_unitario']. "</td>";
+                    echo "</tr>";
+                }
+                ?>
+                
+                    
+                
+            </tbody>
         </div>
 
     </body>
