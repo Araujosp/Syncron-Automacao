@@ -12,6 +12,7 @@
 body{
     background: #e7e7e7;
     display: flex;
+    /* overflow-y: hidden; */
 }
 
 .perfil{
@@ -120,7 +121,7 @@ body{
 }
 
 .grafico-linha{
-    height: 320px;
+    height: 250px;
 }
 
 /* BOTTOM */
@@ -144,5 +145,5 @@ body{
 }
 
 .grafico-pequeno{
-    height: 250px;
+    height: 180px;
 }

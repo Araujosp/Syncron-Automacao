@@ -20,7 +20,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
         <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
-        <?php include '../includes/header-area-cliente.php'; ?>
+        <?php include '../includes/header.php'; ?>
         <main class="main-content">
             <div class="top-bar">
                 <h1>Área do Cliente</h1>

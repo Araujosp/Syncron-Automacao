@@ -15,7 +15,11 @@
         <a href="index.php"><i class="fa-solid fa-house"></i>Home</a>
         <a href="produtos.php"><i class="fa-solid fa-boxes-stacked"></i>Produtos</a>
         <a href="carrinho.php"><i class="fa-solid fa-cart-shopping"></i>Meu Carrinho</a>
+        <?php if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){ ?>
         <a href="login.php"><i class="fa-regular fa-circle-user"></i>Login</a>
+        <?php } else { ?>
+        <a href="area-cliente.php"><i class="fa-solid fa-user"></i>Área do Cliente</a>
+        <a href="../includes/logout.php"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sair</a>
+        <?php } ?>
     </nav>
-
 </header>

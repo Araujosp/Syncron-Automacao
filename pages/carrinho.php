@@ -2,8 +2,17 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <?php require_once "../includes/meta-links.php";
+    <?php 
+    
+    require_once "../includes/meta-links.php";
+
+    require_once "../includes/session.php";
     require_once "../includes/crud.php";
+
+    if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
+        header("Location:../pages/login.php");
+    }
+
     $id_item = 1;
 
     $quantidade_post = null;

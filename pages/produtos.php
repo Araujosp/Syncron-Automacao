@@ -1,6 +1,7 @@
 <?php
 
 require_once "../includes/crud.php";
+require_once "../includes/session.php";
 
 $categoriasFiltradas = $_GET["categorias"] ?? [];
 
@@ -79,7 +80,7 @@ if($pesquisa != null){
                     <p><?php echo $produto['nome']; ?></p>
                     <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
                 </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
+                <a href="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
             </div>
             <?php
                     }

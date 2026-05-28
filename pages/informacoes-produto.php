@@ -1,6 +1,7 @@
 <?php
 
 require_once "../includes/crud.php";
+require_once "../includes/session.php";
 
 $idProduto = $_GET["id-produto"];
 
