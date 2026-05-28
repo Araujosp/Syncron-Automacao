@@ -45,7 +45,9 @@
                 </div>
 
                 <div class="situation-box">
-                    <p>e aqui vai ficar o valor total do pedido e a situação dele (se já foi pago, se tá pra entrega ou o que)</p>
+                    <h2 class="full-price">R$ 67,00</h2>
+                    <br>
+                    <p class="situation"><b class="situation-title">Situação:</b> Pedido enviado para entrega.</p>
                 </div>
         </section>
 
