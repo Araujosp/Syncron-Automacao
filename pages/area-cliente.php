@@ -16,7 +16,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php require_once "../includes/meta-links.php"; ?>
         <link rel="stylesheet" href="../assets/area-cliente.css">
-        <title><?php echo $_SESSION['usuario']; ?> | Syncron</title>
+        <title><?php echo $_SESSION['nome']; ?> | Syncron</title>
         <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
@@ -28,9 +28,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
 
             <article class="profile-box">
                 <div class="profile-line">
-                    <div class="profile-photo">
-                        <img src="../uploads/usuarios/joinha-placeholder.png">
-                    </div>
+                    <?php echo '<img src="../'.$_SESSION['foto_perfil'].'" class="profile-photo">'; ?>
                     <div class="profile-info">
                         <h2><?php echo $_SESSION['nome']; ?></h2>
                         <p><?php echo $_SESSION['email']; ?></p>

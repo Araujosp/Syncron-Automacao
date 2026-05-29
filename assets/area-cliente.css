@@ -26,8 +26,19 @@
         .profile-photo{
             width: 125px;
             height: 125px;
-            align-items: left;
-            justify-content: left;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 4rem;
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-photo img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-line{
@@ -39,7 +50,6 @@
         .profile-info{
             align-items: left;
             justify-content: left;
-            margin-left: -100px;
         }
 
         .profile-info h2{
@@ -166,7 +176,7 @@
 
         .edit-info{
             width: 1700px;
-            height: 660px;
+            height: 680px;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
@@ -234,6 +244,35 @@
 
         .edit-input:focus ~ .edit-label,
         .edit-input:valid ~ .edit-label{
+            top: 90%;
+            font-size: 12px;
+            color: #000000;
+        }
+
+        .edit-label-file{
+            position: absolute;
+            top: -2px;
+            left: 0px;
+            pointer-events: none;
+            transition: .5s;
+            margin-left: 5%;
+        }
+
+        .edit-input-file{
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgb(0, 0, 0);
+            outline: none;
+            color: rgb(0, 0, 0);
+            font-size: 15px;
+            font-weight: 500;
+            width: 90%;
+            margin-left: 5%;
+            letter-spacing: 2px;
+        }
+
+        .edit-input-file:focus ~ .edit-label-file,
+        .edit-input-file:valid ~ .edit-label-file{
             top: 90%;
             font-size: 12px;
             color: #000000;
