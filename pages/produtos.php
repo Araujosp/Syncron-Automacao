@@ -80,7 +80,7 @@ if($pesquisa != null){
                     <p><?php echo $produto['nome']; ?></p>
                     <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
                 </div>
-                <a href="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
+                <a href="../includes/adicionar-carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
             </div>
             <?php
                     }
