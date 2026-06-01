@@ -1,5 +1,13 @@
 <?php
     require_once "../includes/session.php";
+    require_once "../includes/crud.php";
+
+    $sql = "SELECT itens_pedidos.id_produto, produtos.nome, SUM(itens_pedidos.quantidade_item), produtos.preco_unitario, produtos.foto FROM itens_pedidos JOIN produtos ON itens_pedidos.id_produto = produtos.id_produto GROUP BY produtos.nome ORDER BY SUM(quantidade_item) DESC LIMIT 4;";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    $produtos_em_destaque = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -17,17 +25,26 @@
         <img src="../img/banner.png" class="banner">
         <h1 class="produto">Produtos em destaque</h1>
         <div class="centraliza">
+            <?php
+                foreach($produtos_em_destaque as $destaque){
+            ?>
             <div class="cor">
-                <img src="../img/Clps.jpg">
-                <div class="info">
-                    <p>clipes elétricos</p>
-                    <h2 class="preco">R$ 25,00</h2>
+                <div>
+                    <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="placeholder-img">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <span>Sem imagem</span>
+                    </div>
                 </div>
-                <a href="#" class="botao">Adicionar ao carrinho</a>
+                <div class="info">
+                    <p><?php echo $destaque["nome"]; ?></p>
+                    <h2 class="preco"><?php echo $destaque["preco_unitario"]; ?></h2>
+                </div>
+                <a href="carrinho.php?id_produto=<?php echo $destaque["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
             </div>
-            <div class="cor"></div>
-            <div class="cor"></div>
-            <div class="cor"></div>
+            <?php
+                }
+            ?>
         </div>
         <div class="login-card-wrapper">
             <section class="Quem_somos">
