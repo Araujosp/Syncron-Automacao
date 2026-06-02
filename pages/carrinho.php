@@ -14,20 +14,34 @@
     }
 
     $quantidade_post = null;
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $quantidade_post = $_POST['quantidade'] ?? null;
         $id_item_post = $_POST['id_item'] ?? null;
         }
     
-    $id_item = $_GET['id_produto'] ?? null;
+        
+        $id_item = $_GET['id_produto'] ?? null;
+        
+        if ($id_item !== null) {
+            $produto = read($pdo, "produtos", "id_produto = $id_item");
+            } 
+            else {
+                $produto = null;
+            }
 
-    if ($id_item !== null) {
-        $produto = read($pdo, "produtos", "id_produto = $id_item");
-    } 
-    else {
-        $produto = null;
-    }
-    
+        /* se não usasse o java script, a lógica do cupom:
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $cupom_digitado = strtolower(trim($_POST['cupom']));  
+                if ($cupom_digitado == "desconto10"){
+                    if ($produto['preco_unitario'] >= 500 ){
+                            $valorFinal = $produto['preco_unitario'] * 0.9;
+                     }
+                    else {
+                        $valorFinal=  $produto['preco_unitario'];
+                    }
+                }
+        }*/
         ?>
 
     <link rel="stylesheet" href="../assets/carrinho.css">
@@ -74,48 +88,97 @@
                     <div class="caixa_cupom">
                         <p>Valor original: <strong><?php if ($produto !== null): ?> R$<?php echo $produto['preco_unitario'] ?? '' ?> <?php endif; ?></strong></p>
                         <p>Adicionar cupom:</p>
-                        <p class="cupom">DESCONTO10</p>
-                        <p>Desconto: <strong>10%</strong></p>
+                        <form method = "POST">
+                            <input type="text" id = "cupom" class ="cupom" placeholder = "DESCONTO10" name = "cupom"><br>
+                            <button type="button" id = "aplicar-cupom">
+                                Aplicar Cupom
+                            </button>
+                        </form>
+                        <p>Desconto: <strong id="percentual-desconto">0%</strong></p>
                     </div>
                     <div>
-                        <h1 class="total">R$ <?php echo $produto['preco_unitario'] ?? '' ?></h1>
+                        <h1 class="total">
+                            R$ <span id="valor-final"><?php echo $produto['preco_unitario'] ?></span>
+                        </h1>
                     </div>
             </section>
         </div>
     </main>
     <script defer>
-        const btnMais = document.querySelector('#mais');
-        const btnMenos = document.querySelector('#menos');
-        const contador = document.querySelector('#contador');
-        const total = document.querySelector('#total');
+const btnMais = document.querySelector('#mais');
+const btnMenos = document.querySelector('#menos');
+const contador = document.querySelector('#contador');
+const total = document.querySelector('#valor-final');
 
-        let valor = 1;
-        let min = 1;
-        let max = <?php echo $produto['quantidade_estoque'] ?? ''?>;
-        let preco = <?php echo $produto['preco_unitario'] ?? '' ?>;
+const campoCupom = document.querySelector('#cupom');
+const btnAplicarCupom = document.querySelector('#aplicar-cupom');
+const percentualDesconto = document.querySelector('#percentual-desconto');
 
+let valor = 1;
+let max = <?php echo $produto['quantidade_estoque'] ?? 0 ?>;
+let preco = <?php echo $produto['preco_unitario'] ?? 0 ?>;
 
-        function atualizarTotal() {
-            total.textContent = (valor * preco).toFixed(2);
-        }
+let desconto = 0;
 
+const cupons = {
+    desconto10: 10,
+    desconto20: 20,
+    desconto30: 30,
+    blackfriday: 50
+};
 
-        btnMais.addEventListener('click', ()=> {
-        if(valor < max){
-            valor++;
-            contador.textContent = valor;
-            atualizarTotal()
-        }
-        });
+function atualizarTotal() {
 
-         btnMenos.addEventListener('click', () => {
-        if (valor > 1) {
-            valor--;
-            contador.textContent = valor;
-            atualizarTotal()
-            }
-        });
-    </script>
-    
+    let valorOriginal = valor * preco;
+    let valorFinal = valorOriginal;
+
+    if (desconto > 0 && valorOriginal >= 500) {
+        valorFinal = valorOriginal * (1 - desconto / 100);
+    }
+
+    total.textContent = valorFinal.toFixed(2);
+}
+
+btnAplicarCupom.addEventListener('click', () => {
+
+    const cupom = campoCupom.value.trim().toLowerCase();
+
+    if (cupons[cupom]) {
+        desconto = cupons[cupom];
+        percentualDesconto.textContent = desconto + '%';
+        alert('Cupom aplicado!');
+
+    } else {
+
+        desconto = 0;
+        percentualDesconto.textContent = '0%';
+        alert('Cupom inválido!');
+    }
+
+    atualizarTotal();
+});
+
+btnMais.addEventListener('click', () => {
+
+    if (valor < max) {
+        valor++;
+        contador.textContent = valor;
+        atualizarTotal();
+    }
+
+});
+
+btnMenos.addEventListener('click', () => {
+
+    if (valor > 1) {
+        valor--;
+        contador.textContent = valor;
+        atualizarTotal();
+    }
+
+});
+
+atualizarTotal();
+</script>
 </body>
 </html>
