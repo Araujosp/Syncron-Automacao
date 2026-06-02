@@ -140,35 +140,39 @@ $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </thead>
             <tbody>
                 <?php
-                foreach ($dados as $row){
-                    $status_geral = $row["status_geral"];
-                    $status_pagamento = $row["status_pagamento"];
+                if($dados){
+                    foreach ($dados as $row){
+                        $status_geral = $row["status_geral"];
+                        $status_pagamento = $row["status_pagamento"];
 
-                    if($status_geral == "Entregue"){
-                        $classe_badge_geral = "badge-verde";
-                    } else if($status_geral == "Em trânsito"){
-                        $classe_badge_geral = "badge-amarelo";
-                    } else if($status_geral == "Pendente"){
-                        $classe_badge_geral = "badge-cinza";
-                    } else {
-                        $classe_badge_geral = "badge-vermelho";
+                        if($status_geral == "Entregue"){
+                            $classe_badge_geral = "badge-verde";
+                        } else if($status_geral == "Em trânsito"){
+                            $classe_badge_geral = "badge-amarelo";
+                        } else if($status_geral == "Pendente"){
+                            $classe_badge_geral = "badge-cinza";
+                        } else {
+                            $classe_badge_geral = "badge-vermelho";
+                        }
+
+                        if($status_pagamento == "Realizado"){
+                            $classe_badge_pagamento = "badge-verde";
+                        } else {
+                            $classe_badge_pagamento = "badge-cinza";
+                        }
+
+                        echo "<tr>";
+                        echo "<td>" . $row['id_pedido'] . "</td>";
+                        echo "<td>"  . $row['produtos'] . "</td>";
+                        echo "<td>"  . $row['nome_cliente'] . "</td>";
+                        echo "<td><span class='badge " . $classe_badge_geral . "'>" . $row['status_geral'] . "</span>" . "</td>";
+                        echo "<td><span class='badge " . $classe_badge_pagamento . "'>" . $row['status_pagamento'] . "</span>" . "</td>";
+                        echo "<td>"  . $row['data_pedido'] . "</td>";
+                        echo "<td>"  . "R$" . $row['valor_total']. "</td>";
+                        echo "</tr>";
                     }
-
-                    if($status_pagamento == "Realizado"){
-                        $classe_badge_pagamento = "badge-verde";
-                    } else {
-                        $classe_badge_pagamento = "badge-cinza";
-                    }
-
-                    echo "<tr>";
-                    echo "<td>" . $row['id_pedido'] . "</td>";
-                    echo "<td>"  . $row['produtos'] . "</td>";
-                    echo "<td>"  . $row['nome_cliente'] . "</td>";
-                    echo "<td><span class='badge " . $classe_badge_geral . "'>" . $row['status_geral'] . "</span>" . "</td>";
-                    echo "<td><span class='badge " . $classe_badge_pagamento . "'>" . $row['status_pagamento'] . "</span>" . "</td>";
-                    echo "<td>"  . $row['data_pedido'] . "</td>";
-                    echo "<td>"  . "R$" . $row['valor_total']. "</td>";
-                    echo "</tr>";
+                } else {
+                    echo "<tr><td colspan='7'>Nenhum pedido encontrado.</td></tr>";
                 }
                 ?>
             </tbody>

@@ -112,16 +112,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <select name="categoria" required>
     <option value="">Selecione</option>
     <option 
+        value="CLPs"
+        <?= $produto['categoria'] == 'CLPs' ? 'selected' : '' ?>
+    >
+        CLPs
+    </option>
+    <option 
         value="Sensores"
         <?= $produto['categoria'] == 'Sensores' ? 'selected' : '' ?>
     >
         Sensores
-    </option>
-    <option 
-        value="Clps"
-        <?= $produto['categoria'] == 'Clps' ? 'selected' : '' ?>
-    >
-        Clps
     </option>
     <option 
         value="IHMs"
