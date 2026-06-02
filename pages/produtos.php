@@ -85,6 +85,8 @@ if($pesquisa != null){
             <?php
                     }
                 }
+            } else {
+                echo "<h1>Nenhum produto encontrado</h1>";
             }
             ?>
         </div>

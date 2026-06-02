@@ -3,10 +3,36 @@
 require_once "../includes/session.php";
 require_once "../includes/crud.php";
 
-$pedidos = readAll($pdo, 'pedidos');
-
 if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
+}
+
+if(isset($_GET["situacao_geral"])){
+    $SituacaoGeralSelect = !empty($_GET["situacao_geral"]) ? $_GET["situacao_geral"] : null;
+} else {
+    $SituacaoGeralSelect = null;
+}
+
+if(isset($_GET["situacao_pagamento"])){
+    $SituacaoPagamentoSelect = !empty($_GET["situacao_pagamento"]) ? $_GET["situacao_pagamento"] : null;
+} else {
+    $SituacaoPagamentoSelect = null;
+}
+
+$where = [];
+
+if($SituacaoGeralSelect != null){
+    $where[] = "status_geral = '" . $SituacaoGeralSelect . "'";
+}
+
+if($SituacaoPagamentoSelect != null){
+    $where[] = "status_pagamento = '" . $SituacaoPagamentoSelect . "'";
+}
+
+$pesquisa = $_GET["pesquisa"] ?? null;
+
+if($pesquisa != null){
+    $where[] = "clientes.nome LIKE '%" . $pesquisa . "%'";
 }
 
 $sql = " SELECT pedidos.id_pedido, clientes.nome AS nome_cliente, produtos.nome AS nome_produto,
@@ -23,6 +49,10 @@ ON itens_pedidos.id_pedido = pedidos.id_pedido
 INNER JOIN produtos
 ON produtos.id_produto = itens_pedidos.id_produto
 ";
+
+if(!empty($where)){
+    $sql .= " WHERE " . implode(" AND ", $where);
+}
 
 $stmt = $pdo->prepare($sql);
 
@@ -46,19 +76,39 @@ $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="main-content">
             <div class="top-bar">
-                <div class="filters">
+                <form class="filters" method="GET">
                     <div class="filter-group">
-                        <label>Categoria</label>
-                        <select><option>Todos</option><option>Sensores</option></select>
+                        <label for="situacao_geral">Situação Geral</label>
+                        <select name="situacao_geral" id="situacao_geral" onchange="this.form.submit()">
+                            <option value="none" disabled hidden>Selecione uma opção</option>
+                            <option value="">Todos</option>
+                            <?php
+                                echo "<option value='Pendente'" . ($SituacaoGeralSelect == 'Pendente' ? 'selected' : '') . ">Pendente</option>";
+                                echo "<option value='Em trânsito'" . ($SituacaoGeralSelect == 'Em trânsito' ? 'selected' : '') . ">Em trânsito</option>";
+                                echo "<option value='Entregue'" . ($SituacaoGeralSelect == 'Entregue' ? 'selected' : '') . ">Entregue</option>";
+                                echo "<option value='Cancelado'" . ($SituacaoGeralSelect == 'Cancelado' ? 'selected' : '') . ">Cancelado</option>";
+                            ?>
+                        </select>
                     </div>
                     <div class="filter-group">
-                        <label>Situação</label>
-                        <select><option>Todos</option></select>
+                        <label for="situacao_pagamento">Situação do Pagamento</label>
+                        <select name="situacao_pagamento" id="situacao_pagamento" onchange="this.form.submit()">
+                            <option value="none" disabled hidden>Selecione uma opção</option>
+                            <option value="">Todos</option>
+                            <?php
+                                echo "<option value='Pendente'" . ($SituacaoPagamentoSelect == 'Pendente' ? 'selected' : '') . ">Pendente</option>";
+                                echo "<option value='Realizado'" . ($SituacaoPagamentoSelect == 'Realizado' ? 'selected' : '') . ">Realizado</option>";
+                            ?>
+                        </select>
                     </div>
-                </div>
+                    <a href="financeiro.php">Limpar Filtros</a>
+                </form>
                 <div class="search-bar">
                     <label>Pesquisa</label>
-                    <input type="text" placeholder="Pesquisar...">
+                    <form class="search-bar" action="financeiro.php" method="GET">
+                        <input type="text" name="pesquisa" placeholder="Pesquisar...">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </form>
                 </div>
             </div>
 
@@ -88,9 +138,6 @@ $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     echo "</tr>";
                 }
                 ?>
-                
-                    
-                
             </tbody>
         </div>
 
