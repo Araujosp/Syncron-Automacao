@@ -35,24 +35,38 @@ if($pesquisa != null){
     $where[] = "clientes.nome LIKE '%" . $pesquisa . "%'";
 }
 
-$sql = " SELECT pedidos.id_pedido, clientes.nome AS nome_cliente, produtos.nome AS nome_produto,
-    itens_pedidos.quantidade_item, itens_pedidos.preco_unitario, pedidos.status_geral, pedidos.status_pagamento,
-    pedidos.data_pedido
+$sql = "
+SELECT 
+pedidos.id_pedido, 
+clientes.nome AS nome_cliente, 
+GROUP_CONCAT(
+    CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
+    SEPARATOR', '
+) AS produtos,
+pedidos.status_geral,
+pedidos.status_pagamento,
+pedidos.data_pedido,
+SUM(
+    itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
+) AS valor_total
 FROM pedidos
-
-INNER JOIN clientes
-ON clientes.id_cliente = pedidos.id_cliente
-
-INNER JOIN itens_pedidos
-ON itens_pedidos.id_pedido = pedidos.id_pedido
-
-INNER JOIN produtos
-ON produtos.id_produto = itens_pedidos.id_produto
+INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
 ";
 
 if(!empty($where)){
     $sql .= " WHERE " . implode(" AND ", $where);
 }
+
+$sql .= "
+GROUP BY
+    pedidos.id_pedido,
+    clientes.nome,
+    pedidos.status_geral,
+    pedidos.status_pagamento,
+    pedidos.data_pedido
+";
 
 $stmt = $pdo->prepare($sql);
 
@@ -126,16 +140,39 @@ $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </thead>
             <tbody>
                 <?php
-                foreach ($dados as $row){
-                    echo "<tr>";
-                    echo "<td>" . $row['id_pedido'] . "</td>";
-                    echo "<td>"  . $row['nome_produto'] . "</td>";
-                    echo "<td>"  . $row['nome_cliente'] . "</td>";
-                    echo "<td>"  . $row['status_geral'] . "</td>";
-                    echo "<td>"  . $row['status_pagamento'] . "</td>";
-                    echo "<td>"  . $row['data_pedido'] . "</td>";
-                    echo "<td>"  . "R$" . $row['quantidade_item'] * $row['preco_unitario']. "</td>";
-                    echo "</tr>";
+                if($dados){
+                    foreach ($dados as $row){
+                        $status_geral = $row["status_geral"];
+                        $status_pagamento = $row["status_pagamento"];
+
+                        if($status_geral == "Entregue"){
+                            $classe_badge_geral = "badge-verde";
+                        } else if($status_geral == "Em trânsito"){
+                            $classe_badge_geral = "badge-amarelo";
+                        } else if($status_geral == "Pendente"){
+                            $classe_badge_geral = "badge-cinza";
+                        } else {
+                            $classe_badge_geral = "badge-vermelho";
+                        }
+
+                        if($status_pagamento == "Realizado"){
+                            $classe_badge_pagamento = "badge-verde";
+                        } else {
+                            $classe_badge_pagamento = "badge-cinza";
+                        }
+
+                        echo "<tr>";
+                        echo "<td>" . $row['id_pedido'] . "</td>";
+                        echo "<td>"  . $row['produtos'] . "</td>";
+                        echo "<td>"  . $row['nome_cliente'] . "</td>";
+                        echo "<td><span class='badge " . $classe_badge_geral . "'>" . $row['status_geral'] . "</span>" . "</td>";
+                        echo "<td><span class='badge " . $classe_badge_pagamento . "'>" . $row['status_pagamento'] . "</span>" . "</td>";
+                        echo "<td>"  . $row['data_pedido'] . "</td>";
+                        echo "<td>"  . "R$" . $row['valor_total']. "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>Nenhum pedido encontrado.</td></tr>";
                 }
                 ?>
             </tbody>

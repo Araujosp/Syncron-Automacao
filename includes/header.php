@@ -7,7 +7,7 @@
     </div>
 
     <form class="search-bar" action="produtos.php" method="GET">
-        <input type="text" name="pesquisa" placeholder="Pesquisar...">
+        <input type="text" name="pesquisa" value="<?php echo isset($_GET["pesquisa"]) ? $_GET["pesquisa"] : ''; ?>" placeholder="Pesquisar...">
         <i class="fa-solid fa-magnifying-glass"></i>
     </form>
 

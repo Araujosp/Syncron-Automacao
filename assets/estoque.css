@@ -91,7 +91,7 @@
         /* --- TABELA DE ESTOQUE --- */
         table { width: 100%; border-collapse: collapse; text-align: center; }
         thead { background-color: #222; color: white; }
-        th, td { padding: 15px 10px; border-bottom: 1px solid #ddd; }
+        th, td { padding: 15px 10px; border-bottom: 1px solid #ddd; max-width: 400px; }
         
         /* Badges de Situação */
         .badge {
@@ -100,7 +100,7 @@
         .badge-verde { background-color: #2ecc71; }
         .badge-amarelo { background-color: #f1c40f; color: #000; }
         .badge-vermelho { background-color: #e74c3c; }
-        .badge-cinza { background-color: #808080; color: #000; }
+        .badge-cinza { background-color: #808080; }
 
         /* Ações (Editar / Excluir) */
         .acoes a {
