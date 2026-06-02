@@ -3,8 +3,6 @@
 require_once "../includes/session.php";
 require_once "../includes/crud.php";
 
-$produtos = readAll($pdo, 'produtos');
-
 $pesquisa = $_GET["pesquisa"] ?? null;
 
 if($pesquisa != null){
@@ -22,6 +20,12 @@ if(isset($_GET["categoria"])){
     $CategoriaSelect = !empty($_GET["categoria"]) ? $_GET["categoria"] : null;
 } else {
     $CategoriaSelect = null;
+}
+
+if(isset($_GET["situacao"])){
+    $SituacaoSelect = !empty($_GET["situacao"]) ? $_GET["situacao"] : null;
+} else {
+    $SituacaoSelect = null;
 }
 
 ?>
@@ -42,25 +46,36 @@ if(isset($_GET["categoria"])){
     <div class="main-content">
         
         <div class="top-bar">
-            <div class="filters">
-                <form class="filter-group" method="GET">
+            <form class="filters" method="GET">
+                <div class="filter-group">
                     <label>Categoria</label>
                     <select name="categoria" id="categoria" onchange="this.form.submit()">
                         <option value="none" disabled hidden>Selecione uma opção</option>
                         <option value="">Tudo</option>
                         <?php
+                            echo "<option value='CLPs'" . ($CategoriaSelect == 'CLPs' ? 'selected' : '') . ">CLPs</option>";
                             echo "<option value='Sensores'" . ($CategoriaSelect == 'Sensores' ? 'selected' : '') . ">Sensores</option>";
+                            echo "<option value='IHMs'" . ($CategoriaSelect == 'IHMs' ? 'selected' : '') . ">IHMs</option>";
+                            echo "<option value='Fontes Industriais'" . ($CategoriaSelect == 'Fontes Industriais' ? 'selected' : '') . ">Fontes Industriais</option>";
+                            echo "<option value='Relés'" . ($CategoriaSelect == 'Relés' ? 'selected' : '') . ">Relés</option>";
+                            echo "<option value='Inversores de Frequência'" . ($CategoriaSelect == 'Inversores de Frequência' ? 'selected' : '') . ">Inversores de Frequência</option>";
                         ?>
                     </select>
-                </form>
-                <div class="filter-group">
-                    <label>Situação</label>
-                    <select><option>Todos</option></select>
                 </div>
-            </div>
-
-            
-            
+                <div class="filter-group">
+                    <label for="situacao">Situação</label>
+                    <select name="situacao" id="situacao" onchange="this.form.submit()">
+                        <option value="none" disabled hidden>Selecione uma opção</option>
+                        <option value="">Todos</option>
+                        <?php
+                            echo "<option value='Disponível'" . ($SituacaoSelect == 'Disponível' ? 'selected' : '') . ">Disponível</option>";
+                            echo "<option value='Estoque baixo'" . ($SituacaoSelect == 'Estoque baixo' ? 'selected' : '') . ">Estoque baixo</option>";
+                            echo "<option value='Sem estoque'" . ($SituacaoSelect == 'Sem estoque' ? 'selected' : '') . ">Sem estoque</option>";
+                        ?>
+                    </select>
+                </div>
+                <a href="estoque.php">Limpar Filtros</a>
+            </form>
             <div class="search-bar">
                 <label>Pesquisa</label>
                 <form class="search-bar" action="estoque.php" method="GET">
@@ -85,22 +100,25 @@ if(isset($_GET["categoria"])){
             <tbody>
                 <?php 
                 // Verifica se existem produtos cadastrados
-                if($produtos) {
-                    foreach($produtos as $produto) { 
-                        
-                        // Lógica para definir a cor e o texto da Situação baseada na quantidade
-                        $qtd = $produto['quantidade_estoque'];
-                        if ($qtd >= 50) {
-                            $classe_badge = "badge-verde";
-                            $texto_badge = "Disponível";
-                        } else if ($qtd > 0 && $qtd < 50) {
-                            $classe_badge = "badge-amarelo";
-                            $texto_badge = "Estoque baixo";
-                        } else {
-                            $classe_badge = "badge-vermelho";
-                            $texto_badge = "Sem estoque";
-                        }
-                        if ($CategoriaSelect == $produto['categoria'] || $CategoriaSelect == null) {
+                    if($produtos) {
+                        foreach($produtos as $produto) { 
+                            
+                            // Lógica para definir a cor e o texto da Situação baseada na quantidade
+                            $qtd = $produto['quantidade_estoque'];
+                            if ($qtd >= 50) {
+                                $classe_badge = "badge-verde";
+                                $texto_badge = "Disponível";
+                                $situacao = "Disponível";
+                            } else if ($qtd > 0 && $qtd < 50) {
+                                $classe_badge = "badge-amarelo";
+                                $texto_badge = "Estoque baixo";
+                                $situacao = "Estoque baixo";
+                            } else {
+                                $classe_badge = "badge-vermelho";
+                                $texto_badge = "Sem estoque";
+                                $situacao = "Sem estoque";
+                            }
+                        if (($CategoriaSelect == $produto['categoria'] || $CategoriaSelect == null) && ($SituacaoSelect == $situacao || $SituacaoSelect == null)) {
                 ?>
                 <tr>
                     <td><?php echo $produto['id_produto']; ?></td>
