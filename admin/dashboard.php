@@ -9,6 +9,25 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
 }
 
+$sql = "
+    SELECT
+        SUM(itens_pedidos.quantidade_item * itens_pedidos.preco_unitario) AS pedido_total
+    FROM pedidos 
+    INNER JOIN itens_pedidos
+        ON pedidos.id_pedido = itens_pedidos.id_pedido
+    WHERE pedidos.status_geral = 'Entregue'
+    AND MONTH(pedidos.data_pedido) = 1
+";
+
+
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$receita = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$pedido_total = $receita['pedido_total'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,8 +44,8 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     <title>Syncron | Dashboard</title>
 </head>
 <body>
-</body>
-</html>
+
+
 
 <?php  require_once "../includes/sidebar.php"  ?>
 <!-- MAIN -->
@@ -43,7 +62,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
 
             <h2>Receita Mensal</h2>
 
-            <p>R$ 2.400.000</p>
+            <p>R$ <?php echo $pedido_total?></p>
 
         </div>
 
