@@ -82,6 +82,9 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                     $_SESSION['email'] =
                         $cliente_encontrado['email'];
 
+                    $_SESSION['foto_perfil'] =
+                        $cliente_encontrado['foto_perfil'];
+
                     header("Location:area-cliente.php");
                     exit;
                 }
