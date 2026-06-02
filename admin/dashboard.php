@@ -9,13 +9,15 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
     header("Location:../pages/login.php");
 }
 
+//Dinheior mensal
+
 $sql = "
     SELECT
         SUM(itens_pedidos.quantidade_item * itens_pedidos.preco_unitario) AS pedido_total
     FROM pedidos 
     INNER JOIN itens_pedidos
         ON pedidos.id_pedido = itens_pedidos.id_pedido
-    WHERE pedidos.status_geral = 'Entregue'
+    WHERE pedidos.status_pagamento = 'Realizado'
     AND MONTH(pedidos.data_pedido) = 1
 ";
 
@@ -27,6 +29,87 @@ $stmt->execute();
 $receita = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $pedido_total = $receita['pedido_total'];
+
+
+//Taxa de cancelamento
+
+$sql2 = "
+    SELECT
+        itens_pedidos.quantidade_item,
+        SUM(
+            CASE WHEN pedidos.status_geral = 'Cancelado' 
+            THEN (itens_pedidos.quantidade_item * itens_pedidos.preco_unitario) 
+            ELSE 0 
+            END
+        ) AS total_cancelado
+    FROM pedidos 
+    INNER JOIN itens_pedidos
+        ON pedidos.id_pedido = itens_pedidos.id_pedido
+    WHERE MONTH(pedidos.data_pedido) = 1
+";
+
+
+
+$stmt2 = $pdo->prepare($sql2);
+$stmt2->execute();
+
+$receita2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+
+$total_cancelado = $receita2['total_cancelado'];
+
+
+//Pedidos fechados
+
+$sql3 = "
+    SELECT
+        COUNT(DISTINCT pedidos.id_pedido) as pedidos_count
+    FROM pedidos 
+    INNER JOIN itens_pedidos
+        ON pedidos.id_pedido = itens_pedidos.id_pedido
+     WHERE pedidos.status_pagamento = 'Realizado' or pedidos.status_pagamento = 'Pendente'
+    AND MONTH(pedidos.data_pedido) = 1
+";
+
+
+
+$stmt3 = $pdo->prepare($sql3);
+$stmt3->execute();
+
+$receita3 = $stmt3->fetch(PDO::FETCH_ASSOC);
+
+$pedidos_count = $receita3['pedidos_count'];
+
+//Panorama de vendas
+
+// 1. Mudamos de SUM (somar dinheiro) para COUNT (contar quantidade de pedidos)
+$sql_linha = "
+    SELECT 
+        MONTH(pedidos.data_pedido) AS mes, 
+        COUNT(DISTINCT pedidos.id_pedido) AS total -- Conta quantos pedidos únicos foram feitos
+    FROM pedidos
+    WHERE pedidos.status_geral = 'Entregue' 
+      AND YEAR(pedidos.data_pedido) = YEAR(CURRENT_DATE()) 
+    GROUP BY MONTH(pedidos.data_pedido)
+    ORDER BY MONTH(pedidos.data_pedido) ASC
+";
+
+// 2. Executa a query
+$stmt4 = $pdo->query($sql_linha);
+$dados_do_banco = $stmt4->fetchAll(PDO::FETCH_ASSOC);
+
+// 3. Criamos a estrutura zerada para os 6 meses [Jan, Fev, Mar, Abr, Mai, Jun]
+$valores_meses = [0, 0, 0, 0, 0, 0]; 
+
+// 4. Preenche a array com a QUANTIDADE real de pedidos
+foreach ($dados_do_banco as $linha) {
+    $numero_mes = (int)$linha['mes']; 
+    
+    if ($numero_mes <= 6) {
+        // Agora o $linha['total'] guarda o número de pedidos (ex: 5, 12, 18...)
+        $valores_meses[$numero_mes - 1] = (int)$linha['total']; 
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -70,7 +153,7 @@ $pedido_total = $receita['pedido_total'];
 
             <h2>Taxa Cancelamento</h2>
 
-            <p>4,2%</p>
+            <p><?php echo number_format($total_cancelado, 0)?>%</p>
 
         </div>
 
@@ -78,7 +161,7 @@ $pedido_total = $receita['pedido_total'];
 
             <h2>Pedidos Fechados</h2>
 
-            <p>12.450</p>
+            <p><?php echo $pedidos_count?></p>
 
         </div>
 
@@ -150,7 +233,7 @@ new Chart(ctxLinha, {
 
         datasets: [{
 
-            data: [300, 900, 1800, 1400, 450, 1600],
+            data: <?= json_encode($valores_meses) ?>,
 
             borderColor: '#4f7cff',
 
