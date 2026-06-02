@@ -25,9 +25,14 @@ $id_cliente = $_SESSION['id_cliente'];
             </div>
             <article class="order-back">
                 <?php 
-                        $pedidos = read($pdo, 'pedidos', "id_cliente = $id_cliente");
+                        $pedidos = read($pdo, 'pedidos', "id_cliente = $id_cliente"); 
                         $count = 1;
+                        $total_value = 0;
                         foreach ($pedidos as $pedido){
+                            $id_pedido = readOne($pdo, 'pedidos', 'id_pedido', "id_cliente = $id_cliente");
+                            $item = read($pdo, 'itens_pedidos', 'id_pedido = '.$id_pedido.'');
+                            $id_produto = readOne($pdo, 'itens_pedidos', 'id_produto', 'id_pedido = '.$id_pedido.'');
+                            $produto = read($pdo, 'produtos', 'id_produto = '.$id_produto.'');
                             echo '
                                 <div class="order-line">
                                     <div class="order-box">
@@ -35,19 +40,20 @@ $id_cliente = $_SESSION['id_cliente'];
                                             <h3>PEDIDO '.$count.':</h3>
                                             <table>
                                                 <tbody class="inbox-list">
-                                                    '.$produtos = read($pdo, 'itens_pedido', "id_pedido = $id_pedido");
-                                                    foreach ($produto as $produtos)['
-                                                    <tr>
-                                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                                        <td>1x. <b>PRODUTO<b></td>
-                                                        <td><p class="order-subprice">R$ 7,00<p></td>
-                                                    </tr>
-                                                    ']'
+                                                        <tr>
+                                                            <td><img src="'.$produto['foto'].'" class="order-img"></td>
+                                                            <td>'.$item['quantidade_item'].'x. <b>'.$produto['nome'].'<b></td>
+                                                            <td><p class="order-subprice">R$ '.$item['preco_unitario'].'<p></td>
+                                                        </tr>
                                                 </tbody>
                                             </table>
                                         <div class="inbox-line">
-                                            <h4 class="order-price">R$ 67,00</h4>
-                                            <a href="./detalhes-pedido.php">
+                                            <h4 class="order-price">R$'
+                                                #foreach($item as $item2){
+                                                    #$total_value = $total_value + ($item2['quantidade_item'] * $item2['preco_unitario'])
+                                                    #}
+                                                    '</h4>
+                                            <a href="./detalhes-pedido.php?pedido='.$id_pedido.'">
                                                 <img src="../img/arrow.png" class="details-arrow">
                                             </a>
                                         </div>

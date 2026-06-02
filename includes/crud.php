@@ -28,6 +28,14 @@ try {
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function readOne($pdo, $table,$column, $where = null) {
+        $sql = "SELECT $column FROM $table";
+        if ($where) {
+            $sql .= " WHERE $where";
+        }
+        $stmt = $pdo->query($sql);
+        return $stmt->fetchColumn();
+    }
     function read($pdo, $table, $where = null) {
         $sql = "SELECT * FROM $table";
         if ($where) {
