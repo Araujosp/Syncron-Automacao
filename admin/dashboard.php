@@ -51,10 +51,9 @@ $porcentagem_cancel = ($receita2['todo_cancelados'] / $receita2['todo_pedidos'])
 
 //Pedidos fechados
 
-$sql3 = " SELECT
-        COUNT(id_pedido) as pedidos_count
+$sql3 = " SELECT COUNT(id_pedido) as pedidos_count
     FROM pedidos 
-    WHERE (status_pagamento = 'Realizado' or status_pagamento = 'Pendente')
+    WHERE (status_pagamento = 'Realizado')
     AND MONTH(data_pedido) = 01
 ";
 
@@ -96,12 +95,16 @@ foreach ($dados_do_banco as $linha) {
     }
 }
 
-$sql4 = "SELECT p.categoria, COUNT(*) AS total FROM itens_pedidos ip
-        INNER JOIN produtos p ON ip.id_produto = p.id_produto
-        INNER JOIN pedidos ped
-        ON ip.id_pedido = ped.id_pedido
-        GROUP BY p.categoria
-        ORDER BY total DESC;
+$sql4 = "SELECT 
+    p.categoria,
+    SUM(ip.quantidade_item) AS total
+FROM itens_pedidos ip
+INNER JOIN produtos p 
+    ON ip.id_produto = p.id_produto
+INNER JOIN pedidos ped
+    ON ip.id_pedido = ped.id_pedido
+WHERE MONTH(ped.data_pedido) = 1
+GROUP BY p.categoria;
 ";
 
 
