@@ -11,8 +11,7 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_usuario']))){
 
 //Dinheior mensal
 
-$sql = "
-    SELECT
+$sql = " SELECT
         SUM(itens_pedidos.quantidade_item * itens_pedidos.preco_unitario) AS pedido_total
     FROM pedidos 
     INNER JOIN itens_pedidos
@@ -33,19 +32,11 @@ $pedido_total = $receita['pedido_total'];
 
 //Taxa de cancelamento
 
-$sql2 = "
-    SELECT
-        itens_pedidos.quantidade_item,
-        SUM(
-            CASE WHEN pedidos.status_geral = 'Cancelado' 
-            THEN (itens_pedidos.quantidade_item * itens_pedidos.preco_unitario) 
-            ELSE 0 
-            END
-        ) AS total_cancelado
+$sql2 = " SELECT
+        COUNT(id_pedido) as todo_pedidos,
+        SUM(status_geral = 'Cancelado') AS todo_cancelados
     FROM pedidos 
-    INNER JOIN itens_pedidos
-        ON pedidos.id_pedido = itens_pedidos.id_pedido
-    WHERE MONTH(pedidos.data_pedido) = 1
+    WHERE MONTH(data_pedido) = 1
 ";
 
 
@@ -55,19 +46,16 @@ $stmt2->execute();
 
 $receita2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-$total_cancelado = $receita2['total_cancelado'];
+$porcentagem_cancel = ($receita2['todo_cancelados'] / $receita2['todo_pedidos']) * 100;
 
 
 //Pedidos fechados
 
-$sql3 = "
-    SELECT
-        COUNT(DISTINCT pedidos.id_pedido) as pedidos_count
+$sql3 = " SELECT
+        COUNT(id_pedido) as pedidos_count
     FROM pedidos 
-    INNER JOIN itens_pedidos
-        ON pedidos.id_pedido = itens_pedidos.id_pedido
-     WHERE pedidos.status_pagamento = 'Realizado' or pedidos.status_pagamento = 'Pendente'
-    AND MONTH(pedidos.data_pedido) = 1
+    WHERE (status_pagamento = 'Realizado' or status_pagamento = 'Pendente')
+    AND MONTH(data_pedido) = 01
 ";
 
 
@@ -82,15 +70,13 @@ $pedidos_count = $receita3['pedidos_count'];
 //Panorama de vendas
 
 // 1. Mudamos de SUM (somar dinheiro) para COUNT (contar quantidade de pedidos)
-$sql_linha = "
-    SELECT 
-        MONTH(pedidos.data_pedido) AS mes, 
-        COUNT(DISTINCT pedidos.id_pedido) AS total -- Conta quantos pedidos únicos foram feitos
+$sql_linha = " SELECT MONTH(data_pedido) AS mes, 
+        COUNT(id_pedido) AS total 
     FROM pedidos
-    WHERE pedidos.status_geral = 'Entregue' 
-      AND YEAR(pedidos.data_pedido) = YEAR(CURRENT_DATE()) 
-    GROUP BY MONTH(pedidos.data_pedido)
-    ORDER BY MONTH(pedidos.data_pedido) ASC
+    WHERE status_geral = 'Entregue' 
+      AND YEAR(data_pedido) = YEAR(CURRENT_DATE()) 
+    GROUP BY MONTH(data_pedido)
+    ORDER BY MONTH(data_pedido) ASC
 ";
 
 // 2. Executa a query
@@ -109,6 +95,28 @@ foreach ($dados_do_banco as $linha) {
         $valores_meses[$numero_mes - 1] = (int)$linha['total']; 
     }
 }
+
+$sql4 = "SELECT p.categoria, COUNT(*) AS total FROM itens_pedidos ip
+        INNER JOIN produtos p ON ip.id_produto = p.id_produto
+        INNER JOIN pedidos ped
+        ON ip.id_pedido = ped.id_pedido
+        GROUP BY p.categoria
+        ORDER BY total DESC;
+";
+
+
+
+$stmt4 = $pdo->prepare($sql4);
+$stmt4->execute();
+
+$labels = [];
+$dados = [];
+
+while ($row = $stmt4->fetch(PDO::FETCH_ASSOC)) {
+    $labels[] = $row['categoria'];
+    $dados[] = $row['total'];
+}
+
 
 
 ?>
@@ -153,7 +161,7 @@ foreach ($dados_do_banco as $linha) {
 
             <h2>Taxa Cancelamento</h2>
 
-            <p><?php echo number_format($total_cancelado, 0)?>%</p>
+            <p><?php echo number_format($porcentagem_cancel, 2) ?>%</p>
 
         </div>
 
@@ -313,6 +321,9 @@ new Chart(ctxBarra, {
 
 /* GRAFICO PIZZA */
 
+const labels = <?= json_encode($labels) ?>;
+const dados = <?= json_encode($dados) ?>;
+
 const ctxPizza = document.getElementById('graficoPizza');
 
 new Chart(ctxPizza, {
@@ -321,11 +332,11 @@ new Chart(ctxPizza, {
 
     data: {
 
-        labels: ['Fontes', 'IHMs', 'Sensores', 'CLPs'],
+        labels: labels,
 
         datasets: [{
 
-            data: [55, 25, 15, 5],
+            data: dados,
 
             backgroundColor: [
                 '#5b87ff',
