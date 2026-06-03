@@ -1,34 +1,40 @@
 <?php
-//  $sql = "
-//     SELECT 
-//         pedidos.id_pedido,
-//         produtos.foto,
-//         GROUP_CONCAT(
-//             CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
-//             SEPARATOR', '
-//         ) AS produtos,
-//         pedidos.status_geral,
-//         pedidos.status_pagamento,
-//         pedidos.data_pedido,
-//         itens_pedidos.preco_unitario,
-//         SUM(
-//             itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
-//         ) AS valor_total
-//     FROM pedidos
-//     INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
-//     INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
-//     INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
-//     WHERE pedidos.id_cliente = $id_cliente
-//     GROUP BY
-//         pedidos.id_pedido,
-//         clientes.nome,
-//         pedidos.status_geral,
-//         pedidos.status_pagamento,
-//         pedidos.data_pedido
-//     ";
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->execute();
-//                         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+require_once "../includes/session.php";
+require_once "../includes/crud.php";
+
+$id_cliente = $_SESSION['id_cliente'];
+$id_pedido = $_GET['pedido'];
+
+ $sql = "
+    SELECT
+        produtos.foto,
+        GROUP_CONCAT(
+            CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
+            SEPARATOR', '
+        ) AS produtos,
+        pedidos.status_geral,
+        pedidos.status_pagamento,
+        pedidos.data_pedido,
+        itens_pedidos.preco_unitario,
+        SUM(
+            itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
+        ) AS valor_total
+    FROM pedidos
+    INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+    INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+    INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
+    WHERE pedidos.id_cliente = $id_cliente
+    GROUP BY
+        pedidos.id_pedido,
+        clientes.nome,
+        pedidos.status_geral,
+        pedidos.status_pagamento,
+        pedidos.data_pedido
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -58,13 +64,19 @@
                             <th><h3 class="head">Preço Total</h3></th>
                         </thead>
                         <tbody>
-                            <tr class="body">
-                                <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                <td><h4 class="product-table">PRODUTO</h4></td>
-                                <td><p class="product-table">R$ 20,00</p></td>
-                                <td><p class="product-table">3</p></td>
-                                <td><p class="product-table">R$ 60,00</p></td>
-                            </tr>
+                            <?php
+                                // foreach ($dados as $item){
+                                //     echo '
+                                //         <tr class="body">
+                                //             <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
+                                //             <td><h4 class="product-table">PRODUTO</h4></td>
+                                //             <td><p class="product-table">R$ 20,00</p></td>
+                                //             <td><p class="product-table">3</p></td>
+                                //             <td><p class="product-table">R$ 60,00</p></td>
+                                //         </tr>
+                                //         ';
+                                //     }
+                            ?>
                             <tr class="body">
                                 <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
                                 <td><h4 class="product-table">PRODUTO</h4></td>
