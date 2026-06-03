@@ -24,40 +24,63 @@ $id_cliente = $_SESSION['id_cliente'];
                 <h1>Meus Pedidos</h1>
             </div>
             <article class="order-back">
+                <div class="order-line">
                 <?php 
-                        $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente"); 
+                        $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente");
+                        $sql = "
+                            SELECT 
+                                pedidos.id_pedido,
+                                produtos.foto,
+                                GROUP_CONCAT(
+                                    CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
+                                    SEPARATOR', '
+                                ) AS produtos,
+                                pedidos.status_geral,
+                                pedidos.status_pagamento,
+                                pedidos.data_pedido,
+                                SUM(
+                                    itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
+                                ) AS valor_total
+                            FROM pedidos
+                            INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                            INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+                            INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
+                            WHERE pedidos.id_cliente = $id_cliente
+                            GROUP BY
+                                pedidos.id_pedido,
+                                clientes.nome,
+                                pedidos.status_geral,
+                                pedidos.status_pagamento,
+                                pedidos.data_pedido
+                        ";
+                        
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
+                        $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         $count = 1;
-                        $id_pedido = readOne($pdo, 'pedidos', 'id_pedido', "id_cliente = $id_cliente");
-                        foreach ($pedidos as $pedido){
-                            $item = read($pdo, 'itens_pedidos', 'id_pedido = '.$id_pedido.'');
-                            $id_produto = readOne($pdo, 'itens_pedidos', 'id_produto', 'id_pedido = '.$id_pedido.'');
-                            $produto = read($pdo, 'produtos', 'id_produto = '.$id_produto.'');
-                            $sql = " SELECT SUM(quantidade_item * preco_unitario) as value from itens_pedidos where id_pedido = $id_pedido ";
+                        foreach ($dados as $pedido){
                             echo '
-                                <div class="order-line">
+                                
                                     <div class="order-box">
                                         <div class="margin-order">
                                             <h3>PEDIDO '.$count.':</h3>
                                             <table>
                                                 <tbody class="inbox-list">
                                                         <tr>
-                                                            <td><img src="'.$produto['foto'].'" class="order-img"></td>
-                                                            <td>'.$item['quantidade_item'].'x. <b>'.$produto['nome'].'<b></td>
-                                                            <td><p class="order-subprice">R$ '.$item['preco_unitario'].'<p></td>
+                                                            <td><img src="'.$pedido['foto'].'" class="order-img"></td>
+                                                            <td>'. $pedido["produtos"] .'<b></td>
+                                                            <td><p class="order-subprice">R$ '.$pedido['valor_total'].'<p></td>
                                                         </tr>
                                                 </tbody>
                                             </table>
-                                        <div class="inbox-line">
-                                            <h4 class="order-price">R$ '.$value.'</h4>
-                                            <a href="./detalhes-pedido.php?pedido='.$id_pedido.'">
-                                                <img src="../img/arrow.png" class="details-arrow">
-                                            </a>
+                                            
                                         </div>
                                     </div>
-                                </div>';
+                                ';
                             $count ++ ;
                         }
                     ?>
+                </div>
                 <br>
                 <a href="./area-cliente.php" class="order-return">
                     <img src="../img/arrow3.png" class="return-arrow">

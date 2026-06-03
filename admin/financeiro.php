@@ -69,9 +69,7 @@ GROUP BY
 ";
 
 $stmt = $pdo->prepare($sql);
-
 $stmt->execute();
-
 $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
