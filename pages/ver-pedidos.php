@@ -25,14 +25,14 @@ $id_cliente = $_SESSION['id_cliente'];
             </div>
             <article class="order-back">
                 <?php 
-                        $pedidos = read($pdo, 'pedidos', "id_cliente = $id_cliente"); 
+                        $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente"); 
                         $count = 1;
-                        $total_value = 0;
+                        $id_pedido = readOne($pdo, 'pedidos', 'id_pedido', "id_cliente = $id_cliente");
                         foreach ($pedidos as $pedido){
-                            $id_pedido = readOne($pdo, 'pedidos', 'id_pedido', "id_cliente = $id_cliente");
                             $item = read($pdo, 'itens_pedidos', 'id_pedido = '.$id_pedido.'');
                             $id_produto = readOne($pdo, 'itens_pedidos', 'id_produto', 'id_pedido = '.$id_pedido.'');
                             $produto = read($pdo, 'produtos', 'id_produto = '.$id_produto.'');
+                            $sql = " SELECT SUM(quantidade_item * preco_unitario) as value from itens_pedidos where id_pedido = $id_pedido ";
                             echo '
                                 <div class="order-line">
                                     <div class="order-box">
@@ -48,11 +48,7 @@ $id_cliente = $_SESSION['id_cliente'];
                                                 </tbody>
                                             </table>
                                         <div class="inbox-line">
-                                            <h4 class="order-price">R$'
-                                                #foreach($item as $item2){
-                                                    #$total_value = $total_value + ($item2['quantidade_item'] * $item2['preco_unitario'])
-                                                    #}
-                                                    '</h4>
+                                            <h4 class="order-price">R$ '.$value.'</h4>
                                             <a href="./detalhes-pedido.php?pedido='.$id_pedido.'">
                                                 <img src="../img/arrow.png" class="details-arrow">
                                             </a>

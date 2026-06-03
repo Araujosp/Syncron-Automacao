@@ -36,6 +36,16 @@ try {
         $stmt = $pdo->query($sql);
         return $stmt->fetchColumn();
     }
+
+    function readSum($pdo, $table, $column, $column2, $where = null){
+        $sql = "SELECT SUM($column * $column2) from $table";
+        if ($where) {
+            $sql .= " WHERE $where";
+        }
+        $stmt = $pdo->query($sql);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     function read($pdo, $table, $where = null) {
         $sql = "SELECT * FROM $table";
         if ($where) {
