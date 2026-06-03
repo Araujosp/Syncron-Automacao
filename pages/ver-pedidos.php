@@ -29,28 +29,15 @@ $id_cliente = $_SESSION['id_cliente'];
                         $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente");
                         $sql = "
                             SELECT 
-                                pedidos.id_pedido,
-                                produtos.foto,
-                                GROUP_CONCAT(
-                                    CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
-                                    SEPARATOR', '
-                                ) AS produtos,
-                                pedidos.status_geral,
-                                pedidos.status_pagamento,
-                                pedidos.data_pedido,
                                 SUM(
                                     itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
                                 ) AS valor_total
                             FROM pedidos
                             INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
                             INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
-                            INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
                             WHERE pedidos.id_cliente = $id_cliente
                             GROUP BY
                                 pedidos.id_pedido,
-                                clientes.nome,
-                                pedidos.status_geral,
-                                pedidos.status_pagamento,
                                 pedidos.data_pedido
                         ";
                         
@@ -64,16 +51,12 @@ $id_cliente = $_SESSION['id_cliente'];
                                     <div class="order-box">
                                         <div class="margin-order">
                                             <h3>PEDIDO '.$count.':</h3>
-                                            <table>
-                                                <tbody class="inbox-list">
-                                                        <tr>
-                                                            <td><img src="'.$pedido['foto'].'" class="order-img"></td>
-                                                            <td>'. $pedido["produtos"] .'<b></td>
-                                                            <td><p class="order-subprice">R$ '.$pedido['valor_total'].'<p></td>
-                                                        </tr>
-                                                </tbody>
-                                            </table>
-                                            
+                                            <div class="inbox-line">
+                                                <h4 class="order-price">R$ '.$pedido['valor_total'].'</h4>
+                                                <a href="./detalhes-pedido.php">
+                                                    <img src="../img/arrow.png" class="details-arrow">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 ';

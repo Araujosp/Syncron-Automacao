@@ -1,3 +1,35 @@
+<?php
+//  $sql = "
+//     SELECT 
+//         pedidos.id_pedido,
+//         produtos.foto,
+//         GROUP_CONCAT(
+//             CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
+//             SEPARATOR', '
+//         ) AS produtos,
+//         pedidos.status_geral,
+//         pedidos.status_pagamento,
+//         pedidos.data_pedido,
+//         itens_pedidos.preco_unitario,
+//         SUM(
+//             itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
+//         ) AS valor_total
+//     FROM pedidos
+//     INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+//     INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+//     INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
+//     WHERE pedidos.id_cliente = $id_cliente
+//     GROUP BY
+//         pedidos.id_pedido,
+//         clientes.nome,
+//         pedidos.status_geral,
+//         pedidos.status_pagamento,
+//         pedidos.data_pedido
+//     ";
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->execute();
+//                         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>

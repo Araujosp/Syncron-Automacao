@@ -7,6 +7,8 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
     header("Location:../pages/login.php");
 }
 
+$id_cliente = $_SESSION['id_cliente'];
+
 ?>
 
 <!DOCTYPE html>
@@ -51,106 +53,46 @@ if(!isset($_SESSION['usuario']) or (!isset($_SESSION['id_cliente']))){
             <article class="order-list">
                 <h2>Meus pedidos:</h2>
                 <div class="order-line">
-                    <div class="order-box">
-                        <div class="margin-order">
-                            <h3>PEDIDO 1:</h3>
-                            <table>
-                                <tbody class="inbox-list">
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>1x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 7,00<p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>3x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 60,00<p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="inbox-line">
-                                <h4 class="order-price">R$ 67,00</h4>
-                                <a href="./detalhes-pedido.php">
-                                    <img src="../img/arrow.png" class="details-arrow">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-box">
-                        <div class="margin-order">
-                            <h3>PEDIDO 1:</h3>
-                            <table>
-                                <tbody class="inbox-list">
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>1x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 7,00<p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>3x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 60,00<p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="inbox-line">
-                                <h4 class="order-price">R$ 67,00</h4>
-                                <a href="./detalhes-pedido.php">
-                                    <img src="../img/arrow.png" class="details-arrow">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-box">
-                        <div class="margin-order">
-                            <h3>PEDIDO 1:</h3>
-                            <table>
-                                <tbody class="inbox-list">
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>1x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 7,00<p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>3x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 60,00<p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="inbox-line">
-                                <h4 class="order-price">R$ 67,00</h4>
-                                <a href="./detalhes-pedido.php">
-                                    <img src="../img/arrow.png" class="details-arrow">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-box">
-                        <div class="margin-order">
-                            <h3>PEDIDO 1:</h3>
-                            <table>
-                                <tbody class="inbox-list">
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>1x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 7,00<p></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                        <td>3x. <b>PRODUTO<b></td>
-                                        <td><p class="order-subprice">R$ 60,00<p></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="inbox-line">
-                                <h4 class="order-price">R$ 67,00</h4>
-                                <a href="./detalhes-pedido.php">
-                                    <img src="../img/arrow.png" class="details-arrow">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente");
+                        $sql = "
+                            SELECT 
+                                SUM(
+                                        itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
+                                    ) AS valor_total
+                                FROM pedidos
+                                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                                INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+                                WHERE pedidos.id_cliente = $id_cliente
+                                GROUP BY
+                                    pedidos.id_pedido,
+                                    pedidos.data_pedido
+                                limit 4
+                        ";
+                        
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
+                        $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        $count = 1;
+                        foreach ($dados as $pedido){
+                            echo '
+                                
+                                    <div class="order-box">
+                                        <div class="margin-order">
+                                            <h3>PEDIDO '.$count.':</h3>
+                                            <div class="inbox-line">
+                                                <h4 class="order-price">R$ '.$pedido['valor_total'].'</h4>
+                                                <a href="./detalhes-pedido.php">
+                                                    <img src="../img/arrow.png" class="details-arrow">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ';
+                            $count ++ ;
+                        }
+                    ?>
+
                     <a href="./ver-pedidos.php" class="more-order">
                         <h3>Ver mais</h3>
                         <img src="../img/arrow.png" class="order-arrow">

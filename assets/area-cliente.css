@@ -105,7 +105,7 @@
 
         .order-list{
             width: 1700px;
-            height: 300px;
+            height: 230px;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
@@ -126,7 +126,7 @@
 
         .order-box{
             width: 250px;
-            height: 200px;
+            height: 120px;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
@@ -139,7 +139,7 @@
             list-style: none;
             text-decoration: none;
             color: #000000;
-            margin-bottom: 100px;
+            margin-bottom: 50px;
         }
 
         .margin-order{
@@ -313,7 +313,7 @@
             margin-bottom: -5px;
         }
 
-        /* VER PEDIDOS (deus me ajude) */
+        /* VER PEDIDOS */
         .order-back{
             width: 95%;
             height: 650px;
@@ -342,10 +342,10 @@
             background-color: #afafaf;;
             transform: translateY(-10%);
             transition: .5s;   
-       }
+        }
 
-       .details-arrow{
+        .details-arrow{
             width: 20px;
             height: 20px;
             margin-right: 10px;
-       }
+        }
