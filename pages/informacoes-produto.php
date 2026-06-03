@@ -60,13 +60,13 @@ if ($qtd >= 50) {
                 <h2>Pequena descrição</h2>
                 <p><?php echo $produto['descricao']; ?></p>
             </div>
-            <div class="botoes">
+            <form class="botoes" action="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" method="POST">
                 <div class="quantidade">
                     <label for="quantidade">Quantidade</label>
                     <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade" min="1" value="1">
                 </div>
-                <a href="#" class="botao" >Adicionar ao carrinho</a>
-            </div>
+                <button type="submit" class="botao" >Adicionar ao carrinho</submit>
+            </form>
         </div>
     </main>
     

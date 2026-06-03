@@ -18,17 +18,15 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $quantidade_post = $_POST['quantidade'] ?? null;
         $id_item_post = $_POST['id_item'] ?? null;
-        }
+    }
+        
+    $id_item = $_GET['id_produto'] ?? null;
     
-        
-        $id_item = $_GET['id_produto'] ?? null;
-        
-        if ($id_item !== null) {
-            $produto = read($pdo, "produtos", "id_produto = $id_item");
-            } 
-            else {
-                $produto = null;
-            }
+    if ($id_item !== null) {
+        $produto = read($pdo, "produtos", "id_produto = $id_item");
+    } else {
+        $produto = null;
+    }
 
         /* se não usasse o java script, a lógica do cupom:
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -42,7 +40,7 @@
                     }
                 }
         }*/
-        ?>
+    ?>
 
     <link rel="stylesheet" href="../assets/carrinho.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,12 +51,9 @@
     <main>
         <div class="centraliza">
             <section class="carrinho">
-                <?php if ($quantidade_post !== null): ?>
-                Quantidade recebida: <?= $quantidade_post ?>
-                <?php endif; ?>
                 <h2>Meu carrinho:</h2>
                 <div class="caixa_pedidos">
-                    <?php if ($produto !== null): ?>
+                    <?php if ($produto !== null){ ?>
                     <div class="caixa">
                         <div>
                             <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" width='100x100'>
@@ -71,7 +66,7 @@
                             <p><?php echo $produto['nome'] ?? '' ?></p>
                             <div class="caixa_adicionar">
                                <button id="menos"><i class="fa-solid fa-minus"></i></button>
-                                <p id="contador">1</p>
+                                <p id="contador"><?php echo $quantidade_post ?? "1" ?></p>
                                 <button id="mais"><i class="fa-solid fa-plus"></i></button>
                             </div>
                         </div>
@@ -80,11 +75,15 @@
                             <button><i class="fa-solid fa-trash"></i></button>
                         </div>
                     </div>
-                    <?php endif; ?>
+                    <?php
+                        } else {
+                            echo "<h2>Nenhum produto no carrinho</h2>";
+                        }
+                    ?>
                 </div>
             </section>
             <section class="pagamento">
-                <a href="pagamento.php" class="botao">continuar</a>
+                <a href="pagamento.php" class="botao">Continuar</a>
                     <div class="caixa_cupom">
                         <p>Valor original: <strong><?php if ($produto !== null): ?> R$<?php echo $produto['preco_unitario'] ?? '' ?> <?php endif; ?></strong></p>
                         <p>Adicionar cupom:</p>
@@ -98,7 +97,7 @@
                     </div>
                     <div>
                         <h1 class="total">
-                            R$ <span id="valor-final"><?php echo $produto['preco_unitario'] ?></span>
+                            R$ <span id="valor-final"><?php if($produto !== null){ echo $produto['preco_unitario']; } ?></span>
                         </h1>
                     </div>
             </section>
@@ -114,7 +113,7 @@ const campoCupom = document.querySelector('#cupom');
 const btnAplicarCupom = document.querySelector('#aplicar-cupom');
 const percentualDesconto = document.querySelector('#percentual-desconto');
 
-let valor = 1;
+let valor = <?php echo $quantidade_post ?? 1 ?>;
 let max = <?php echo $produto['quantidade_estoque'] ?? 0 ?>;
 let preco = <?php echo $produto['preco_unitario'] ?? 0 ?>;
 
