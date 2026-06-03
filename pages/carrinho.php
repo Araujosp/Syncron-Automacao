@@ -85,13 +85,15 @@
             <section class="pagamento">
                 <a href="pagamento.php" class="botao">Continuar</a>
                     <div class="caixa_cupom">
-                        <p>Valor original: <strong><?php if ($produto !== null): ?> R$<?php echo $produto['preco_unitario'] ?? '' ?> <?php endif; ?></strong></p>
-                        <p>Adicionar cupom:</p>
+                        <p>Valor original: <strong id="valor-original"><?php if ($produto !== null): ?> R$<?php echo $produto['preco_unitario'] ?? '' ?> <?php endif; ?></strong></p>
                         <form method = "POST">
-                            <input type="text" id = "cupom" class ="cupom" placeholder = "DESCONTO10" name = "cupom"><br>
-                            <button type="button" id = "aplicar-cupom">
-                                Aplicar Cupom
-                            </button>
+                            <p>Adicionar cupom:</p>
+                            <div>
+                                <input type="text" id = "cupom" class ="cupom" placeholder = "DESCONTO10" name = "cupom"><br>
+                                <button type="button" id = "aplicar-cupom" class="botao">
+                                    Aplicar Cupom
+                                </button>
+                            </div>
                         </form>
                         <p>Desconto: <strong id="percentual-desconto">0%</strong></p>
                     </div>
@@ -107,6 +109,8 @@
 const btnMais = document.querySelector('#mais');
 const btnMenos = document.querySelector('#menos');
 const contador = document.querySelector('#contador');
+const cupomInput = document.querySelector('#cupom');
+const original = document.querySelector('#valor-original');
 const total = document.querySelector('#valor-final');
 
 const campoCupom = document.querySelector('#cupom');
@@ -134,9 +138,16 @@ function atualizarTotal() {
     if (desconto > 0 && valorOriginal >= 500) {
         valorFinal = valorOriginal * (1 - desconto / 100);
     }
-
+    
+    original.textContent = valorOriginal.toFixed(2);
     total.textContent = valorFinal.toFixed(2);
 }
+
+cupomInput.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+        e.preventDefault();
+    }
+});
 
 btnAplicarCupom.addEventListener('click', () => {
 
@@ -152,6 +163,7 @@ btnAplicarCupom.addEventListener('click', () => {
         desconto = 0;
         percentualDesconto.textContent = '0%';
         alert('Cupom inválido!');
+        cupomInput.value = "";
     }
 
     atualizarTotal();
