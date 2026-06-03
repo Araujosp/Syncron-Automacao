@@ -131,4 +131,5 @@ main {
     text-align: center;
     font-weight: 700;
     border-radius: 15px;
+    cursor: pointer;
 }

@@ -28,9 +28,9 @@
             <?php
                 foreach($produtos_em_destaque as $destaque){
             ?>
-            <div class="cor">
+            <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $destaque['id_produto']; ?>'">
                 <div>
-                    <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <img src="../<?php echo $destaque['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="placeholder-img">
                         <i class="fa-solid fa-boxes-stacked"></i>
                         <span>Sem imagem</span>
