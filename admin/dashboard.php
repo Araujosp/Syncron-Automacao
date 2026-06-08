@@ -17,10 +17,15 @@ $sql = " SELECT
     INNER JOIN itens_pedidos
         ON pedidos.id_pedido = itens_pedidos.id_pedido
     WHERE pedidos.status_pagamento = 'Realizado'
-    AND MONTH(pedidos.data_pedido) = 1
+    AND YEAR(pedidos.data_pedido) = (
+        SELECT YEAR(MAX(pedidos.data_pedido))
+        FROM pedidos
+    )
+    AND MONTH(pedidos.data_pedido) = (
+        SELECT MONTH(MAX(pedidos.data_pedido))
+        FROM pedidos
+    );
 ";
-
-
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -36,7 +41,14 @@ $sql2 = " SELECT
         COUNT(id_pedido) as todo_pedidos,
         SUM(status_geral = 'Cancelado') AS todo_cancelados
     FROM pedidos 
-    WHERE MONTH(data_pedido) = 1
+    WHERE YEAR(pedidos.data_pedido) = (
+        SELECT YEAR(MAX(pedidos.data_pedido))
+        FROM pedidos
+    )
+    AND MONTH(pedidos.data_pedido) = (
+        SELECT MONTH(MAX(pedidos.data_pedido))
+        FROM pedidos
+    );
 ";
 
 
@@ -54,7 +66,14 @@ $porcentagem_cancel = ($receita2['todo_cancelados'] / $receita2['todo_pedidos'])
 $sql3 = " SELECT COUNT(id_pedido) as pedidos_count
     FROM pedidos 
     WHERE (status_pagamento = 'Realizado')
-    AND MONTH(data_pedido) = 01
+    AND YEAR(pedidos.data_pedido) = (
+        SELECT YEAR(MAX(pedidos.data_pedido))
+        FROM pedidos
+    )
+    AND MONTH(pedidos.data_pedido) = (
+        SELECT MONTH(MAX(pedidos.data_pedido))
+        FROM pedidos
+    );
 ";
 
 
@@ -72,7 +91,7 @@ $pedidos_count = $receita3['pedidos_count'];
 $sql_linha = " SELECT MONTH(data_pedido) AS mes, 
         COUNT(id_pedido) AS total 
     FROM pedidos
-    WHERE status_geral = 'Entregue' 
+    WHERE status_pagamento = 'Realizado' 
       AND YEAR(data_pedido) = YEAR(CURRENT_DATE()) 
     GROUP BY MONTH(data_pedido)
     ORDER BY MONTH(data_pedido) ASC
@@ -95,19 +114,22 @@ foreach ($dados_do_banco as $linha) {
     }
 }
 
-$sql4 = "SELECT 
+$sql4 = "SELECT
     p.categoria,
     SUM(ip.quantidade_item) AS total
 FROM itens_pedidos ip
-INNER JOIN produtos p 
+INNER JOIN produtos p
     ON ip.id_produto = p.id_produto
 INNER JOIN pedidos ped
     ON ip.id_pedido = ped.id_pedido
-WHERE MONTH(ped.data_pedido) = 1
-GROUP BY p.categoria;
+WHERE ped.status_pagamento = 'Realizado'
+AND DATE_FORMAT(ped.data_pedido, '%Y-%m') = (
+    SELECT DATE_FORMAT(MAX(data_pedido), '%Y-%m')
+    FROM pedidos
+)
+GROUP BY p.categoria
+ORDER BY total DESC;
 ";
-
-
 
 $stmt4 = $pdo->prepare($sql4);
 $stmt4->execute();
@@ -120,7 +142,29 @@ while ($row = $stmt4->fetch(PDO::FETCH_ASSOC)) {
     $dados[] = $row['total'];
 }
 
+$sql_barras = "SELECT
+    MONTH(data_pedido) AS mes,
+    SUM(ip.quantidade_item * ip.preco_unitario) AS faturamento
+FROM pedidos p
+INNER JOIN itens_pedidos ip
+    ON p.id_pedido = ip.id_pedido
+WHERE p.status_pagamento = 'Realizado'
+GROUP BY MONTH(data_pedido)
+ORDER BY MONTH(data_pedido);";
 
+$stmt_barras = $pdo->query($sql_barras);
+$dados_barras = $stmt_barras->fetchAll(PDO::FETCH_ASSOC);
+
+$valores_barras = [0, 0, 0, 0, 0, 0]; 
+
+foreach ($dados_barras as $linha_barra) {
+    $numero_mes = (int)$linha_barra['mes']; 
+    
+    if ($numero_mes <= 6) {
+        // Agora o $linha['total'] guarda o número de pedidos (ex: 5, 12, 18...)
+        $valores_barras[$numero_mes - 1] = (int)$linha_barra['faturamento']; 
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -128,12 +172,13 @@ while ($row = $stmt4->fetch(PDO::FETCH_ASSOC)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <!-- CHART JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="../assets/dashboard.css">
     <link rel="stylesheet" href="../assets/estoque.css">
+    <link rel="shortcut icon" href="../img/logo-favicon.png" type="png">
 
     <title>Syncron | Dashboard</title>
 </head>
@@ -200,7 +245,7 @@ while ($row = $stmt4->fetch(PDO::FETCH_ASSOC)) {
 
         <div class="box">
 
-            <h2>Total de vendas nos últimos anos</h2>
+            <h2>Total de vendas nos últimos meses (R$)</h2>
 
             <div class="grafico-pequeno">
 
@@ -297,11 +342,11 @@ new Chart(ctxBarra, {
 
     data: {
 
-        labels: ['2019','2020','2021','2022','2023','2024','2025','2026'],
+        labels: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun'],
 
         datasets: [{
 
-            data: [12,18,9,17,18,16,19,12],
+            data: <?= json_encode($valores_barras) ?>,
 
             backgroundColor: '#5b87ff'
         }]
