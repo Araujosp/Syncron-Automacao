@@ -266,9 +266,20 @@
                                     name="cupom"
                                     autocomplete="off"
                                 >
-                                <button type="submit" id="aplicar-cupom" class="botao">
-                                    Aplicar Cupom
-                                </button>
+                                <?php if ($subtotal < 500){
+                                    echo'
+                                        <button type="submit" id="aplicar-cupom" class="botao" style="opacity:.5; cursor:not-allowed;">
+                                            Aplicar Cupom
+                                        </button>
+                                    ';
+                                }else{
+                                    echo'
+                                        <button type="submit" id="aplicar-cupom" class="botao">
+                                            Aplicar Cupom
+                                        </button>
+                                    ';
+                                }
+                                ?>
                             </div>
                         </form>
                         <?php if ($subtotal > 0 && $subtotal < 500): ?>
