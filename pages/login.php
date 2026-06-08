@@ -65,29 +65,23 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
 
             if($cliente_encontrado){
 
-                if(password_verify( $senha_digitada, $cliente_encontrado['senha'])){
+                if(password_verify($senha_digitada, $cliente_encontrado['senha'])){
 
-                    $_SESSION['id_cliente'] =
-                        $cliente_encontrado['id_cliente'];
+                $_SESSION['id_cliente']   = $cliente_encontrado['id_cliente'];
+                $_SESSION['usuario']      = $cliente_encontrado['usuario'];
+                $_SESSION['tipo_cliente'] = $cliente_encontrado['tipo_cliente'];
+                $_SESSION['nome']         = $cliente_encontrado['nome'];
+                $_SESSION['email']        = $cliente_encontrado['email'];
+                $_SESSION['foto_perfil']  = $cliente_encontrado['foto_perfil'];
 
-                    $_SESSION['usuario'] =
-                        $cliente_encontrado['usuario'];
+                // ── Limpa carrinho de sessão anterior ──
+                $_SESSION['carrinho']        = [];
+                unset($_SESSION['cupom'], $_SESSION['cupom_desconto']);
 
-                    $_SESSION['tipo_cliente'] =
-                        $cliente_encontrado['tipo_cliente'];
-
-                    $_SESSION['nome'] =
-                        $cliente_encontrado['nome'];
-
-                    $_SESSION['email'] =
-                        $cliente_encontrado['email'];
-
-                    $_SESSION['foto_perfil'] =
-                        $cliente_encontrado['foto_perfil'];
-
-                    header("Location:area-cliente.php");
-                    exit;
+                header("Location:area-cliente.php");
+                exit;
                 }
+                
                 else{
                     $mensagem_erro = "Senha incorreta.";
                 }

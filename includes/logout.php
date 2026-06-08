@@ -2,7 +2,8 @@
 
 require_once "session.php";
 
-if (isset($_SESSION)){
-        session_destroy();
-        header ("location: ../pages/login.php");
+if (isset($_SESSION['usuario'])) {
+    session_destroy();
 }
+
+header("Location: ../pages/login.php");
