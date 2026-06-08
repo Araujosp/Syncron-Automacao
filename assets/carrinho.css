@@ -165,3 +165,64 @@ p:has(strong){
 .total{
     font-size: 35px;
 }
+
+        /* Placeholder de imagem quebrada */
+        .placeholder-img { display: none; }
+        img.img-erro      { display: none !important; }
+        img.img-erro + .placeholder-img { display: flex; }
+
+        /* Feedback de cupom */
+        .msg-cupom {
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 5px;
+            margin-bottom: 6px;
+        }
+        .msg-cupom.sucesso { background: #d1fae5; color: #065f46; }
+        .msg-cupom.erro    { background: #fee2e2; color: #991b1b; }
+
+        /* Botão remover item */
+        .caixa_reais button { border: none; background: white; cursor: pointer; }
+        .caixa_reais i.fa-trash { color: rgb(148, 31, 31); font-size: 20px; }
+
+        /* Botão limpar carrinho */
+        .btn-limpar {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 12px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #555;
+            margin: 8px 20px 0 0;
+            float: right;
+        }
+        .btn-limpar:hover { background: #f1f1f1; color: rgb(148,31,31); border-color: rgb(148,31,31); }
+
+        /* Aviso estoque mínimo para cupom */
+        .aviso-min { font-size: 11px; color: #888; margin-top: 4px; }
+
+        /* Badge cupom ativo */
+        .cupom-ativo {
+            font-size: 13px;
+            color: #065f46;
+            background: #d1fae5;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Botão remover cupom */
+        .btn-rm-cupom {
+            background: none;
+            border: none;
+            color: #991b1b;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: underline;
+            padding: 0;
+            margin-left: auto;
+        }

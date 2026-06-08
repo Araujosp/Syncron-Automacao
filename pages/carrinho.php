@@ -96,8 +96,8 @@
 
     // ── Adicionar via GET (link direto do produto) ───────────────────────────
     if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id_produto'])) {
-        $id_produto = intval($_GET['id_produto']);
-        $quantidade = max(1, intval($_GET['qtd'] ?? 1));
+        $id_produto = intval($_GET['id_produto']); /* intval() converte o valor para inteiro */
+        $quantidade = max(1, intval($_GET['qtd'] ?? 1)); /* garante que a quantidade nunca seja 0 ou negativa */
         if ($id_produto > 0) {
             $produto = read($pdo, "produtos", "id_produto = $id_produto");
             if ($produto) {
@@ -105,12 +105,13 @@
                 if (!isset($_SESSION['carrinho'])) $_SESSION['carrinho'] = [];
                 if (isset($_SESSION['carrinho'][$id_produto])) {
                     $nova_qtd = $_SESSION['carrinho'][$id_produto]['quantidade'] + $quantidade;
-                    $_SESSION['carrinho'][$id_produto]['quantidade'] = min($nova_qtd, $estoque);
-                } else {
+                    $_SESSION['carrinho'][$id_produto]['quantidade'] = min($nova_qtd, $estoque); /*  impede ultrapassar o estoque */
+                } 
+                else {
                     $_SESSION['carrinho'][$id_produto] = [
                         'id_produto'     => $id_produto,
                         'nome'           => $produto['nome'],
-                        'preco_unitario' => floatval($produto['preco_unitario']),
+                        'preco_unitario' => floatval($produto['preco_unitario']), /*  garante que vai trabalhar com número decimal e não com string  */
                         'foto'           => $produto['foto'],
                         'estoque'        => $estoque,
                         'quantidade'     => min($quantidade, $estoque),
@@ -120,7 +121,7 @@
         }
     }
 
-    // ── Calcular totais ──────────────────────────────────────────────────────
+    // ── Calcular totais ──
     $carrinho     = $_SESSION['carrinho'] ?? [];
     $desconto_pct = $_SESSION['cupom_desconto'] ?? 0;
     $cupom_nome   = $_SESSION['cupom'] ?? '';
@@ -141,68 +142,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Carrinho | Syncron</title>
 
-    <style>
-        /* Placeholder de imagem quebrada */
-        .placeholder-img { display: none; }
-        img.img-erro      { display: none !important; }
-        img.img-erro + .placeholder-img { display: flex; }
-
-        /* Feedback de cupom */
-        .msg-cupom {
-            font-size: 13px;
-            padding: 6px 10px;
-            border-radius: 5px;
-            margin-bottom: 6px;
-        }
-        .msg-cupom.sucesso { background: #d1fae5; color: #065f46; }
-        .msg-cupom.erro    { background: #fee2e2; color: #991b1b; }
-
-        /* Botão remover item */
-        .caixa_reais button { border: none; background: white; cursor: pointer; }
-        .caixa_reais i.fa-trash { color: rgb(148, 31, 31); font-size: 20px; }
-
-        /* Botão limpar carrinho */
-        .btn-limpar {
-            background: none;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px 12px;
-            cursor: pointer;
-            font-size: 13px;
-            color: #555;
-            margin: 8px 20px 0 0;
-            float: right;
-        }
-        .btn-limpar:hover { background: #f1f1f1; color: rgb(148,31,31); border-color: rgb(148,31,31); }
-
-        /* Aviso estoque mínimo para cupom */
-        .aviso-min { font-size: 11px; color: #888; margin-top: 4px; }
-
-        /* Badge cupom ativo */
-        .cupom-ativo {
-            font-size: 13px;
-            color: #065f46;
-            background: #d1fae5;
-            border-radius: 5px;
-            padding: 5px 10px;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Botão remover cupom */
-        .btn-rm-cupom {
-            background: none;
-            border: none;
-            color: #991b1b;
-            cursor: pointer;
-            font-size: 12px;
-            text-decoration: underline;
-            padding: 0;
-            margin-left: auto;
-        }
-    </style>
 </head>
 <body>
     <?php include '../includes/header.php'; ?>
