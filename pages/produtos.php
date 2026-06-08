@@ -7,11 +7,72 @@ $categoriasFiltradas = $_GET["categorias"] ?? [];
 
 $pesquisa = $_GET["pesquisa"] ?? null;
 
-if($pesquisa != null){
-    $produtos = readAll($pdo, "produtos", "nome LIKE '%$pesquisa%'");
-} else {
-    $produtos = readAll($pdo, 'produtos');
+$where = [];
+$params = [];
+
+if (!empty($pesquisa)) {
+    $where[] = "nome LIKE :pesquisa";
+    $params[':pesquisa'] = "%$pesquisa%";
 }
+
+if (!empty($categoriasFiltradas)) {
+    $cats = [];
+
+    foreach ($categoriasFiltradas as $i => $cat) {
+        $key = ":cat$i";
+        $cats[] = $key;
+        $params[$key] = $cat;
+    }
+
+    $where[] = "categoria IN (" . implode(",", $cats) . ")";
+}
+
+$sqlWhere = $where ? "WHERE " . implode(" AND ", $where) : "";
+
+$produtosPorPagina = 30;
+
+$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+if ($paginaAtual < 1) $paginaAtual = 1;
+
+$offset = ($paginaAtual - 1) * $produtosPorPagina;
+
+$sql = "
+    SELECT *
+    FROM produtos
+    $sqlWhere
+    LIMIT :limite OFFSET :offset
+";
+
+$stmt = $pdo->prepare($sql);
+
+foreach ($params as $key => $value) {
+    $stmt->bindValue($key, $value);
+}
+
+$stmt->bindValue(':limite', $produtosPorPagina, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+$stmt->execute();
+$produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sqlCount = "
+    SELECT COUNT(*)
+    FROM produtos
+    $sqlWhere
+";
+
+$stmt = $pdo->prepare($sqlCount);
+
+foreach ($params as $key => $value) {
+    $stmt->bindValue($key, $value);
+}
+
+$stmt->execute();
+
+$totalProdutos = $stmt->fetchColumn();
+$totalPaginas = ceil($totalProdutos / $produtosPorPagina);
+
+
 
 ?>
 
@@ -62,33 +123,43 @@ if($pesquisa != null){
                 </div>
             </form>
         </aside>
-        <div class="produtos-container">
-            <?php
-                if($produtos){
-                    foreach($produtos as $produto){
-                        if(empty($categoriasFiltradas) || in_array($produto["categoria"], $categoriasFiltradas)){
-            ?>
-            <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $produto['id_produto']; ?>'">
-                <div>
-                    <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="placeholder-img">
-                        <i class="fa-solid fa-boxes-stacked"></i>
-                        <span>Sem imagem</span>
+        <div class="centraliza">
+            <div class="produtos-container">
+                <?php
+                    if($produtos){
+                        foreach($produtos as $produto){
+                ?>
+                <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $produto['id_produto']; ?>'">
+                    <div>
+                        <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="placeholder-img">
+                            <i class="fa-solid fa-boxes-stacked"></i>
+                            <span>Sem imagem</span>
+                        </div>
                     </div>
+                    <div class="info">
+                        <p><?php echo $produto['nome']; ?></p>
+                        <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
+                    </div>
+                    <a href="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
                 </div>
-                <div class="info">
-                    <p><?php echo $produto['nome']; ?></p>
-                    <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
-                </div>
-                <a href="../includes/adicionar-carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
-            </div>
-            <?php
+                <?php
+                        
                     }
+                } else {
+                    echo "<h1>Nenhum produto encontrado</h1>";
                 }
-            } else {
-                echo "<h1>Nenhum produto encontrado</h1>";
-            }
-            ?>
+                ?>
+            </div>
+            <?php if ($totalPaginas > 1): ?>
+            <div class="paginacao">
+                <?php for($i = 1; $i <= $totalPaginas; $i++): ?>
+                <a href="?<?= http_build_query(array_merge($_GET, ['pagina' => $i])) ?>">
+                    <?php echo $i; ?>
+                </a>
+                <?php endfor; ?>
+            </div>
+                <?php endif; ?>
         </div>
     </main>
     <?php include '../includes/footer.php'; ?>
