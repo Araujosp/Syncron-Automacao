@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01/06/2026 às 15:56
+-- Tempo de geração: 08/06/2026 às 15:21
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -279,64 +279,65 @@ CREATE TABLE `pedidos` (
   `id_cliente` int(11) NOT NULL,
   `data_pedido` date NOT NULL DEFAULT curdate(),
   `status_pagamento` enum('Pendente','Realizado') NOT NULL,
-  `status_geral` enum('Pendente','Em trânsito','Entregue','Cancelado') NOT NULL
+  `status_geral` enum('Pendente','Em trânsito','Entregue','Cancelado') NOT NULL,
+  `desconto_aplicado` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamento`, `status_geral`) VALUES
-(1, 1, '2026-01-03', 'Pendente', 'Pendente'),
-(2, 2, '2026-01-05', 'Realizado', 'Em trânsito'),
-(3, 3, '2026-01-07', 'Realizado', 'Entregue'),
-(4, 4, '2026-01-08', 'Pendente', 'Cancelado'),
-(5, 5, '2026-01-10', 'Realizado', 'Entregue'),
-(6, 6, '2026-01-12', 'Pendente', 'Pendente'),
-(7, 7, '2026-01-13', 'Realizado', 'Em trânsito'),
-(8, 8, '2026-01-14', 'Realizado', 'Entregue'),
-(9, 12, '2026-01-15', 'Pendente', 'Cancelado'),
-(10, 15, '2026-01-16', 'Realizado', 'Entregue'),
-(11, 16, '2026-01-17', 'Pendente', 'Pendente'),
-(12, 17, '2026-01-18', 'Realizado', 'Em trânsito'),
-(13, 1, '2026-01-19', 'Realizado', 'Entregue'),
-(14, 2, '2026-01-20', 'Pendente', 'Cancelado'),
-(15, 3, '2026-01-21', 'Realizado', 'Entregue'),
-(16, 4, '2026-01-22', 'Pendente', 'Pendente'),
-(17, 5, '2026-01-23', 'Realizado', 'Em trânsito'),
-(18, 6, '2026-01-24', 'Realizado', 'Entregue'),
-(19, 52, '2026-01-25', 'Pendente', 'Cancelado'),
-(20, 8, '2026-01-26', 'Realizado', 'Entregue'),
-(21, 12, '2026-01-27', 'Pendente', 'Pendente'),
-(22, 15, '2026-01-28', 'Realizado', 'Em trânsito'),
-(23, 16, '2026-01-29', 'Realizado', 'Entregue'),
-(24, 17, '2026-01-30', 'Pendente', 'Cancelado'),
-(25, 1, '2026-02-01', 'Realizado', 'Entregue'),
-(26, 52, '2026-02-02', 'Pendente', 'Pendente'),
-(27, 3, '2026-02-03', 'Realizado', 'Em trânsito'),
-(28, 52, '2026-02-04', 'Realizado', 'Entregue'),
-(29, 5, '2026-02-05', 'Pendente', 'Cancelado'),
-(30, 6, '2026-02-06', 'Realizado', 'Entregue'),
-(31, 7, '2026-02-07', 'Pendente', 'Pendente'),
-(32, 8, '2026-02-08', 'Realizado', 'Em trânsito'),
-(33, 12, '2026-02-09', 'Realizado', 'Entregue'),
-(34, 52, '2026-02-10', 'Pendente', 'Cancelado'),
-(35, 16, '2026-02-11', 'Realizado', 'Entregue'),
-(36, 17, '2026-02-12', 'Pendente', 'Pendente'),
-(37, 1, '2026-02-13', 'Realizado', 'Em trânsito'),
-(38, 2, '2026-02-14', 'Realizado', 'Entregue'),
-(39, 3, '2026-02-15', 'Pendente', 'Cancelado'),
-(40, 4, '2026-02-16', 'Realizado', 'Entregue'),
-(41, 5, '2026-02-17', 'Pendente', 'Pendente'),
-(42, 6, '2026-02-18', 'Realizado', 'Em trânsito'),
-(43, 7, '2026-02-19', 'Realizado', 'Entregue'),
-(44, 8, '2026-02-20', 'Pendente', 'Cancelado'),
-(45, 52, '2026-02-21', 'Realizado', 'Entregue'),
-(46, 15, '2026-02-22', 'Pendente', 'Pendente'),
-(47, 16, '2026-02-23', 'Realizado', 'Em trânsito'),
-(48, 17, '2026-02-24', 'Realizado', 'Entregue'),
-(49, 1, '2026-02-25', 'Pendente', 'Cancelado'),
-(50, 2, '2026-02-26', 'Realizado', 'Entregue');
+INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamento`, `status_geral`, `desconto_aplicado`) VALUES
+(1, 1, '2026-01-03', 'Pendente', 'Pendente', 0),
+(2, 2, '2026-01-05', 'Realizado', 'Em trânsito', 0),
+(3, 3, '2026-01-07', 'Realizado', 'Entregue', 0),
+(4, 4, '2026-01-08', 'Pendente', 'Cancelado', 0),
+(5, 5, '2026-01-10', 'Realizado', 'Entregue', 0),
+(6, 6, '2026-01-12', 'Pendente', 'Pendente', 0),
+(7, 7, '2026-01-13', 'Realizado', 'Em trânsito', 0),
+(8, 8, '2026-01-14', 'Realizado', 'Entregue', 0),
+(9, 12, '2026-01-15', 'Pendente', 'Cancelado', 0),
+(10, 15, '2026-01-16', 'Realizado', 'Entregue', 0),
+(11, 16, '2026-01-17', 'Pendente', 'Pendente', 0),
+(12, 17, '2026-01-18', 'Realizado', 'Em trânsito', 0),
+(13, 1, '2026-01-19', 'Realizado', 'Entregue', 0),
+(14, 2, '2026-01-20', 'Pendente', 'Cancelado', 0),
+(15, 3, '2026-01-21', 'Realizado', 'Entregue', 0),
+(16, 4, '2026-01-22', 'Pendente', 'Pendente', 0),
+(17, 5, '2026-01-23', 'Realizado', 'Em trânsito', 0),
+(18, 6, '2026-01-24', 'Realizado', 'Entregue', 0),
+(19, 52, '2026-01-25', 'Pendente', 'Cancelado', 10),
+(20, 8, '2026-01-26', 'Realizado', 'Entregue', 0),
+(21, 12, '2026-01-27', 'Pendente', 'Pendente', 0),
+(22, 15, '2026-01-28', 'Realizado', 'Em trânsito', 0),
+(23, 16, '2026-01-29', 'Realizado', 'Entregue', 0),
+(24, 17, '2026-01-30', 'Pendente', 'Cancelado', 0),
+(25, 1, '2026-02-01', 'Realizado', 'Entregue', 0),
+(26, 52, '2026-02-02', 'Pendente', 'Pendente', 0),
+(27, 3, '2026-02-03', 'Realizado', 'Em trânsito', 0),
+(28, 52, '2026-02-04', 'Realizado', 'Entregue', 0),
+(29, 5, '2026-02-05', 'Pendente', 'Cancelado', 0),
+(30, 6, '2026-02-06', 'Realizado', 'Entregue', 0),
+(31, 7, '2026-02-07', 'Pendente', 'Pendente', 0),
+(32, 8, '2026-02-08', 'Realizado', 'Em trânsito', 0),
+(33, 12, '2026-02-09', 'Realizado', 'Entregue', 0),
+(34, 52, '2026-02-10', 'Pendente', 'Cancelado', 0),
+(35, 16, '2026-02-11', 'Realizado', 'Entregue', 0),
+(36, 17, '2026-02-12', 'Pendente', 'Pendente', 0),
+(37, 1, '2026-02-13', 'Realizado', 'Em trânsito', 0),
+(38, 2, '2026-02-14', 'Realizado', 'Entregue', 0),
+(39, 3, '2026-02-15', 'Pendente', 'Cancelado', 0),
+(40, 4, '2026-02-16', 'Realizado', 'Entregue', 0),
+(41, 5, '2026-02-17', 'Pendente', 'Pendente', 0),
+(42, 6, '2026-02-18', 'Realizado', 'Em trânsito', 0),
+(43, 7, '2026-02-19', 'Realizado', 'Entregue', 0),
+(44, 8, '2026-02-20', 'Pendente', 'Cancelado', 0),
+(45, 52, '2026-02-21', 'Realizado', 'Entregue', 0),
+(46, 15, '2026-02-22', 'Pendente', 'Pendente', 0),
+(47, 16, '2026-02-23', 'Realizado', 'Em trânsito', 0),
+(48, 17, '2026-02-24', 'Realizado', 'Entregue', 0),
+(49, 1, '2026-02-25', 'Pendente', 'Cancelado', 0),
+(50, 2, '2026-02-26', 'Realizado', 'Entregue', 0);
 
 -- --------------------------------------------------------
 

@@ -57,20 +57,21 @@ $id_cliente = $_SESSION['id_cliente'];
                         $pedidos = readAll($pdo, 'pedidos', "id_cliente = $id_cliente");
                         $sql = "
                             SELECT
-                                pedidos.id_pedido,
+                            pedidos.id_pedido, 
                                 SUM(
                                     itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
-                                    )
-                                AS valor_total,
-                                pedidos.data_pedido,
-                                pedidos.status_geral
-                                FROM pedidos
-                                INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
-                                INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
-                                WHERE pedidos.id_cliente = $id_cliente
-                                GROUP BY
-                                    pedidos.id_pedido,
-                                    pedidos.data_pedido
+                                )
+                            AS valor_total,
+                            pedidos.data_pedido,
+                            pedidos.status_geral,
+                            pedidos.desconto_aplicado as desconto
+                            FROM pedidos
+                            INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
+                            INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
+                            WHERE pedidos.id_cliente = $id_cliente
+                            GROUP BY
+                                pedidos.id_pedido,
+                                pedidos.data_pedido
                                 limit 4
                         ";
                         
@@ -86,8 +87,9 @@ $id_cliente = $_SESSION['id_cliente'];
                                             <h3>PEDIDO '.$count.':</h3>
                                             <p><b>Data de Criação: </b>'.$pedido['data_pedido'].'</p>
                                             <p><b>Situação: </b>'.$pedido['status_geral'].'</p>
+                                            <p><b>Desconto aplicado: </b>'.$pedido['desconto'].'%</p>
                                             <div class="inbox-line">
-                                                <h4 class="order-price">R$ '.$pedido['valor_total'].'</h4>
+                                                <h4 class="order-price">R$ '.($pedido['valor_total'] - (($pedido['valor_total'] / 100) * $pedido['desconto'])).'</h4>
                                                 <a href="./detalhes-pedido.php?pedido='.$pedido['id_pedido'].'">
                                                     <img src="../img/arrow.png" class="details-arrow">
                                                 </a>

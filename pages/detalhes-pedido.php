@@ -6,35 +6,36 @@ require_once "../includes/crud.php";
 $id_cliente = $_SESSION['id_cliente'];
 $id_pedido = $_GET['pedido'];
 
- $sql = "
+ $sql1 = "
     SELECT
-        produtos.foto,
-        GROUP_CONCAT(
-            CONCAT(produtos.nome, ' (', itens_pedidos.quantidade_item, 'x)')
-            SEPARATOR', '
-        ) AS produtos,
-        pedidos.status_geral,
-        pedidos.status_pagamento,
-        pedidos.data_pedido,
-        itens_pedidos.preco_unitario,
-        SUM(
-            itens_pedidos.quantidade_item * itens_pedidos.preco_unitario
-        ) AS valor_total
-    FROM pedidos
-    INNER JOIN clientes ON clientes.id_cliente = pedidos.id_cliente
-    INNER JOIN itens_pedidos ON itens_pedidos.id_pedido = pedidos.id_pedido
-    INNER JOIN produtos ON produtos.id_produto = itens_pedidos.id_produto
-    WHERE pedidos.id_cliente = $id_cliente
+        produtos.`foto` as `foto`,
+        produtos.`nome` as `nome`,
+        itens_pedidos.`preco_unitario` as `preco_unitario`,
+        itens_pedidos.`quantidade_item` as `quantidade`,
+        (itens_pedidos.`preco_unitario` * itens_pedidos.`quantidade_item`) as `valor_total`
+    FROM `pedidos`
+        INNER JOIN `itens_pedidos` on itens_pedidos.`id_pedido` = pedidos.`id_pedido`
+        INNER JOIN `produtos` on produtos.`id_produto` = itens_pedidos.`id_produto`
+    WHERE
+        pedidos.`id_pedido` = $id_pedido
     GROUP BY
-        pedidos.id_pedido,
-        clientes.nome,
-        pedidos.status_geral,
-        pedidos.status_pagamento,
-        pedidos.data_pedido
+        produtos.`nome`;
     ";
-    $stmt = $pdo->prepare($sql);
+    $stmt = $pdo->prepare($sql1);
     $stmt->execute();
-    $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $produtos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$sql2 = "
+    SELECT
+        data_pedido as data,
+        status_geral as situacao
+        from pedidos
+        where id_pedido = $id_pedido
+    ";
+    $stmt = $pdo->prepare($sql2);
+    $stmt->execute();
+    $info = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -65,36 +66,57 @@ $id_pedido = $_GET['pedido'];
                         </thead>
                         <tbody>
                             <?php
-                                // foreach ($dados as $item){
-                                //     echo '
-                                //         <tr class="body">
-                                //             <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                //             <td><h4 class="product-table">PRODUTO</h4></td>
-                                //             <td><p class="product-table">R$ 20,00</p></td>
-                                //             <td><p class="product-table">3</p></td>
-                                //             <td><p class="product-table">R$ 60,00</p></td>
-                                //         </tr>
-                                //         ';
-                                //     }
+                                $valor_pedido = 0;
+                                foreach ($produtos as $produto){
+                                    if ($produto['foto'] = 'NULL'){
+                                        echo '
+                                        <tr class="body">
+                                            <td><span>Sem imagem</span></td>
+                                            <td><h4 class="product-table">'.$produto['nome'].'</h4></td>
+                                            <td><p class="product-table">R$ '.$produto['preco_unitario'].'</p></td>
+                                            <td><p class="product-table">'.$produto['quantidade'].'</p></td>
+                                            <td><p class="product-table">R$ '.$produto['valor_total'].'</p></td>
+                                        </tr>
+                                        ';
+                                    }else{
+                                        echo '
+                                        <tr class="body">
+                                            <td><img src="../'.$produto['foto'].'" class="order-img"></td>
+                                            <td><h4 class="product-table">'.$produto['nome'].'</h4></td>
+                                            <td><p class="product-table">R$ '.$produto['preco_unitario'].'</p></td>
+                                            <td><p class="product-table">'.$produto['quantidade'].'</p></td>
+                                            <td><p class="product-table">R$ '.$produto['valor_total'].'</p></td>
+                                        </tr>
+                                        ';}
+                                    $valor_pedido = $valor_pedido + $produto['valor_total'];
+                                    }
                             ?>
-                            <tr class="body">
-                                <td><img src="../uploads/usuarios/joinha-placeholder.png" class="order-img"></td>
-                                <td><h4 class="product-table">PRODUTO</h4></td>
-                                <td><p class="product-table">R$ 7,00</p></td>
-                                <td><p class="product-table">1</p></td>
-                                <td><p class="product-table">R$ 7,00</p></td>
-                            </tr>
                         </tbody> 
                     </table>
                 </div>
 
                 <div class="situation-box">
-                    <h2 class="full-price">R$ 67,00</h2>
+                    <?php
+                    $desconto = readOne($pdo, 'pedidos', 'desconto_aplicado', "id_pedido = $id_pedido");
+                    if ($desconto == 0){
+                        echo'<h2 class="full-price">R$ '.$valor_pedido.'</h2>';
+                    }else{
+                        echo'
+                            <p class="situation"><b class="situation-title">Valor original:</b> R$ '.$valor_pedido.'</p>
+                            <p class="situation"><b class="situation-title">Desconto aplicado:</b> '.$desconto.'%</p>
+                            <h2 class="full-price">R$ '.($valor_pedido - (($valor_pedido / 100) * $desconto)).'</h2>
+                            ';
+                    }
+                    ?>
                     <br>
-                    <p class="situation"><b class="situation-title">Situação:</b> Pedido enviado para entrega.</p>
+                    <p class="situation"><b class="situation-title">Data de Criação:</b> <?php echo $info['data']; ?></p>
+                    <p class="situation"><b class="situation-title">Situação:</b> <?php echo $info['situacao']; ?></p>
                 </div>
         </section>
-
+        <a href="./area-cliente.php" class="order-return">
+            <img src="../img/arrow3.png" class="return-arrow">
+            <b>Voltar</b>
+        </a>
         </main>
         <?php include '../includes/footer.php'; ?>
     </body>

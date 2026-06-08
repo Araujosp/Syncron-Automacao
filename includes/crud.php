@@ -28,7 +28,7 @@ try {
         $stmt = $pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function readOne($pdo, $table,$column, $where = null) {
+    function readOne($pdo, $table, $column, $where = null) {
         $sql = "SELECT $column FROM $table";
         if ($where) {
             $sql .= " WHERE $where";
