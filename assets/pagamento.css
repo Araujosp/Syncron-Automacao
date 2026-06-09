@@ -1,0 +1,26 @@
+main {
+    margin-top: 500px;
+}
+
+.pagamento{
+    margin-top: 250px;
+    width: 40%;
+    margin-left: 300px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 20px;
+}
+
+
+.pagamento p {
+    font-size: 30px;
+}
+
+.pagamento img {
+    border: 1px solid black;
+    width: 350px;
+}
