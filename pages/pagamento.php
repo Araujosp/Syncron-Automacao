@@ -20,6 +20,14 @@
             <p>Este código expirará em</p>
             <h1>2 horas</h1>
         </div>
-        <aside></aside>
+        <aside class="lado">
+            <div class="caixa">
+                <p>Subtotal: <strong>R$ 75,00</strong></p>
+                <p>Desconto: <strong>R$ 10,00</strong></p>
+                <hr>
+                <p>Valor Total: <strong>R$ 60,00</strong></p>
+            </div>
+            <a class="button" href="#">Concluir pagamento</a>
+        </aside>
     </main>
 </body>
