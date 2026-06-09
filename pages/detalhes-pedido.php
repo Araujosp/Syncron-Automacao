@@ -70,7 +70,7 @@ $sql2 = "
                                 $valor_pedido = 0;
                                 foreach ($produtos as $produto){
                                     echo '<tr class="body">';
-                                    if ($produto['foto'] = 'NULL'){
+                                    if ($produto['foto'] == 'NULL'){
                                         echo '<td><span>Sem imagem</span></td>';
                                     }else{
                                         echo '<td><img src="../'.$produto['foto'].'" class="order-img"></td>';

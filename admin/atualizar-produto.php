@@ -64,16 +64,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     |
     */
 
-    if (!empty($_FILES['foto']['name'])) {
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $tipos_permitidos = [
+            'image/jpeg',
+            'image/png',
+            'image/webp',
+            'image/avif'
+        ];
 
-        // valida imagem
+        if (!in_array($_FILES['foto']['type'], $tipos_permitidos)) {
+            die("Tipo de arquivo não permitido.");
+        }
 
-        // move upload
+        $tamanho_maximo = 5 * 1024 * 1024;
 
-        // atualiza caminho da foto no banco
+        if ($_FILES['foto']['size'] > $tamanho_maximo) {
+            die("Arquivo muito grande.");
+        }
+
+        $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+
+        $novoNome = "Produto_" . uniqid() . "." . $extensao;
+
+        $dir = "../uploads/produtos/";
+
+        $caminho = $dir . "$idProduto/";
+
+        $file = $caminho . $novoNome;
+
+        if (!is_dir($caminho)) {
+            mkdir($caminho, 0775, true);
+        }
+
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $file)) {
+            $fotoUrl = "uploads/produtos/$idProduto/$novoNome";
+            update(
+                $pdo,
+                'produtos',
+                ['foto' => $fotoUrl],
+                "id_produto = $idProduto"
+            );
+        } else {
+            $mensagem = "Erro ao enviar imagem.";
+        }
     }
 
     $mensagem = "Produto atualizado!";
+
+    header("Refresh: 2; url=estoque.php");
 }
 
 ?>
@@ -87,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <link rel="stylesheet" href="../assets/cadastrar.css">
     <link rel="stylesheet" href="../assets/estoque.css">
+    <link rel="shortcut icon" href="../img/logo-favicon.png" type="png">
 </head>
 
 <body>
@@ -168,6 +207,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label>Descrição do Produto</label>
 
         <textarea name="descricao"><?= $produto['descricao']??''?></textarea>
+
+        <label>Selecione a imagem do Produto</label>
+        <input type="file" name="foto" required>
 
         <button type="submit">Atualizar</button>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/06/2026 às 15:21
+-- Tempo de geração: 09/06/2026 às 15:17
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -95,8 +95,7 @@ INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente
 (48, 'Industrial Quantum LTDA', '(11) 4000-4848', 'contato@quantum48.com.br', 'PJ', '2026-02-18', '48.111.222/0001-48', 'quantum48', '$2y$10$hash48', ''),
 (49, 'Vinicius Costa Rocha', '(11) 99249-4949', 'vinicius.rocha49@teste.com', 'PF', '2026-02-19', '149.456.789-49', 'vinicius49', '$2y$10$hash49', ''),
 (50, 'Industrial Apex LTDA', '(11) 4000-5050', 'contato@apex50.com.br', 'PJ', '2026-02-20', '50.111.222/0001-50', 'apex50', '$2y$10$hash50', ''),
-(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp'),
-(52, 'Igor Matos', '(11) 96742-2469', 'iguinhoreidelas@gmail.com', 'PF', '2026-06-01', '123.456.789-67', 'igor', '$2y$10$XWBN3YkoWeJ13WWoIPCoYefgAfZ3gM.f7z8.QJLn0vF0vRp3/6RS.', 'uploads/usuarios/52/Usuario_6a1d81f667dfe.png');
+(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp');
 
 -- --------------------------------------------------------
 
@@ -266,7 +265,28 @@ INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_i
 (147, 4, 42, 3, 2990.00),
 (148, 29, 27, 3, 3350.00),
 (149, 32, 39, 5, 4590.00),
-(150, 44, 49, 1, 3299.90);
+(150, 44, 49, 1, 3299.90),
+(151, 51, 1, 2, 1899.90),
+(152, 51, 2, 5, 89.90),
+(153, 51, 4, 3, 320.50),
+(154, 51, 15, 1, 2890.90),
+(155, 52, 7, 1, 2490.00),
+(156, 52, 8, 4, 129.90),
+(157, 52, 10, 2, 210.75),
+(158, 52, 17, 6, 65.00),
+(159, 52, 24, 1, 4200.00),
+(160, 53, 13, 2, 1740.00),
+(161, 53, 20, 3, 420.00),
+(162, 53, 21, 1, 980.50),
+(163, 53, 23, 4, 79.90),
+(164, 53, 30, 1, 2680.00),
+(165, 53, 34, 2, 890.00),
+(166, 54, 25, 1, 2150.75),
+(167, 54, 32, 5, 189.50),
+(168, 54, 35, 2, 780.00),
+(169, 54, 40, 1, 650.00),
+(170, 54, 43, 1, 3599.00),
+(171, 54, 50, 10, 49.90);
 
 -- --------------------------------------------------------
 
@@ -280,7 +300,7 @@ CREATE TABLE `pedidos` (
   `data_pedido` date NOT NULL DEFAULT curdate(),
   `status_pagamento` enum('Pendente','Realizado') NOT NULL,
   `status_geral` enum('Pendente','Em trânsito','Entregue','Cancelado') NOT NULL,
-  `desconto_aplicado` int(3) NOT NULL
+  `desconto_aplicado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -306,22 +326,22 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamen
 (16, 4, '2026-01-22', 'Pendente', 'Pendente', 0),
 (17, 5, '2026-01-23', 'Realizado', 'Em trânsito', 0),
 (18, 6, '2026-01-24', 'Realizado', 'Entregue', 0),
-(19, 52, '2026-01-25', 'Pendente', 'Cancelado', 10),
+(19, 7, '2026-01-25', 'Pendente', 'Cancelado', 0),
 (20, 8, '2026-01-26', 'Realizado', 'Entregue', 0),
 (21, 12, '2026-01-27', 'Pendente', 'Pendente', 0),
 (22, 15, '2026-01-28', 'Realizado', 'Em trânsito', 0),
 (23, 16, '2026-01-29', 'Realizado', 'Entregue', 0),
 (24, 17, '2026-01-30', 'Pendente', 'Cancelado', 0),
 (25, 1, '2026-02-01', 'Realizado', 'Entregue', 0),
-(26, 52, '2026-02-02', 'Pendente', 'Pendente', 0),
+(26, 2, '2026-02-02', 'Pendente', 'Pendente', 0),
 (27, 3, '2026-02-03', 'Realizado', 'Em trânsito', 0),
-(28, 52, '2026-02-04', 'Realizado', 'Entregue', 0),
+(28, 4, '2026-02-04', 'Realizado', 'Entregue', 0),
 (29, 5, '2026-02-05', 'Pendente', 'Cancelado', 0),
 (30, 6, '2026-02-06', 'Realizado', 'Entregue', 0),
 (31, 7, '2026-02-07', 'Pendente', 'Pendente', 0),
 (32, 8, '2026-02-08', 'Realizado', 'Em trânsito', 0),
 (33, 12, '2026-02-09', 'Realizado', 'Entregue', 0),
-(34, 52, '2026-02-10', 'Pendente', 'Cancelado', 0),
+(34, 15, '2026-02-10', 'Pendente', 'Cancelado', 0),
 (35, 16, '2026-02-11', 'Realizado', 'Entregue', 0),
 (36, 17, '2026-02-12', 'Pendente', 'Pendente', 0),
 (37, 1, '2026-02-13', 'Realizado', 'Em trânsito', 0),
@@ -332,12 +352,16 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamen
 (42, 6, '2026-02-18', 'Realizado', 'Em trânsito', 0),
 (43, 7, '2026-02-19', 'Realizado', 'Entregue', 0),
 (44, 8, '2026-02-20', 'Pendente', 'Cancelado', 0),
-(45, 52, '2026-02-21', 'Realizado', 'Entregue', 0),
+(45, 12, '2026-02-21', 'Realizado', 'Entregue', 0),
 (46, 15, '2026-02-22', 'Pendente', 'Pendente', 0),
 (47, 16, '2026-02-23', 'Realizado', 'Em trânsito', 0),
 (48, 17, '2026-02-24', 'Realizado', 'Entregue', 0),
 (49, 1, '2026-02-25', 'Pendente', 'Cancelado', 0),
-(50, 2, '2026-02-26', 'Realizado', 'Entregue', 0);
+(50, 2, '2026-02-26', 'Realizado', 'Entregue', 0),
+(51, 51, '2026-06-03', 'Pendente', 'Pendente', 0),
+(52, 51, '2026-06-03', 'Realizado', 'Em trânsito', 0),
+(53, 51, '2026-06-03', 'Realizado', 'Entregue', 0),
+(54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0);
 
 -- --------------------------------------------------------
 
@@ -361,56 +385,56 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`, `foto`) VALUES
-(1, 'CLP Siemens S7-1200', '2026-01-02', 15, 1899.90, 'Controlador lógico programável compacto para automação industrial.', 'CLPs', NULL),
-(2, 'Sensor Indutivo LJ12A3', '2026-01-03', 40, 89.90, 'Sensor indutivo metálico de proximidade 12mm.', 'Sensores', NULL),
-(3, 'IHM Weintek MT8071iE', '2026-01-04', 12, 1450.00, 'Interface homem-máquina touchscreen 7 polegadas.', 'IHMs', NULL),
-(4, 'Fonte Industrial 24V 10A', '2026-01-05', 25, 320.50, 'Fonte chaveada industrial 24V DC 10A.', 'Fontes Industriais', NULL),
-(5, 'Relé Finder 40.52', '2026-01-06', 60, 35.90, 'Relé eletromecânico industrial 24V.', 'Relés', NULL),
-(6, 'Inversor WEG CFW300', '2026-01-07', 8, 2299.99, 'Inversor de frequência trifásico para motores.', 'Inversores de Frequência', NULL),
-(7, 'CLP Allen Bradley Micro820', '2026-01-08', 10, 2490.00, 'CLP compacto para aplicações industriais.', 'CLPs', NULL),
-(8, 'Sensor Fotoelétrico E3Z', '2026-01-09', 35, 129.90, 'Sensor fotoelétrico de alta precisão.', 'Sensores', NULL),
-(9, 'IHM Delta DOP-107BV', '2026-01-10', 9, 1199.00, 'Painel IHM touchscreen industrial.', 'IHMs', NULL),
-(10, 'Fonte Mean Well 24V 5A', '2026-01-11', 18, 210.75, 'Fonte industrial estabilizada 24V.', 'Fontes Industriais', NULL),
-(11, 'Relé Omron MY2N', '2026-01-12', 50, 42.30, 'Relé auxiliar industrial Omron.', 'Relés', NULL),
-(12, 'Inversor Schneider ATV320', '2026-01-13', 7, 3150.00, 'Inversor compacto para controle de motores.', 'Inversores de Frequência', NULL),
-(13, 'CLP WEG TPW03', '2026-01-14', 11, 1740.00, 'CLP nacional para automação industrial.', 'CLPs', NULL),
-(14, 'Sensor Capacitivo CR30', '2026-01-15', 22, 98.00, 'Sensor capacitivo para líquidos e sólidos.', 'Sensores', NULL),
-(15, 'IHM Siemens KTP700', '2026-01-16', 6, 2890.90, 'Painel touch Siemens 7 polegadas.', 'IHMs', NULL),
-(16, 'Fonte Phoenix Contact 24V', '2026-01-17', 14, 499.90, 'Fonte industrial de alta confiabilidade.', 'Fontes Industriais', NULL),
-(17, 'Relé de Estado Sólido SSR-40DA', '2026-01-18', 30, 65.00, 'Relé SSR para cargas AC.', 'Relés', NULL),
-(18, 'Inversor Danfoss FC51', '2026-01-19', 5, 3599.90, 'Inversor para aplicações industriais leves.', 'Inversores de Frequência', NULL),
-(19, 'CLP Delta DVP14SS2', '2026-01-20', 13, 1399.99, 'CLP compacto Delta série DVP.', 'CLPs', NULL),
-(20, 'Sensor Ultrassônico UC2000', '2026-01-21', 16, 420.00, 'Sensor ultrassônico industrial.', 'Sensores', NULL),
-(21, 'IHM Kinco MT4434T', '2026-01-22', 10, 980.50, 'Interface touchscreen Kinco.', 'IHMs', NULL),
-(22, 'Fonte Industrial 12V 20A', '2026-01-23', 19, 289.90, 'Fonte chaveada 12V industrial.', 'Fontes Industriais', NULL),
-(23, 'Relé Temporizador RT-1', '2026-01-24', 28, 79.90, 'Relé temporizador multifunção.', 'Relés', NULL),
-(24, 'Inversor ABB ACS355', '2026-01-25', 6, 4200.00, 'Inversor ABB para motores trifásicos.', 'Inversores de Frequência', NULL),
-(25, 'CLP Schneider M221', '2026-01-26', 8, 2150.75, 'CLP modular Schneider Electric.', 'CLPs', NULL),
-(26, 'Sensor Magnético Reed', '2026-01-27', 45, 25.90, 'Sensor magnético tipo reed switch.', 'Sensores', NULL),
-(27, 'IHM Proface GP4100', '2026-01-28', 5, 3350.00, 'Painel industrial Proface.', 'IHMs', NULL),
-(28, 'Fonte Industrial 48V 5A', '2026-01-29', 12, 540.90, 'Fonte industrial 48V DC.', 'Fontes Industriais', NULL),
-(29, 'Relé Interface Slim', '2026-01-30', 70, 29.90, 'Relé slim para painéis elétricos.', 'Relés', NULL),
-(30, 'Inversor Mitsubishi FR-D700', '2026-02-01', 7, 2680.00, 'Inversor Mitsubishi compacto.', 'Inversores de Frequência', NULL),
-(31, 'CLP Eaton XC100', '2026-02-02', 9, 1999.90, 'CLP Eaton para automação.', 'CLPs', NULL),
-(32, 'Sensor Óptico Banner QS18', '2026-02-03', 20, 189.50, 'Sensor óptico industrial.', 'Sensores', NULL),
-(33, 'IHM Omron NB7W', '2026-02-04', 6, 2100.00, 'IHM Omron widescreen.', 'IHMs', NULL),
-(34, 'Fonte Siemens SITOP', '2026-02-05', 11, 890.00, 'Fonte industrial Siemens SITOP.', 'Fontes Industriais', NULL),
-(35, 'Relé de Segurança Pilz', '2026-02-06', 9, 780.00, 'Relé de segurança industrial.', 'Relés', NULL),
-(36, 'Inversor Yaskawa V1000', '2026-02-07', 4, 3890.00, 'Inversor vetorial Yaskawa.', 'Inversores de Frequência', NULL),
-(37, 'CLP Fatek FBs-24MCR2', '2026-02-08', 10, 1250.00, 'CLP compacto Fatek.', 'CLPs', NULL),
-(38, 'Sensor de Pressão BMP280', '2026-02-09', 26, 58.00, 'Sensor eletrônico de pressão.', 'Sensores', NULL),
-(39, 'IHM Red Lion G306', '2026-02-10', 3, 4590.00, 'IHM industrial avançada.', 'IHMs', NULL),
-(40, 'Fonte Chaveada 24V 20A', '2026-02-11', 15, 650.00, 'Fonte robusta para automação.', 'Fontes Industriais', NULL),
-(41, 'Relé Térmico Siemens', '2026-02-12', 18, 115.90, 'Relé térmico de proteção.', 'Relés', NULL),
-(42, 'Inversor Lenze i510', '2026-02-13', 5, 2990.00, 'Inversor industrial Lenze.', 'Inversores de Frequência', NULL),
-(43, 'CLP Mitsubishi FX5U', '2026-02-14', 7, 3599.00, 'CLP Mitsubishi alta performance.', 'CLPs', NULL),
-(44, 'Sensor Laser Keyence', '2026-02-15', 8, 1250.00, 'Sensor laser de precisão.', 'Sensores', NULL),
-(45, 'IHM Schneider HMIGXO', '2026-02-16', 5, 2750.00, 'Painel touchscreen Schneider.', 'IHMs', NULL),
-(46, 'Fonte Industrial 5V 10A', '2026-02-17', 22, 180.00, 'Fonte compacta 5V.', 'Fontes Industriais', NULL),
-(47, 'Relé Auxiliar WEG', '2026-02-18', 40, 32.00, 'Relé auxiliar para comandos elétricos.', 'Relés', NULL),
-(48, 'Inversor Hitachi WJ200', '2026-02-19', 4, 4100.00, 'Inversor para aplicações industriais.', 'Inversores de Frequência', NULL),
-(49, 'CLP Unitronics Vision350', '2026-02-20', 6, 3299.90, 'CLP com IHM integrada.', 'CLPs', NULL),
-(50, 'Sensor Temperatura PT100', '2026-02-21', 55, 49.90, 'Sensor de temperatura industrial.', 'Sensores', NULL);
+(1, 'CLP Siemens S7-1200', '2026-01-02', 15, 1899.90, 'Controlador lógico programável compacto para automação industrial.', 'CLPs', 'uploads/produtos/1/Produto_6a280abcf15e3.png'),
+(2, 'Sensor Indutivo LJ12A3', '2026-01-03', 40, 89.90, 'Sensor indutivo metálico de proximidade 12mm.', 'Sensores', 'uploads/produtos/2/Produto_6a280b098287e.webp'),
+(3, 'IHM Weintek MT8071iE', '2026-01-04', 12, 1450.00, 'Interface homem-máquina touchscreen 7 polegadas.', 'IHMs', 'uploads/produtos/3/Produto_6a280b263d907.jpg'),
+(4, 'Fonte Industrial 24V 10A', '2026-01-05', 25, 320.50, 'Fonte chaveada industrial 24V DC 10A.', 'Fontes Industriais', 'uploads/produtos/4/Produto_6a280b49bcbee.jpg'),
+(5, 'Relé Finder 40.52', '2026-01-06', 60, 35.90, 'Relé eletromecânico industrial 24V.', 'Relés', 'uploads/produtos/5/Produto_6a280c6309536.webp'),
+(6, 'Inversor WEG CFW300', '2026-01-07', 8, 2299.99, 'Inversor de frequência trifásico para motores.', 'Inversores de Frequência', 'uploads/produtos/6/Produto_6a280c81cc89f.jpg'),
+(7, 'CLP Allen Bradley Micro820', '2026-01-08', 10, 2490.00, 'CLP compacto para aplicações industriais.', 'CLPs', 'uploads/produtos/7/Produto_6a280c9721d48.webp'),
+(8, 'Sensor Fotoelétrico E3Z', '2026-01-09', 35, 129.90, 'Sensor fotoelétrico de alta precisão.', 'Sensores', 'uploads/produtos/8/Produto_6a280cdbbc1de.png'),
+(9, 'IHM Delta DOP-107BV', '2026-01-10', 9, 1199.00, 'Painel IHM touchscreen industrial.', 'IHMs', 'uploads/produtos/9/Produto_6a280d154dc54.jpg'),
+(10, 'Fonte Mean Well 24V 5A', '2026-01-11', 18, 210.75, 'Fonte industrial estabilizada 24V.', 'Fontes Industriais', 'uploads/produtos/10/Produto_6a280d3a93b8c.webp'),
+(11, 'Relé Omron MY2N', '2026-01-12', 50, 42.30, 'Relé auxiliar industrial Omron.', 'Relés', 'uploads/produtos/11/Produto_6a280d573640f.webp'),
+(12, 'Inversor Schneider ATV320', '2026-01-13', 7, 3150.00, 'Inversor compacto para controle de motores.', 'Inversores de Frequência', 'uploads/produtos/12/Produto_6a280d72b4d1b.png'),
+(13, 'CLP WEG TPW03', '2026-01-14', 11, 1740.00, 'CLP nacional para automação industrial.', 'CLPs', 'uploads/produtos/13/Produto_6a280db8b9393.avif'),
+(14, 'Sensor Capacitivo CR30', '2026-01-15', 22, 98.00, 'Sensor capacitivo para líquidos e sólidos.', 'Sensores', 'uploads/produtos/14/Produto_6a280dd55d032.webp'),
+(15, 'IHM Siemens KTP700', '2026-01-16', 6, 2890.90, 'Painel touch Siemens 7 polegadas.', 'IHMs', 'uploads/produtos/15/Produto_6a280dee5e43f.png'),
+(16, 'Fonte Phoenix Contact 24V', '2026-01-17', 14, 499.90, 'Fonte industrial de alta confiabilidade.', 'Fontes Industriais', 'uploads/produtos/16/Produto_6a280e01b091d.jpg'),
+(17, 'Relé de Estado Sólido SSR-40DA', '2026-01-18', 30, 65.00, 'Relé SSR para cargas AC.', 'Relés', 'uploads/produtos/17/Produto_6a280e2e3f228.webp'),
+(18, 'Inversor Danfoss FC51', '2026-01-19', 5, 3599.90, 'Inversor para aplicações industriais leves.', 'Inversores de Frequência', 'uploads/produtos/18/Produto_6a280e46e5d0a.webp'),
+(19, 'CLP Delta DVP14SS2', '2026-01-20', 13, 1399.99, 'CLP compacto Delta série DVP.', 'CLPs', 'uploads/produtos/19/Produto_6a280e5b3e745.webp'),
+(20, 'Sensor Ultrassônico UC2000', '2026-01-21', 16, 420.00, 'Sensor ultrassônico industrial.', 'Sensores', 'uploads/produtos/20/Produto_6a280e7683f19.webp'),
+(21, 'IHM Kinco MT4434T', '2026-01-22', 10, 980.50, 'Interface touchscreen Kinco.', 'IHMs', 'uploads/produtos/21/Produto_6a280e8eedc9c.webp'),
+(22, 'Fonte Industrial 12V 20A', '2026-01-23', 19, 289.90, 'Fonte chaveada 12V industrial.', 'Fontes Industriais', 'uploads/produtos/22/Produto_6a280ea73edbc.png'),
+(23, 'Relé Temporizador RT-1', '2026-01-24', 28, 79.90, 'Relé temporizador multifunção.', 'Relés', 'uploads/produtos/23/Produto_6a280ebe53671.webp'),
+(24, 'Inversor ABB ACS355', '2026-01-25', 6, 4200.00, 'Inversor ABB para motores trifásicos.', 'Inversores de Frequência', 'uploads/produtos/24/Produto_6a280edba0618.webp'),
+(25, 'CLP Schneider M221', '2026-01-26', 8, 2150.75, 'CLP modular Schneider Electric.', 'CLPs', 'uploads/produtos/25/Produto_6a280ef663167.jpg'),
+(26, 'Sensor Magnético Reed', '2026-01-27', 45, 25.90, 'Sensor magnético tipo reed switch.', 'Sensores', 'uploads/produtos/26/Produto_6a280f0e57138.jpg'),
+(27, 'IHM Proface GP4100', '2026-01-28', 5, 3350.00, 'Painel industrial Proface.', 'IHMs', 'uploads/produtos/27/Produto_6a280f3277494.png'),
+(28, 'Fonte Industrial 48V 5A', '2026-01-29', 12, 540.90, 'Fonte industrial 48V DC.', 'Fontes Industriais', 'uploads/produtos/28/Produto_6a280f4c8ff6d.webp'),
+(29, 'Relé Interface Slim', '2026-01-30', 70, 29.90, 'Relé slim para painéis elétricos.', 'Relés', 'uploads/produtos/29/Produto_6a280f633a6ea.webp'),
+(30, 'Inversor Mitsubishi FR-D700', '2026-02-01', 7, 2680.00, 'Inversor Mitsubishi compacto.', 'Inversores de Frequência', 'uploads/produtos/30/Produto_6a280f8305f16.webp'),
+(31, 'CLP Eaton XC100', '2026-02-02', 9, 1999.90, 'CLP Eaton para automação.', 'CLPs', 'uploads/produtos/31/Produto_6a280fa47b915.jpg'),
+(32, 'Sensor Óptico Banner QS18', '2026-02-03', 20, 189.50, 'Sensor óptico industrial.', 'Sensores', 'uploads/produtos/32/Produto_6a280fb8e9324.webp'),
+(33, 'IHM Omron NB7W', '2026-02-04', 6, 2100.00, 'IHM Omron widescreen.', 'IHMs', 'uploads/produtos/33/Produto_6a280fd20c7d5.jpg'),
+(34, 'Fonte Siemens SITOP', '2026-02-05', 11, 890.00, 'Fonte industrial Siemens SITOP.', 'Fontes Industriais', 'uploads/produtos/34/Produto_6a280fe8c843f.webp'),
+(35, 'Relé de Segurança Pilz', '2026-02-06', 9, 780.00, 'Relé de segurança industrial.', 'Relés', 'uploads/produtos/35/Produto_6a280ffd8ca4a.webp'),
+(36, 'Inversor Yaskawa V1000', '2026-02-07', 4, 3890.00, 'Inversor vetorial Yaskawa.', 'Inversores de Frequência', 'uploads/produtos/36/Produto_6a281019d5ab1.webp'),
+(37, 'CLP Fatek FBs-24MCR2', '2026-02-08', 10, 1250.00, 'CLP compacto Fatek.', 'CLPs', 'uploads/produtos/37/Produto_6a28104216b4e.webp'),
+(38, 'Sensor de Pressão BMP280', '2026-02-09', 26, 58.00, 'Sensor eletrônico de pressão.', 'Sensores', 'uploads/produtos/38/Produto_6a281057571c1.webp'),
+(39, 'IHM Red Lion G306', '2026-02-10', 3, 4590.00, 'IHM industrial avançada.', 'IHMs', 'uploads/produtos/39/Produto_6a2810692a301.webp'),
+(40, 'Fonte Chaveada 24V 20A', '2026-02-11', 15, 650.00, 'Fonte robusta para automação.', 'Fontes Industriais', 'uploads/produtos/40/Produto_6a28107f5ba43.webp'),
+(41, 'Relé Térmico Siemens', '2026-02-12', 18, 115.90, 'Relé térmico de proteção.', 'Relés', 'uploads/produtos/41/Produto_6a28109141c12.webp'),
+(42, 'Inversor Lenze i510', '2026-02-13', 5, 2990.00, 'Inversor industrial Lenze.', 'Inversores de Frequência', 'uploads/produtos/42/Produto_6a2810a4c146d.jpg'),
+(43, 'CLP Mitsubishi FX5U', '2026-02-14', 7, 3599.00, 'CLP Mitsubishi alta performance.', 'CLPs', 'uploads/produtos/43/Produto_6a2810b73e30f.webp'),
+(44, 'Sensor Laser Keyence', '2026-02-15', 8, 1250.00, 'Sensor laser de precisão.', 'Sensores', 'uploads/produtos/44/Produto_6a2810cd6af6a.avif'),
+(45, 'IHM Schneider HMIGXO', '2026-02-16', 5, 2750.00, 'Painel touchscreen Schneider.', 'IHMs', 'uploads/produtos/45/Produto_6a2810e0cd79e.jpg'),
+(46, 'Fonte Industrial 5V 10A', '2026-02-17', 22, 180.00, 'Fonte compacta 5V.', 'Fontes Industriais', 'uploads/produtos/46/Produto_6a2810f671066.webp'),
+(47, 'Relé Auxiliar WEG', '2026-02-18', 40, 32.00, 'Relé auxiliar para comandos elétricos.', 'Relés', 'uploads/produtos/47/Produto_6a28110c46a32.webp'),
+(48, 'Inversor Hitachi WJ200', '2026-02-19', 4, 4100.00, 'Inversor para aplicações industriais.', 'Inversores de Frequência', 'uploads/produtos/48/Produto_6a281124aca00.jpg'),
+(49, 'CLP Unitronics Vision350', '2026-02-20', 6, 3299.90, 'CLP com IHM integrada.', 'CLPs', 'uploads/produtos/49/Produto_6a281139b8ead.jpg'),
+(50, 'Sensor Temperatura PT100', '2026-02-21', 55, 49.90, 'Sensor de temperatura industrial.', 'Sensores', 'uploads/produtos/50/Produto_6a28114cd59b7.webp');
 
 -- --------------------------------------------------------
 
@@ -489,19 +513,19 @@ ALTER TABLE `usuarios_sistema`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
