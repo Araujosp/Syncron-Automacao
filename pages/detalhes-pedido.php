@@ -28,7 +28,8 @@ $id_pedido = $_GET['pedido'];
 $sql2 = "
     SELECT
         data_pedido as data,
-        status_geral as situacao
+        status_geral as situacao,
+        status_pagamento as pagamento
         from pedidos
         where id_pedido = $id_pedido
     ";
@@ -44,14 +45,14 @@ $sql2 = "
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php require_once "../includes/meta-links.php"; ?>
         <link rel="stylesheet" href="../assets/detalhes-pedido.css">
-        <title>[nome do usuário] | Syncron</title>
+        <title>Pedido N° <?php echo $id_pedido; ?> | Syncron</title>
         <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
         <?php include '../includes/header.php'; ?>
         <main class="main-content">
             <div class="top-bar">
-                <h1>Pedido Nº1:</h1>
+                <h1>Pedido Nº <?php echo $id_pedido; ?></h1>
             </div>
 
             <section class="line">
@@ -68,29 +69,20 @@ $sql2 = "
                             <?php
                                 $valor_pedido = 0;
                                 foreach ($produtos as $produto){
+                                    echo '<tr class="body">';
                                     if ($produto['foto'] = 'NULL'){
-                                        echo '
-                                        <tr class="body">
-                                            <td><span>Sem imagem</span></td>
-                                            <td><h4 class="product-table">'.$produto['nome'].'</h4></td>
-                                            <td><p class="product-table">R$ '.$produto['preco_unitario'].'</p></td>
-                                            <td><p class="product-table">'.$produto['quantidade'].'</p></td>
-                                            <td><p class="product-table">R$ '.$produto['valor_total'].'</p></td>
-                                        </tr>
-                                        ';
+                                        echo '<td><span>Sem imagem</span></td>';
                                     }else{
-                                        echo '
-                                        <tr class="body">
-                                            <td><img src="../'.$produto['foto'].'" class="order-img"></td>
-                                            <td><h4 class="product-table">'.$produto['nome'].'</h4></td>
-                                            <td><p class="product-table">R$ '.$produto['preco_unitario'].'</p></td>
-                                            <td><p class="product-table">'.$produto['quantidade'].'</p></td>
-                                            <td><p class="product-table">R$ '.$produto['valor_total'].'</p></td>
-                                        </tr>
-                                        ';}
+                                        echo '<td><img src="../'.$produto['foto'].'" class="order-img"></td>';
+                                    }
+                                    echo '<td><h4 class="product-table">'.$produto['nome'].'</h4></td>
+                                        <td><p class="product-table">R$ '.number_format($produto['preco_unitario'], 2, ',', '.').'</p></td>
+                                        <td><p class="product-table">'.$produto['quantidade'].'</p></td>
+                                        <td><p class="product-table">R$ '.number_format($produto['valor_total'], 2, ',', '.').'</p></td>';
                                     $valor_pedido = $valor_pedido + $produto['valor_total'];
                                     }
                             ?>
+                            
                         </tbody> 
                     </table>
                 </div>
@@ -99,18 +91,20 @@ $sql2 = "
                     <?php
                     $desconto = readOne($pdo, 'pedidos', 'desconto_aplicado', "id_pedido = $id_pedido");
                     if ($desconto == 0){
-                        echo'<h2 class="full-price">R$ '.$valor_pedido.'</h2>';
+                        echo'<h2 class="full-price">R$ '.number_format($valor_pedido, 2, ',', '.').'</h2>';
                     }else{
                         echo'
                             <p class="situation"><b class="situation-title">Valor original:</b> R$ '.$valor_pedido.'</p>
                             <p class="situation"><b class="situation-title">Desconto aplicado:</b> '.$desconto.'%</p>
-                            <h2 class="full-price">R$ '.($valor_pedido - (($valor_pedido / 100) * $desconto)).'</h2>
+                            <h2 class="full-price">R$ '.number_format(($valor_pedido - (($valor_pedido / 100) * $desconto)), 2, ',', '.').'</h2>
                             ';
                     }
                     ?>
                     <br>
-                    <p class="situation"><b class="situation-title">Data de Criação:</b> <?php echo $info['data']; ?></p>
+                    <?php $data_formatada = (new DateTime($info['data']))->format('d/m/Y'); ?>
+                    <p class="situation"><b class="situation-title">Data de Criação:</b> <?php echo $data_formatada; ?></p>
                     <p class="situation"><b class="situation-title">Situação:</b> <?php echo $info['situacao']; ?></p>
+                    <p class="situation"><b class="situation-title">Pagamento:</b> <?php echo $info['pagamento']; ?></p>
                 </div>
         </section>
         <a href="./area-cliente.php" class="order-return">

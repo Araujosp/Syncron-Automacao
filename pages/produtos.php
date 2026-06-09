@@ -139,7 +139,7 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                     </div>
                     <div class="info">
                         <p><?php echo $produto['nome']; ?></p>
-                        <h2 class="preco">R$ <?php echo $produto['preco_unitario']; ?></h2>
+                        <h2 class="preco">R$ <?php echo number_format($produto['preco_unitario'], 2, ',', '.'); ?></h2>
                     </div>
                     <a href="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
                 </div>

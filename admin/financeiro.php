@@ -159,14 +159,16 @@ $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             $classe_badge_pagamento = "badge-cinza";
                         }
 
+                        $data_formatada = (new DateTime($row['data_pedido']))->format('d/m/Y');
+
                         echo "<tr>";
                         echo "<td>" . $row['id_pedido'] . "</td>";
                         echo "<td>"  . $row['produtos'] . "</td>";
                         echo "<td>"  . $row['nome_cliente'] . "</td>";
                         echo "<td><span class='badge " . $classe_badge_geral . "'>" . $row['status_geral'] . "</span>" . "</td>";
                         echo "<td><span class='badge " . $classe_badge_pagamento . "'>" . $row['status_pagamento'] . "</span>" . "</td>";
-                        echo "<td>"  . $row['data_pedido'] . "</td>";
-                        echo "<td>"  . "R$" . $row['valor_total']. "</td>";
+                        echo "<td>"  . $data_formatada . "</td>";
+                        echo "<td>"  . "R$" . number_format($row['valor_total'], 2, ',', '.'). "</td>";
                         echo "</tr>";
                     }
                 } else {

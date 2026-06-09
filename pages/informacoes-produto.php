@@ -55,16 +55,18 @@ if ($qtd >= 50) {
                 </div>
                 <p><?php echo $situacaoProduto; ?></p>
             </div>
-            <h1 class="preco">R$ <?php echo $produto["preco_unitario"]; ?></h1>
+            <h1 class="preco">R$ <?php echo number_format($produto['preco_unitario'], 2, ',', '.'); ?></h1>
             <div class="descricao">
                 <h2>Pequena descrição</h2>
                 <p><?php echo $produto['descricao']; ?></p>
             </div>
-            <form class="botoes" action="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" method="POST">
+            <form class="botoes" action="carrinho.php" method="POST">
                 <div class="quantidade">
                     <label for="quantidade">Quantidade</label>
                     <input type="number" name="quantidade" id="quantidade" placeholder="Informe a quantidade" min="1" value="1">
                 </div>
+                <input type="hidden" name="id_produto" value="<?php echo $produto['id_produto']; ?>">
+                <input type="hidden" name="acao" value="adicionar">
                 <button type="submit" class="botao" >Adicionar ao carrinho</submit>
             </form>
         </div>

@@ -38,7 +38,7 @@
                 </div>
                 <div class="info">
                     <p><?php echo $destaque["nome"]; ?></p>
-                    <h2 class="preco">R$ <?php echo $destaque["preco_unitario"]; ?></h2>
+                    <h2 class="preco">R$ <?php echo number_format($destaque['preco_unitario'], 2, ',', '.'); ?></h2>
                 </div>
                 <a href="carrinho.php?id_produto=<?php echo $destaque["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
             </div>
