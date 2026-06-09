@@ -14,7 +14,7 @@ $id_cliente = $_SESSION['id_cliente'];
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <?php require_once "../includes/meta-links.php"; ?>
         <link rel="stylesheet" href="../assets/area-cliente.css">
-        <title>[nome do usuário] | Syncron</title>
+        <title>Meus Pedidos | Syncron</title>
         <link rel="shortcut icon" href="../img/logo-favicon.png" type="image/png">
     </head>
     <body>
@@ -35,6 +35,7 @@ $id_cliente = $_SESSION['id_cliente'];
                                 )
                             AS valor_total,
                             pedidos.data_pedido,
+                            pedidos.status_pagamento,
                             pedidos.status_geral,
                             pedidos.desconto_aplicado as desconto
                             FROM pedidos
@@ -49,18 +50,20 @@ $id_cliente = $_SESSION['id_cliente'];
                         $stmt = $pdo->prepare($sql);
                         $stmt->execute();
                         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        $count = 1;
+
                         foreach ($dados as $pedido){
+                            $data_formatada = (new DateTime($pedido['data_pedido']))->format('d/m/Y');
+
                             echo '
-                                
                                     <div class="order-box">
                                         <div class="margin-order">
-                                            <h3>PEDIDO '.$count.':</h3>
-                                            <p><b>Data de Criação: </b>'.$pedido['data_pedido'].'</p>
+                                            <h3>Pedido N° '.$pedido['id_pedido'].'</h3>
+                                            <p><b>Data de Criação: </b>'.$data_formatada.'</p>
                                             <p><b>Situação: </b>'.$pedido['status_geral'].'</p>
+                                            <p><b>Pagamento: </b>'.$pedido['status_pagamento'].'</p>
                                             <p><b>Desconto aplicado: </b>'.$pedido['desconto'].'%</p>
                                             <div class="inbox-line">
-                                                <h4 class="order-price">R$ '.($pedido['valor_total'] - (($pedido['valor_total'] / 100) * $pedido['desconto'])).'</h4>
+                                                <h4 class="order-price">R$ '.number_format(($pedido['valor_total'] - (($pedido['valor_total'] / 100) * $pedido['desconto'])), 2, ',', '.').'</h4>
                                                 <a href="./detalhes-pedido.php?pedido='.$pedido['id_pedido'].'">
                                                     <img src="../img/arrow.png" class="details-arrow">
                                                 </a>
@@ -68,7 +71,6 @@ $id_cliente = $_SESSION['id_cliente'];
                                         </div>
                                     </div>
                                 ';
-                            $count ++ ;
                         }
                     ?>
                 </div>

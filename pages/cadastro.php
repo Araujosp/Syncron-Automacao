@@ -51,7 +51,7 @@ if(isset($_POST['usuario']) && isset($_POST['senha'])){
                 die("Tipo de arquivo não permitido.");
             }
 
-            $tamanho_maximo = 1 * 1024 * 1024;
+            $tamanho_maximo = 5 * 1024 * 1024;
 
             if ($_FILES['foto']['size'] > $tamanho_maximo) {
                 die("Arquivo muito grande.");
