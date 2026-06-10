@@ -19,7 +19,7 @@
 
         /* --- EXIBIÇÃO DO PERFIL --- */
         .profile-box{
-            width: 500px;
+            width: 80%;
             height: 150px;
         }
 
@@ -43,8 +43,8 @@
 
         .profile-line{
             display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
+            align-items: center;
+            gap: 20px;
         }
 
         .profile-info{
