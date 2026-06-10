@@ -48,6 +48,8 @@
         }
 
         .profile-info{
+            margin-right: -50px;
+            margin-bottom: 15px;
             align-items: left;
             justify-content: left;
         }
@@ -140,7 +142,7 @@
             list-style: none;
             text-decoration: none;
             color: #000000;
-            margin-bottom: 50px;
+            margin-bottom: 75px;
         }
 
         .margin-order{
@@ -317,15 +319,15 @@
         /* VER PEDIDOS */
         .order-back{
             width: 95%;
-            height: 650px;
+            height: 100%;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
         }
 
         .order-return{
-            width: 25%;
-            margin-left: 25px;
+            width: 120px;
+            margin-top: 25px;
             margin-bottom: 0px;
             border: none;
             padding: 15px;

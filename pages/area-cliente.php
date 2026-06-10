@@ -53,7 +53,8 @@ $id_cliente = $_SESSION['id_cliente'];
             <article class="order-list">
                 <h2>Meus pedidos:</h2>
                 <div class="order-line">
-                    <?php 
+                    <?php
+                        $count = 0;
                         $sql = "
                             SELECT
                             pedidos.id_pedido, 
@@ -80,7 +81,6 @@ $id_cliente = $_SESSION['id_cliente'];
                         $dados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($dados as $pedido){
                             $data_formatada = (new DateTime($pedido['data_pedido']))->format('d/m/Y');
-
                             echo '
                                     <div class="order-box">
                                         <div class="margin-order">
@@ -98,13 +98,17 @@ $id_cliente = $_SESSION['id_cliente'];
                                         </div>
                                     </div>
                                 ';
+                            $count = $count + 1;
+                        }
+                        if ($count >= 4){
+                            echo '
+                            <a href="./ver-pedidos.php" class="more-order">
+                                <h3>Ver mais</h3>
+                                <img src="../img/arrow.png" class="order-arrow">
+                            </a>
+                            ';
                         }
                     ?>
-
-                    <a href="./ver-pedidos.php" class="more-order">
-                        <h3>Ver mais</h3>
-                        <img src="../img/arrow.png" class="order-arrow">
-                    </a>
                 </div>
             </article>
 

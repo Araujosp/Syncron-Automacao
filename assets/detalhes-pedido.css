@@ -21,13 +21,13 @@
         .line{
             display: flex;
             justify-content: space-around;
-            align-items: flex-end;
+            align-items: flex-start;
             margin-left: -170px;
         }
 
         .order-box{
             width: 1200px;
-            height: 650px;
+            height: 100%;
             background-color: #ffffff;
             border: 1px solid #000000;
             border-radius: 1rem;
@@ -35,18 +35,25 @@
 
         .situation-box{
             width: 400px;
-            height: 200px;
+            height: 100%;
             background-color: #ffffff;
-            margin-bottom: 450px;
             border: 1px solid #000000;
             border-radius: 1rem;
             margin-left: -300px;
         }
 
         /* Área dos Detalhes do Pedido*/
+        .teste{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
         .order-table{
-            margin-top: 50px;
             width: 1100px;
+            margin-top: 25px;
+            margin-left: 25px;
+            margin-bottom: 25px;
         }
 
         .head{
@@ -71,11 +78,14 @@
         /* Área da Situação do Pedido */
         .full-price{
             margin-top: 25px;
+            margin-bottom: -25px;
             font-size: 40px;
             text-align: center;
         }
 
         .situation{
+            margin-top: 25px;
+            margin-bottom: 25px;
             text-align: center;
         }
 

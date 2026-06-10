@@ -75,12 +75,11 @@ $id_cliente = $_SESSION['id_cliente'];
                     ?>
                 </div>
                 <br>
+            </article>
                 <a href="./area-cliente.php" class="order-return">
                     <img src="../img/arrow3.png" class="return-arrow">
                     <b>Voltar</b>
                 </a>
-            </article>
-
         </main>
         <?php include '../includes/footer.php'; ?>
     </body>
