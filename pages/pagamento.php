@@ -31,6 +31,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         ];
 
         $idItemPedidoCriado = create($pdo,'itens_pedidos', $novoItemPedido);
+
+        $produto = read($pdo, "produtos", "id_produto = " . $item_pedido["id_produto"]);
+
+        $estoqueAtualizado = [
+            "quantidade_estoque" => $produto["quantidade_estoque"] - $item_pedido["quantidade"]
+        ];
+        update($pdo, 'produtos', $estoqueAtualizado, "id_produto = " . $item_pedido["id_produto"]);
     }
 
     $_SESSION["carrinho"] = null;
