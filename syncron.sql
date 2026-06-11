@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/06/2026 às 15:48
+-- Tempo de geração: 11/06/2026 às 13:56
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -95,8 +95,7 @@ INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente
 (48, 'Industrial Quantum LTDA', '(11) 4000-4848', 'contato@quantum48.com.br', 'PJ', '2026-02-18', '48.111.222/0001-48', 'quantum48', '$2y$10$hash48', ''),
 (49, 'Vinicius Costa Rocha', '(11) 99249-4949', 'vinicius.rocha49@teste.com', 'PF', '2026-02-19', '149.456.789-49', 'vinicius49', '$2y$10$hash49', ''),
 (50, 'Industrial Apex LTDA', '(11) 4000-5050', 'contato@apex50.com.br', 'PJ', '2026-02-20', '50.111.222/0001-50', 'apex50', '$2y$10$hash50', ''),
-(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp'),
-(52, 'Derick Condolo', '(11) 95117-6832', 'condoloderick@gmail.com', 'PF', '2026-06-10', '536.752.698-50', 'condolo', '$2y$10$oPbBG8k8oTHqrIG/7Yrec.mMql.RvTcS8KJVoOGttH.RkA2ZTs2zi', 'uploads/usuarios/52/Usuario_6a2961ab86a36.jpg');
+(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp');
 
 -- --------------------------------------------------------
 
@@ -287,21 +286,7 @@ INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_i
 (168, 54, 35, 2, 780.00),
 (169, 54, 40, 1, 650.00),
 (170, 54, 43, 1, 3599.00),
-(171, 54, 50, 10, 49.90),
-(172, 55, 1, 1, 1899.90),
-(173, 55, 3, 1, 1450.00),
-(174, 55, 7, 1, 2490.00),
-(175, 55, 6, 1, 2299.99),
-(176, 55, 9, 1, 1199.00),
-(177, 55, 12, 1, 3150.00),
-(178, 55, 13, 1, 1740.00),
-(179, 55, 15, 1, 2890.90),
-(180, 55, 18, 1, 3599.90),
-(181, 55, 19, 1, 1399.99),
-(182, 55, 24, 1, 4200.00),
-(183, 55, 25, 1, 2150.75),
-(184, 55, 27, 1, 3350.00),
-(185, 55, 30, 1, 2680.00);
+(171, 54, 50, 10, 49.90);
 
 -- --------------------------------------------------------
 
@@ -376,8 +361,7 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamen
 (51, 51, '2026-06-03', 'Pendente', 'Pendente', 0),
 (52, 51, '2026-06-03', 'Realizado', 'Em trânsito', 0),
 (53, 51, '2026-06-03', 'Realizado', 'Entregue', 0),
-(54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0),
-(55, 52, '2026-06-10', 'Realizado', 'Pendente', 50);
+(54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0);
 
 -- --------------------------------------------------------
 
@@ -491,7 +475,8 @@ ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
   ADD UNIQUE KEY `telefone` (`telefone`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `documento` (`documento`);
+  ADD UNIQUE KEY `documento` (`documento`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
 
 --
 -- Índices de tabela `itens_pedidos`
@@ -529,19 +514,19 @@ ALTER TABLE `usuarios_sistema`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
