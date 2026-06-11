@@ -201,7 +201,7 @@ foreach ($dados_barras as $linha_barra) {
 
             <h2>Receita Mensal</h2>
 
-            <p>R$ <?php echo $pedido_total?></p>
+            <p>R$ <?php echo number_format($pedido_total, 2, ',', '.')?></p>
 
         </div>
 
@@ -209,7 +209,7 @@ foreach ($dados_barras as $linha_barra) {
 
             <h2>Taxa Cancelamento</h2>
 
-            <p><?php echo number_format($porcentagem_cancel, 2) ?>%</p>
+            <p><?php echo number_format($porcentagem_cancel, 2, ',', '.') ?>%</p>
 
         </div>
 

@@ -72,8 +72,6 @@ $stmt->execute();
 $totalProdutos = $stmt->fetchColumn();
 $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -128,8 +126,12 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                 <?php
                     if($produtos){
                         foreach($produtos as $produto){
+                            $semEstoque = $produto['quantidade_estoque'] <= 0;
                 ?>
-                <div class="cor" onclick="window.location.href='informacoes-produto.php?id-produto=<?php echo $produto['id_produto']; ?>'">
+                <div
+                    class="cor <?= $semEstoque ? 'indisponivel' : '' ?>"
+                    <?= !$semEstoque ? "onclick=\"window.location.href='informacoes-produto.php?id-produto={$produto['id_produto']}'\"" : ''?>
+                >
                     <div>
                         <img src="../<?php echo $produto['foto']; ?>" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                         <div class="placeholder-img">
@@ -141,10 +143,15 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                         <p><?php echo $produto['nome']; ?></p>
                         <h2 class="preco">R$ <?php echo number_format($produto['preco_unitario'], 2, ',', '.'); ?></h2>
                     </div>
-                    <a href="carrinho.php?id_produto=<?php echo $produto["id_produto"]; ?>" class="botao">Adicionar ao carrinho</a>
+                    <?php
+                        if($semEstoque){
+                            echo "<a href='#' class='botao'>Não disponível</a>";
+                        } else {
+                            echo "<a href='carrinho.php?id_produto={$produto['id_produto']}' class='botao'>Adicionar ao carrinho</a>";
+                        }
+                    ?>
                 </div>
                 <?php
-                        
                     }
                 } else {
                     echo "<h1>Nenhum produto encontrado</h1>";

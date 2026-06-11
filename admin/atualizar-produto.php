@@ -208,8 +208,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <textarea name="descricao"><?= $produto['descricao']??''?></textarea>
 
-        <label>Selecione a imagem do Produto</label>
-        <input type="file" name="foto" required>
+        <label>Selecione a imagem do Produto (Opcional)</label>
+        <input type="file" name="foto">
 
         <button type="submit">Atualizar</button>
 
