@@ -6,7 +6,7 @@
         /* --- MENU LATERAL (SIDEBAR) --- */
         .sidebar {
             width: 250px;
-            height: 105vh;
+            height: 100vh;
             background-color: #3b6b9a;
             color: white;
             display: flex;

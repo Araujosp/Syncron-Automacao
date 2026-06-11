@@ -5,90 +5,121 @@ require_once "../includes/session.php";
 
 $mensagem_erro = "";
 
-if(isset($_POST['usuario']) && isset($_POST['senha'])){
-    $nome_digitado = $_POST['nome'];
-    $email_digitado = trim($_POST['email']);
-    $telefone_digitado = $_POST['telefone'];
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $sql = "
+    SELECT email, telefone, documento, usuario
+    FROM clientes
+    WHERE email = ?
+        OR telefone = ?
+        OR documento = ?
+        OR usuario = ?
+    LIMIT 1";
 
-    $tipo_documento_digitado = $_POST['tipo_documento'];
-    $documento_digitado = $_POST['documento'];
+    $stmt = $pdo->prepare($sql);
 
-    $usuario_digitado = trim($_POST['usuario']);
-    $senha_digitada = trim($_POST['senha']);
+    $stmt->execute([$_POST["email"], $_POST["telefone"], $_POST["documento"], $_POST["usuario"]]);
 
-    // Verifica campos vazios
-    if(strlen($usuario_digitado) == 0){
-        $mensagem_erro = "Usuário não pode estar vazio.";
-    }
-    else if(strlen($senha_digitada) == 0){
-        $mensagem_erro = "Senha não pode estar vazia.";
-    }
-    else{
-        // LOGIN SISTEMA
+    $clienteExistente = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $novo_cliente = [
-            'nome' => $nome_digitado,
-            'telefone' => $telefone_digitado,
-            'email' => $email_digitado,
-            'tipo_cliente' => $tipo_documento_digitado,
-            'data_cadastro' => date("Y-m-d"),
-            'documento' => $documento_digitado,
-            'usuario' => $usuario_digitado,
-            'senha' => password_hash($senha_digitada, PASSWORD_DEFAULT)
-        ];
+    if ($clienteExistente) {
+        if ($clienteExistente['email'] == $_POST["email"]) {
+            $mensagem_erro = "Este e-mail já está cadastrado.";
+        } else if ($clienteExistente['telefone'] == $_POST["telefone"]) {
+            $mensagem_erro = "Este telefone já está cadastrado.";
+        } else if ($clienteExistente['documento'] == $_POST["documento"]) {
+            $mensagem_erro = "Este documento já está cadastrado.";
+        } else if ($clienteExistente['usuario'] == $_POST["usuario"]) {
+            $mensagem_erro = "Este usuário já está em uso.";
+        }
+    } else {
+        if(isset($_POST['usuario']) && isset($_POST['senha'])){
+            $nome_digitado = $_POST['nome'];
+            $email_digitado = trim($_POST['email']);
+            $telefone_digitado = $_POST['telefone'];
 
-        $cliente_criado = create( $pdo,'clientes', $novo_cliente);
+            $tipo_documento_digitado = $_POST['tipo_documento'];
+            $documento_digitado = $_POST['documento'];
 
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-            $tipos_permitidos = [
-                'image/jpeg',
-                'image/png',
-                'image/webp',
-                'image/avif'
-            ];
+            $usuario_digitado = trim($_POST['usuario']);
+            $senha_digitada = trim($_POST['senha']);
 
-            if (!in_array($_FILES['foto']['type'], $tipos_permitidos)) {
-                die("Tipo de arquivo não permitido.");
+            // Verifica campos vazios
+            if(strlen($usuario_digitado) == 0){
+                $mensagem_erro = "Usuário não pode estar vazio.";
             }
-
-            $tamanho_maximo = 5 * 1024 * 1024;
-
-            if ($_FILES['foto']['size'] > $tamanho_maximo) {
-                die("Arquivo muito grande.");
+            else if(strlen($senha_digitada) == 0){
+                $mensagem_erro = "Senha não pode estar vazia.";
             }
+            else{
+                // LOGIN SISTEMA
 
-            $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+                $novo_cliente = [
+                    'nome' => $nome_digitado,
+                    'telefone' => $telefone_digitado,
+                    'email' => $email_digitado,
+                    'tipo_cliente' => $tipo_documento_digitado,
+                    'data_cadastro' => date("Y-m-d"),
+                    'documento' => $documento_digitado,
+                    'usuario' => $usuario_digitado,
+                    'senha' => password_hash($senha_digitada, PASSWORD_DEFAULT)
+                ];
 
-            $novoNome = "Usuario_" . uniqid() . "." . $extensao;
+                $cliente_criado = create( $pdo,'clientes', $novo_cliente);
 
-            $dir = "../uploads/usuarios/";
+                if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+                    $tipos_permitidos = [
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                        'image/avif'
+                    ];
 
-            $caminho = $dir . "$cliente_criado/";
+                    if (!in_array($_FILES['foto']['type'], $tipos_permitidos)) {
+                        die("Tipo de arquivo não permitido.");
+                    }
 
-            $file = $caminho . $novoNome;
+                    $tamanho_maximo = 5 * 1024 * 1024;
 
-            if (!is_dir($caminho)) {
-                mkdir($caminho, 0775, true);
+                    if ($_FILES['foto']['size'] > $tamanho_maximo) {
+                        die("Arquivo muito grande.");
+                    }
+
+                    $extensao = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
+
+                    $novoNome = "Usuario_" . uniqid() . "." . $extensao;
+
+                    $dir = "../uploads/usuarios/";
+
+                    $caminho = $dir . "$cliente_criado/";
+
+                    $file = $caminho . $novoNome;
+
+                    if (!is_dir($caminho)) {
+                        mkdir($caminho, 0775, true);
+                    }
+
+                    if (move_uploaded_file($_FILES['foto']['tmp_name'], $file)) {
+                        $fotoUrl = "uploads/usuarios/$cliente_criado/$novoNome";
+                        update(
+                            $pdo,
+                            'clientes',
+                            ['foto_perfil' => $fotoUrl],
+                            "id_cliente = $cliente_criado"
+                        );
+
+                        header("Location: login.php?usuario_cadastrado=true");
+                    } else {
+                        $mensagem = "Erro ao enviar imagem.";
+                    }
+                } else {
+                    header("Location: login.php?usuario_cadastrado=true");
+                }   
             }
-
-            if (move_uploaded_file($_FILES['foto']['tmp_name'], $file)) {
-                $fotoUrl = "uploads/usuarios/$cliente_criado/$novoNome";
-                update(
-                    $pdo,
-                    'clientes',
-                    ['foto_perfil' => $fotoUrl],
-                    "id_cliente = $cliente_criado"
-                );
-
-                header("Location: login.php?usuario_cadastrado=true");
-            } else {
-                $mensagem = "Erro ao enviar imagem.";
-            }
-        } else {
-            header("Location: login.php?usuario_cadastrado=true");
-        }   
+        }
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>

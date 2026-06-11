@@ -8,7 +8,7 @@
     require_once "../includes/crud.php";
 
     if (!isset($_SESSION['usuario']) || !isset($_SESSION['id_cliente'])) {
-        header("Location:../pages/login.php");
+        header("Location:../pages/login.php?necessario-login");
         exit;
     }
 

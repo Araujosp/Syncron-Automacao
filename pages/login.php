@@ -5,6 +5,8 @@ require_once "../includes/session.php";
 
 if(isset($_GET['usuario_cadastrado'])) {
     $mensagem_erro = "Usuário cadastrado com sucesso!";
+} else if(isset($_GET['necessario-login'])){
+    $mensagem_erro = "É necessário o login para acessar o carrinho!";
 } else {
     $mensagem_erro = "";
 }
