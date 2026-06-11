@@ -28,6 +28,24 @@ if(isset($_GET["situacao"])){
     $SituacaoSelect = null;
 }
 
+
+if (isset($_GET['excluir'])) {
+
+    $id = (int) $_GET['excluir'];
+    
+    // try{
+        delete($pdo, 'itens_pedidos',"id_produto = $id");
+        delete($pdo, 'produtos',"id_produto = $id");
+    // }
+    // catch(PDOException $e) {
+    //     $mensagem_erro = "Este produto não pode ser excluído porque já está vinculado a pedidos.";
+    //     echo $mensagem_erro;
+    //     }
+
+    // header("Location: estoque.php");
+    // exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +147,7 @@ if(isset($_GET["situacao"])){
                     <td>R$ <?php echo number_format($produto['preco_unitario'], 2, ',', '.'); ?></td>
                     <td class="acoes">
                         <a href="atualizar-produto.php?id=<?php echo $produto['id_produto']; ?>" class="btn-editar">Editar</a>
-                        <a href="excluir-produto.php?id=<?php echo $produto['id_produto']; ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                        <a href="estoque.php?excluir=<?php echo $produto['id_produto']; ?>" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                     </td>
                 </tr>
 
