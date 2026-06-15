@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <h1>Aguardando pagamento</h1>
             <img src="../img/qr.png" alt="QR code">
             <p>Este código expirará em</p>
-            <h1>2 horas</h1>
+            <h1 id="tempo_restante">2:00:00</h1>
         </div>
         <form class="lado" action="pagamento.php" method="POST">
             <div class="caixa">
@@ -88,4 +88,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             <button class="button" type="submit">Concluir pagamento</button>
         </form>
     </main>
+    <script>
+        let tempoRestante = 2 * 60 * 60; // (2 horas)
+        const tempoRestanteLabel = document.querySelector("#tempo_restante");
+        const temporizador = setInterval(() => {
+            const horas = Math.floor(tempoRestante / 3600);
+            const minutos = Math.floor((tempoRestante % 3600) / 60);
+            const segundos = tempoRestante % 60;
+
+            tempoRestanteLabel.textContent = `${horas}:${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+
+            tempoRestante--;
+
+            if(tempoRestante < 0){
+                clearInterval(tempoRestante); // fim
+            }
+        }, 1000);
+    </script>
 </body>

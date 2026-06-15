@@ -58,8 +58,11 @@ $stmt2->execute();
 
 $receita2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 
-$porcentagem_cancel = ($receita2['todo_cancelados'] / $receita2['todo_pedidos']) * 100;
-
+if($receita2['todo_pedidos'] != 0){
+    $porcentagem_cancel = ($receita2['todo_cancelados'] / $receita2['todo_pedidos']) * 100;
+} else {
+    $porcentagem_cancel = 0;
+}
 
 //Pedidos fechados
 

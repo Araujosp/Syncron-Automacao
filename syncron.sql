@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/06/2026 às 13:56
+-- Tempo de geração: 15-Jun-2026 às 15:49
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `clientes`
+-- Estrutura da tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -41,7 +41,7 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `clientes`
+-- Extraindo dados da tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente`, `data_cadastro`, `documento`, `usuario`, `senha`, `foto_perfil`) VALUES
@@ -95,12 +95,15 @@ INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente
 (48, 'Industrial Quantum LTDA', '(11) 4000-4848', 'contato@quantum48.com.br', 'PJ', '2026-02-18', '48.111.222/0001-48', 'quantum48', '$2y$10$hash48', ''),
 (49, 'Vinicius Costa Rocha', '(11) 99249-4949', 'vinicius.rocha49@teste.com', 'PF', '2026-02-19', '149.456.789-49', 'vinicius49', '$2y$10$hash49', ''),
 (50, 'Industrial Apex LTDA', '(11) 4000-5050', 'contato@apex50.com.br', 'PJ', '2026-02-20', '50.111.222/0001-50', 'apex50', '$2y$10$hash50', ''),
-(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp');
+(51, 'Rafael Yu', '(11) 99999-2222', 'rafael@gmail.com', 'PF', '2026-05-28', '123.123.123-12', 'rafa2005', '$2y$10$rsa0F7Z1QrCpWiR1B0r3Y.tQawb4GxgTTUkut/Si6DxJ5fENbMBta', 'uploads/usuarios/51/Usuario_6a18386b3e296.webp'),
+(52, 'rafa12215215', '1262367243698238', '12521621126@gmail.com', 'PF', '2026-06-15', '21562367923623', 'rafa126268236823', '$2y$10$eUfcHaO6Koe9a2aXFclr6O7/zmzzVr4h0Cxqqs88z0rgzP79KHCvu', ''),
+(53, 'Rafael Yu', '(12) 12825-2121', 'rafael24@gmail.com', 'PF', '2026-06-15', '124.124.123-11', 'rafa2010', '$2y$10$C3OvIA0wFdxeDbmG.auWR.LqjjiaREunW25p0BfIQw8nRBDni0xUW', 'uploads/usuarios/53/Usuario_6a2ff97b00178.jpg'),
+(54, 'Memê', '(11) 11111-2222', 'meme@gmail.com', 'PF', '2026-06-15', '111.111.111-11', 'meme', '$2y$10$RH.iVVazyH0Dbe.Be513Ee2IPBEA4f3Ek11Lj4rwjeW.w5FtsscMu', 'uploads/usuarios/54/Usuario_6a3002c0cd098.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `itens_pedidos`
+-- Estrutura da tabela `itens_pedidos`
 --
 
 CREATE TABLE `itens_pedidos` (
@@ -112,7 +115,7 @@ CREATE TABLE `itens_pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `itens_pedidos`
+-- Extraindo dados da tabela `itens_pedidos`
 --
 
 INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_item`, `preco_unitario`) VALUES
@@ -286,12 +289,17 @@ INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_i
 (168, 54, 35, 2, 780.00),
 (169, 54, 40, 1, 650.00),
 (170, 54, 43, 1, 3599.00),
-(171, 54, 50, 10, 49.90);
+(171, 54, 50, 10, 49.90),
+(172, 55, 1, 3, 1899.90),
+(173, 55, 2, 3, 89.90),
+(174, 55, 3, 1, 1450.00),
+(175, 55, 4, 1, 320.50),
+(176, 56, 2, 30, 89.90);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pedidos`
+-- Estrutura da tabela `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -304,7 +312,7 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `pedidos`
+-- Extraindo dados da tabela `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamento`, `status_geral`, `desconto_aplicado`) VALUES
@@ -361,12 +369,14 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamen
 (51, 51, '2026-06-03', 'Pendente', 'Pendente', 0),
 (52, 51, '2026-06-03', 'Realizado', 'Em trânsito', 0),
 (53, 51, '2026-06-03', 'Realizado', 'Entregue', 0),
-(54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0);
+(54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0),
+(55, 53, '2026-06-15', 'Realizado', 'Pendente', 50),
+(56, 53, '2026-06-15', 'Realizado', 'Pendente', 10);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `produtos`
+-- Estrutura da tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -381,14 +391,14 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `produtos`
+-- Extraindo dados da tabela `produtos`
 --
 
 INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`, `foto`) VALUES
-(1, 'CLP Siemens S7-1200', '2026-01-02', 15, 1899.90, 'Controlador lógico programável compacto para automação industrial.', 'CLPs', 'uploads/produtos/1/Produto_6a280abcf15e3.png'),
-(2, 'Sensor Indutivo LJ12A3', '2026-01-03', 40, 89.90, 'Sensor indutivo metálico de proximidade 12mm.', 'Sensores', 'uploads/produtos/2/Produto_6a280b098287e.webp'),
-(3, 'IHM Weintek MT8071iE', '2026-01-04', 12, 1450.00, 'Interface homem-máquina touchscreen 7 polegadas.', 'IHMs', 'uploads/produtos/3/Produto_6a280b263d907.jpg'),
-(4, 'Fonte Industrial 24V 10A', '2026-01-05', 25, 320.50, 'Fonte chaveada industrial 24V DC 10A.', 'Fontes Industriais', 'uploads/produtos/4/Produto_6a280b49bcbee.jpg'),
+(1, 'CLP Siemens S7-1200', '2026-01-02', 12, 1899.90, 'Controlador lógico programável compacto para automação industrial.', 'CLPs', 'uploads/produtos/1/Produto_6a280abcf15e3.png'),
+(2, 'Sensor Indutivo LJ12A3', '2026-01-03', 7, 89.90, 'Sensor indutivo metálico de proximidade 12mm.', 'Sensores', 'uploads/produtos/2/Produto_6a280b098287e.webp'),
+(3, 'IHM Weintek MT8071iE', '2026-01-04', 11, 1450.00, 'Interface homem-máquina touchscreen 7 polegadas.', 'IHMs', 'uploads/produtos/3/Produto_6a280b263d907.jpg'),
+(4, 'Fonte Industrial 24V 10A', '2026-01-05', 24, 320.50, 'Fonte chaveada industrial 24V DC 10A.', 'Fontes Industriais', 'uploads/produtos/4/Produto_6a280b49bcbee.jpg'),
 (5, 'Relé Finder 40.52', '2026-01-06', 60, 35.90, 'Relé eletromecânico industrial 24V.', 'Relés', 'uploads/produtos/5/Produto_6a280c6309536.webp'),
 (6, 'Inversor WEG CFW300', '2026-01-07', 8, 2299.99, 'Inversor de frequência trifásico para motores.', 'Inversores de Frequência', 'uploads/produtos/6/Produto_6a280c81cc89f.jpg'),
 (7, 'CLP Allen Bradley Micro820', '2026-01-08', 10, 2490.00, 'CLP compacto para aplicações industriais.', 'CLPs', 'uploads/produtos/7/Produto_6a280c9721d48.webp'),
@@ -434,12 +444,13 @@ INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoq
 (47, 'Relé Auxiliar WEG', '2026-02-18', 40, 32.00, 'Relé auxiliar para comandos elétricos.', 'Relés', 'uploads/produtos/47/Produto_6a28110c46a32.webp'),
 (48, 'Inversor Hitachi WJ200', '2026-02-19', 4, 4100.00, 'Inversor para aplicações industriais.', 'Inversores de Frequência', 'uploads/produtos/48/Produto_6a281124aca00.jpg'),
 (49, 'CLP Unitronics Vision350', '2026-02-20', 6, 3299.90, 'CLP com IHM integrada.', 'CLPs', 'uploads/produtos/49/Produto_6a281139b8ead.jpg'),
-(50, 'Sensor Temperatura PT100', '2026-02-21', 55, 49.90, 'Sensor de temperatura industrial.', 'Sensores', 'uploads/produtos/50/Produto_6a28114cd59b7.webp');
+(50, 'Sensor Temperatura PT100', '2026-02-21', 55, 49.90, 'Sensor de temperatura industrial.', 'Sensores', 'uploads/produtos/50/Produto_6a28114cd59b7.webp'),
+(51, 'teste', '2026-06-15', 12421, 12512.00, '12521521', 'Sensores', 'uploads/produtos/51/Produto_6a2ffa58cb4e0.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuarios_sistema`
+-- Estrutura da tabela `usuarios_sistema`
 --
 
 CREATE TABLE `usuarios_sistema` (
@@ -455,7 +466,7 @@ CREATE TABLE `usuarios_sistema` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuarios_sistema`
+-- Extraindo dados da tabela `usuarios_sistema`
 --
 
 INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`, `cargo`, `data_cadastro`, `foto_perfil`, `tipo_usuario`) VALUES
@@ -469,7 +480,7 @@ INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`,
 --
 
 --
--- Índices de tabela `clientes`
+-- Índices para tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
@@ -479,7 +490,7 @@ ALTER TABLE `clientes`
   ADD UNIQUE KEY `usuario` (`usuario`);
 
 --
--- Índices de tabela `itens_pedidos`
+-- Índices para tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
   ADD PRIMARY KEY (`id_item`),
@@ -487,52 +498,52 @@ ALTER TABLE `itens_pedidos`
   ADD KEY `id_produto` (`id_produto`);
 
 --
--- Índices de tabela `pedidos`
+-- Índices para tabela `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`),
   ADD KEY `id_cliente` (`id_cliente`);
 
 --
--- Índices de tabela `produtos`
+-- Índices para tabela `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id_produto`);
 
 --
--- Índices de tabela `usuarios_sistema`
+-- Índices para tabela `usuarios_sistema`
 --
 ALTER TABLE `usuarios_sistema`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `cpf` (`cpf`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios_sistema`
@@ -541,18 +552,18 @@ ALTER TABLE `usuarios_sistema`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `itens_pedidos`
+-- Limitadores para a tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
   ADD CONSTRAINT `itens_pedidos_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
   ADD CONSTRAINT `itens_pedidos_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`);
 
 --
--- Restrições para tabelas `pedidos`
+-- Limitadores para a tabela `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
