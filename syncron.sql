@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Jun-2026 às 15:49
+-- Tempo de geração: 16/06/2026 às 14:25
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `clientes`
+-- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -41,7 +41,7 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `clientes`
+-- Despejando dados para a tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente`, `data_cadastro`, `documento`, `usuario`, `senha`, `foto_perfil`) VALUES
@@ -103,7 +103,7 @@ INSERT INTO `clientes` (`id_cliente`, `nome`, `telefone`, `email`, `tipo_cliente
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `itens_pedidos`
+-- Estrutura para tabela `itens_pedidos`
 --
 
 CREATE TABLE `itens_pedidos` (
@@ -115,7 +115,7 @@ CREATE TABLE `itens_pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `itens_pedidos`
+-- Despejando dados para a tabela `itens_pedidos`
 --
 
 INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_item`, `preco_unitario`) VALUES
@@ -294,12 +294,110 @@ INSERT INTO `itens_pedidos` (`id_item`, `id_pedido`, `id_produto`, `quantidade_i
 (173, 55, 2, 3, 89.90),
 (174, 55, 3, 1, 1450.00),
 (175, 55, 4, 1, 320.50),
-(176, 56, 2, 30, 89.90);
+(176, 56, 2, 30, 89.90),
+(177, 57, 3, 2, 89.90),
+(178, 57, 11, 1, 149.90),
+(179, 58, 5, 4, 39.90),
+(180, 58, 18, 2, 79.90),
+(181, 59, 7, 1, 199.90),
+(182, 60, 12, 3, 59.90),
+(183, 60, 21, 2, 49.90),
+(184, 60, 30, 1, 299.90),
+(185, 61, 8, 5, 24.90),
+(186, 61, 15, 2, 129.90),
+(187, 62, 4, 1, 599.90),
+(188, 62, 27, 3, 39.90),
+(189, 63, 9, 2, 69.90),
+(190, 63, 33, 1, 89.90),
+(191, 64, 14, 1, 499.90),
+(192, 65, 2, 8, 19.90),
+(193, 65, 17, 4, 29.90),
+(194, 65, 24, 2, 59.90),
+(195, 66, 10, 2, 119.90),
+(196, 67, 6, 1, 899.90),
+(197, 67, 25, 5, 22.90),
+(198, 68, 1, 3, 34.90),
+(199, 68, 22, 2, 74.90),
+(200, 69, 16, 1, 249.90),
+(201, 69, 41, 2, 59.90),
+(202, 70, 19, 4, 44.90),
+(203, 70, 35, 1, 399.90),
+(204, 71, 7, 2, 199.90),
+(205, 72, 3, 1, 89.90),
+(206, 72, 29, 2, 54.90),
+(207, 73, 12, 6, 59.90),
+(208, 73, 18, 2, 79.90),
+(209, 74, 8, 10, 24.90),
+(210, 74, 15, 4, 129.90),
+(211, 74, 31, 2, 89.90),
+(212, 75, 5, 1, 39.90),
+(213, 76, 21, 3, 49.90),
+(214, 76, 38, 1, 349.90),
+(215, 77, 13, 2, 99.90),
+(216, 77, 26, 5, 29.90),
+(217, 78, 4, 1, 599.90),
+(218, 78, 17, 8, 29.90),
+(219, 78, 44, 2, 69.90),
+(220, 79, 6, 1, 899.90),
+(221, 80, 2, 15, 19.90),
+(222, 80, 9, 10, 69.90),
+(223, 80, 23, 5, 34.90),
+(224, 81, 14, 1, 499.90),
+(225, 81, 32, 3, 89.90),
+(226, 82, 5, 6, 39.90),
+(227, 82, 11, 2, 149.90),
+(228, 83, 8, 2, 24.90),
+(229, 84, 20, 4, 59.90),
+(230, 84, 36, 1, 299.90),
+(231, 85, 3, 3, 89.90),
+(232, 85, 25, 8, 22.90),
+(233, 86, 7, 2, 199.90),
+(234, 86, 40, 1, 449.90),
+(235, 87, 1, 12, 34.90),
+(236, 87, 18, 6, 79.90),
+(237, 88, 16, 2, 249.90),
+(238, 88, 28, 1, 179.90),
+(239, 89, 10, 1, 119.90),
+(240, 90, 13, 4, 99.90),
+(241, 90, 30, 2, 299.90),
+(242, 91, 22, 5, 74.90),
+(243, 91, 37, 2, 149.90),
+(244, 92, 4, 1, 599.90),
+(245, 92, 12, 4, 59.90),
+(246, 93, 6, 2, 899.90),
+(247, 93, 21, 10, 49.90),
+(248, 94, 17, 6, 29.90),
+(249, 94, 34, 2, 119.90),
+(250, 95, 3, 1, 89.90),
+(251, 95, 26, 3, 29.90),
+(252, 96, 9, 2, 69.90),
+(253, 97, 15, 5, 129.90),
+(254, 97, 42, 1, 399.90),
+(255, 98, 2, 20, 19.90),
+(256, 98, 24, 8, 59.90),
+(257, 99, 8, 4, 24.90),
+(258, 99, 19, 2, 44.90),
+(259, 99, 45, 1, 229.90),
+(260, 100, 5, 3, 39.90),
+(261, 100, 14, 1, 499.90),
+(262, 100, 50, 2, 159.90),
+(263, 101, 45, 40, 2500.00),
+(264, 101, 46, 30, 1800.00),
+(265, 102, 47, 20, 1800.00),
+(266, 103, 48, 50, 2200.00),
+(267, 103, 49, 25, 1800.00),
+(268, 104, 50, 20, 2700.00),
+(269, 105, 45, 50, 2500.00),
+(270, 105, 46, 20, 1800.00),
+(271, 106, 48, 30, 2200.00),
+(272, 107, 49, 40, 1800.00),
+(273, 107, 50, 30, 2700.00),
+(274, 108, 45, 25, 2500.00);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pedidos`
+-- Estrutura para tabela `pedidos`
 --
 
 CREATE TABLE `pedidos` (
@@ -312,7 +410,7 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `pedidos`
+-- Despejando dados para a tabela `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamento`, `status_geral`, `desconto_aplicado`) VALUES
@@ -371,12 +469,64 @@ INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `data_pedido`, `status_pagamen
 (53, 51, '2026-06-03', 'Realizado', 'Entregue', 0),
 (54, 51, '2026-06-03', 'Pendente', 'Cancelado', 0),
 (55, 53, '2026-06-15', 'Realizado', 'Pendente', 50),
-(56, 53, '2026-06-15', 'Realizado', 'Pendente', 10);
+(56, 53, '2026-06-15', 'Realizado', 'Pendente', 10),
+(57, 3, '2026-03-02', 'Realizado', 'Entregue', 0),
+(58, 7, '2026-03-04', 'Realizado', 'Entregue', 5),
+(59, 12, '2026-03-05', 'Pendente', 'Pendente', 0),
+(60, 18, '2026-03-08', 'Realizado', 'Em trânsito', 0),
+(61, 5, '2026-03-10', 'Realizado', 'Entregue', 10),
+(62, 15, '2026-03-13', 'Realizado', 'Entregue', 0),
+(63, 2, '2026-03-15', 'Realizado', 'Entregue', 0),
+(64, 9, '2026-03-17', 'Pendente', 'Cancelado', 0),
+(65, 4, '2026-03-20', 'Realizado', 'Entregue', 15),
+(66, 11, '2026-03-24', 'Realizado', 'Em trânsito', 0),
+(67, 6, '2026-03-28', 'Realizado', 'Entregue', 0),
+(68, 8, '2026-04-01', 'Realizado', 'Entregue', 0),
+(69, 17, '2026-04-03', 'Realizado', 'Entregue', 5),
+(70, 13, '2026-04-06', 'Realizado', 'Em trânsito', 0),
+(71, 5, '2026-04-09', 'Pendente', 'Pendente', 0),
+(72, 10, '2026-04-11', 'Realizado', 'Entregue', 0),
+(73, 14, '2026-04-15', 'Realizado', 'Entregue', 10),
+(74, 3, '2026-04-18', 'Realizado', 'Entregue', 0),
+(75, 1, '2026-04-20', 'Pendente', 'Cancelado', 0),
+(76, 16, '2026-04-23', 'Realizado', 'Entregue', 0),
+(77, 6, '2026-04-25', 'Realizado', 'Em trânsito', 0),
+(78, 18, '2026-04-29', 'Realizado', 'Entregue', 20),
+(79, 4, '2026-05-02', 'Realizado', 'Entregue', 0),
+(80, 8, '2026-05-04', 'Realizado', 'Entregue', 0),
+(81, 12, '2026-05-06', 'Realizado', 'Em trânsito', 0),
+(82, 2, '2026-05-08', 'Realizado', 'Entregue', 10),
+(83, 15, '2026-05-10', 'Pendente', 'Pendente', 0),
+(84, 7, '2026-05-12', 'Realizado', 'Entregue', 5),
+(85, 5, '2026-05-15', 'Realizado', 'Entregue', 0),
+(86, 11, '2026-05-17', 'Realizado', 'Entregue', 15),
+(87, 16, '2026-05-20', 'Realizado', 'Em trânsito', 0),
+(88, 13, '2026-05-22', 'Realizado', 'Entregue', 0),
+(89, 18, '2026-05-25', 'Pendente', 'Cancelado', 0),
+(90, 1, '2026-05-27', 'Realizado', 'Entregue', 5),
+(91, 9, '2026-05-29', 'Realizado', 'Entregue', 0),
+(92, 14, '2026-06-02', 'Realizado', 'Entregue', 0),
+(93, 17, '2026-06-05', 'Realizado', 'Entregue', 10),
+(94, 6, '2026-06-08', 'Realizado', 'Em trânsito', 0),
+(95, 3, '2026-06-12', 'Realizado', 'Entregue', 0),
+(96, 12, '2026-06-15', 'Pendente', 'Pendente', 0),
+(97, 18, '2026-06-18', 'Realizado', 'Entregue', 15),
+(98, 7, '2026-06-21', 'Realizado', 'Entregue', 0),
+(99, 2, '2026-06-25', 'Realizado', 'Em trânsito', 0),
+(100, 15, '2026-06-29', 'Realizado', 'Entregue', 5),
+(101, 5, '2026-03-05', 'Realizado', 'Entregue', 0),
+(102, 8, '2026-03-18', 'Realizado', 'Entregue', 5),
+(103, 12, '2026-04-07', 'Realizado', 'Entregue', 0),
+(104, 16, '2026-04-22', 'Realizado', 'Entregue', 10),
+(105, 4, '2026-05-10', 'Realizado', 'Entregue', 0),
+(106, 9, '2026-05-24', 'Realizado', 'Entregue', 5),
+(107, 7, '2026-06-08', 'Realizado', 'Entregue', 0),
+(108, 15, '2026-06-26', 'Realizado', 'Entregue', 10);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos`
+-- Estrutura para tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -391,7 +541,7 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `produtos`
+-- Despejando dados para a tabela `produtos`
 --
 
 INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoque`, `preco_unitario`, `descricao`, `categoria`, `foto`) VALUES
@@ -450,7 +600,7 @@ INSERT INTO `produtos` (`id_produto`, `nome`, `data_cadastro`, `quantidade_estoq
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios_sistema`
+-- Estrutura para tabela `usuarios_sistema`
 --
 
 CREATE TABLE `usuarios_sistema` (
@@ -466,7 +616,7 @@ CREATE TABLE `usuarios_sistema` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuarios_sistema`
+-- Despejando dados para a tabela `usuarios_sistema`
 --
 
 INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`, `cargo`, `data_cadastro`, `foto_perfil`, `tipo_usuario`) VALUES
@@ -480,7 +630,7 @@ INSERT INTO `usuarios_sistema` (`id_usuario`, `nome`, `usuario`, `senha`, `cpf`,
 --
 
 --
--- Índices para tabela `clientes`
+-- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id_cliente`),
@@ -490,7 +640,7 @@ ALTER TABLE `clientes`
   ADD UNIQUE KEY `usuario` (`usuario`);
 
 --
--- Índices para tabela `itens_pedidos`
+-- Índices de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
   ADD PRIMARY KEY (`id_item`),
@@ -498,27 +648,27 @@ ALTER TABLE `itens_pedidos`
   ADD KEY `id_produto` (`id_produto`);
 
 --
--- Índices para tabela `pedidos`
+-- Índices de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD PRIMARY KEY (`id_pedido`),
   ADD KEY `id_cliente` (`id_cliente`);
 
 --
--- Índices para tabela `produtos`
+-- Índices de tabela `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`id_produto`);
 
 --
--- Índices para tabela `usuarios_sistema`
+-- Índices de tabela `usuarios_sistema`
 --
 ALTER TABLE `usuarios_sistema`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `cpf` (`cpf`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -531,13 +681,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=275;
 
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de tabela `produtos`
@@ -552,18 +702,18 @@ ALTER TABLE `usuarios_sistema`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `itens_pedidos`
+-- Restrições para tabelas `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
   ADD CONSTRAINT `itens_pedidos_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
   ADD CONSTRAINT `itens_pedidos_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id_produto`);
 
 --
--- Limitadores para a tabela `pedidos`
+-- Restrições para tabelas `pedidos`
 --
 ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
